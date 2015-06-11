@@ -16,7 +16,6 @@
     "jasmine-jquery": "^2.0.5",
     "jsdoc": "git+https://github.com/jsdoc3/jsdoc.git",
     "karma": "^0.12.22",
-    "karma-chrome-launcher": "^0.1.12",
     "karma-coverage": "^0.2.6",
     "karma-jasmine": "~0.2.0",
     "karma-junit-reporter": "^0.2.2",
