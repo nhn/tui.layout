@@ -1,3 +1,3 @@
-Weget Dashboard
+Layout Component
 =====================
 
