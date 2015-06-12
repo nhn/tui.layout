@@ -1,8 +1,8 @@
-describe('weget.view.item', function() {
+describe('view item', function() {
 	var item,
 		itemview,
-		Item = weget.Vision.Item,
-		view = weget.Vision.View;
+		Item = ne.component.Layout.Item,
+		view = ne.component.Layout.View;
 
 	beforeEach(function() {
 		item = new Item({

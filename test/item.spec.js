@@ -1,6 +1,6 @@
-describe('vision item', function() {
+describe('vm item', function() {
 	var item,
-		Item = weget.Vision.Item;
+		Item = ne.component.Layout.Item;
 
 	beforeEach(function() {
 		item = new Item({
@@ -45,5 +45,4 @@ describe('vision item', function() {
 		item.show();
 		expect(item.visible).toBe(true);
 	});
-
 });

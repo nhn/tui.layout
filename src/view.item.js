@@ -1,7 +1,7 @@
 /**
  * @fileoverview Vision item view class
  **/
-ne.util.defineNamespace('weget.Vision.View');
+ne.util.defineNamespace('ne.component.Layout.View');
 
 
 var ELEMENT_CLASS = {
@@ -16,7 +16,7 @@ var ELEMENT_CLASS = {
 	ELEMENT_POOL = document.createDocumentFragment(),
 	FORMWORK = document.createElement('div');
 
-weget.Vision.View.Item = ne.util.defineClass({
+ne.component.Layout.View.Item = ne.util.defineClass({
 	/**
 	 * initialize with options
 	 **/

@@ -1,10 +1,16 @@
-ne.util.defineNamespace('weget.Vision.Drag');
+ne.util.defineNamespace('ne.component.Layout');
 
-weget.Vision.Drag = ne.util.defineClass({
+ne.component.Layout.Drag = ne.util.defineClass({
 	init: function(options) {
 		options = options || {};
 		this.element = $('<div class="' + (options.className || 'guilde') + '"></div>');
 		this.element.hide();
+	},
+	/**
+	 * @param {object} pos position to move
+	 **/
+	moveTo: function(pos) {
+		this.setPos(pos);
 	},
 	/**
 	 * setPos for move
@@ -12,7 +18,7 @@ weget.Vision.Drag = ne.util.defineClass({
 	 **/
 	setPos: function(pos) {
 		this.element.css({
-			left: pos.x,
+			left: pos.x,	
 			top: pos.y
 		});
 	},

@@ -1,5 +1,5 @@
-describe('vision drag', function() {
-	var drag = new weget.Vision.Drag({
+describe('view drag', function() {
+	var drag = new ne.component.Layout.Drag({
 		enableDist: 5
 	});
 	jasmine.getFixtures().fixturesPath = 'base';
@@ -16,7 +16,6 @@ describe('vision drag', function() {
 		expect(drag.element.css('left')).toBe('100px');
 		expect(drag.element.css('top')).toBe('200px');
 	});
-
 	it('set Content', function() {
 		var content = 'guide content';
 		drag.setContent(content);
@@ -58,5 +57,14 @@ describe('vision drag', function() {
 		drag.setMoveElement(moveEl);
 		expect(drag.figureValidArea(point)).toBe(true);
 		expect(drag.figureValidArea(point2)).toBe(false);
+	});
+	it('shadow move Element', function() {
+		drag.moveTo({
+			x: 100,
+			y: 200
+		});
+
+		expect(drag.element.css('left')).toBe('100px');
+		expect(drag.element.css('top')).toBe('200px');
 	});
 });

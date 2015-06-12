@@ -1,9 +1,9 @@
 /**
  * @fileoverview Vision item class
  **/
-ne.util.defineNamespace('weget.Vision.Item');
+ne.util.defineNamespace('ne.component.Layout');
 
-weget.Vision.Item = ne.util.defineClass({
+ne.component.Layout.Item = ne.util.defineClass({
 	/**
 	 * init Item object
 	 * @param options
