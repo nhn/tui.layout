@@ -40,7 +40,7 @@ describe('view drag', function() {
 		drag.setTargetElement(target);
 		expect(drag.figureValidTarget()).toBe(true);
 		drag.setTargetElement(el);
-		expect(drag.figureValidTarget()).toBe(false);
+		expect(drag.figureValidTarget()).toBe(false	);
 	});
 	it('enable target drag zone', function() {
 		var moveEl = $('.item2'),

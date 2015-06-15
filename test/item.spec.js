@@ -1,48 +1,70 @@
-describe('vm item', function() {
+describe('item set', function() {
 	var item,
-		Item = ne.component.Layout.Item;
+		item2;
 
 	beforeEach(function() {
-		item = new Item({
-			width: 300,
-			group: 'top',
-			title: 'vision title',
-			type : 'typeA'
+		item = new ne.component.Layout.Item({
+			title: 'title1',
+			id: 'id1',
+			contentID: 'lifeStyle',
+			groupInfo: 'groupA',
+			isDraggable: true,
+			isClose: true,
+			index: 0
 		});
+		item2 = new ne.component.Layout.Item({
+			id: 'iddddd1',
+			contentID: 'lifeStyle',
+			groupInfo: 'groupA',
+			isDraggable: true,
+			isClose: false,
+			index: 1
+		});
+		item3 = new ne.component.Layout.Item({
+			id: 'id2',
+			contentID: 'lifeStyle',
+			groupInfo: 'groupA',
+			isClose: false,
+			index: 2
+		});	
+		item4 = new ne.component.Layout.Item({
+			title: 'asdf',
+			id: 'id2',
+			contentID: 'lifeStyle',
+			groupInfo: 'groupA',
+			index: 3
+		});	
 	});
 
-
-	it('item has essential options', function() {
-		expect(item.width).toBe(300);
-		expect(item.group).toBe('top');
-		expect(item.title).toBe('vision title');
-		expect(item.type).toBe('typeA');
+	it('item defined', function() {
+		expect(item).toBeDefined();
+		expect(item.$element).toBeDefined();
 	});
 
-	it('open toggle', function() {
+	it('item make title, if options include title and useDrag', function() {
+		expect(item.$titleElement).toBeDefined();
+		expect(item.$toggleButton).toBeDefined();
+	});
+
+	it('make option isOpen item, item display block', function() {
+		expect(item.$element.find('.body').css('display')).toBe('none');
+		expect(item2.$element.find('.body').css('display')).not.toBe('none');
+	});
+
+	it('toggle is working none -> block', function() {
 		item.toggle();
-		expect(item.isOpen).toBe(false);
-		item.toggle();
-		expect(item.isOpen).toBe(true);
+		expect(item.$element.find('.body').css('display')).not.toBe('none');
 	});
 
-	it('setLine', function() {
-		item.setLine(2);
-		expect(item.line).toBe(2);
+	it('toggle is working(2) block -> none', function() {
+		item2.toggle();
+		expect(item2.$element.find('.body').css('display')).toBe('none');
 	});
 
-	it('setGroup', function() {
-		item.setGroup('bottomL');
-		expect(item.group).toBe('bottomL');
+	it('item4 title is fixed', function() {
+		item4.titleOff();
+		// event run title Off still title is on
+		expect(item4.$titleElement.css('display')).toBe('block');
 	});
 
-	it('hide', function() {
-		item.hide();
-		expect(item.visible).toBe(false);
-	});
-	
-	it('show', function() {
-		item.show();
-		expect(item.visible).toBe(true);
-	});
-});
+});	
