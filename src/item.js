@@ -1,21 +1,5 @@
 ne.util.defineNamespace('ne.component.Layout');
 
-var HTML = {
-		MOVEBUTTON: '<button class="move">move</button>',
-		ELEMENT: '<div class="item" data-index="{{number}}"><div class="body"></div></div>',
-		TITLE: '<div class="title"></div>',
-		TOGGLEBUTTON: '<button class="toggle"></button>'
-	},
-	TEXT = {
-		DEFAULT_TITLE: 'no title'
-	},
-	ERROR = {
-		OPTIONS_NOT_DEFINED : 'options are not defined'
-	};
-	// FORMWORK = $('<div class="formwork></div>');
-
-// $(document.body).append(FORMWORK);
-
 ne.component.Layout.Item = ne.util.defineClass({
 	/**
 	 * @param {object} options
@@ -31,10 +15,12 @@ ne.component.Layout.Item = ne.util.defineClass({
 		// use title case, make title element
 		this.isDraggable = !!options.isDraggable;
 		this._makeTitle(options);
+
 		// title used, and fix title (no hide)
 		if (!ne.util.isBoolean(options.isClose)) {
 			this.titleFix();
 		}
+
 		this._makeToggleButton(options.toggleButtonHTML || HTML.TOGGLEBUTTON);
 	
 
@@ -45,6 +31,7 @@ ne.component.Layout.Item = ne.util.defineClass({
 			this.open();
 		}
 
+		this.$content.append($(options.contentID));
 		this._setEvents();
 	},
 	/**
@@ -54,6 +41,7 @@ ne.component.Layout.Item = ne.util.defineClass({
 	 **/
 	_makeElement: function(index) {
 		this.$element = $(HTML.ELEMENT.replace('{{number}}', index));
+		this.$content = this.$element.find('.item-body');
 	},
 	/**
 	 * make title element
@@ -71,7 +59,7 @@ ne.component.Layout.Item = ne.util.defineClass({
 			this._makeDragButton(moveButtonHTML);
 		}
 
-		this.$element.find('.body').before(this.$titleElement);
+		this.$content.before(this.$titleElement);
 	},
 	/**
 	 * make drag button 
@@ -93,14 +81,14 @@ ne.component.Layout.Item = ne.util.defineClass({
 	 **/
 	close: function() {
 		this.$toggleButton.addClass("open");
-		this.$element.find('.body').hide();
+		this.$content.hide();
 	},
 	/**
 	 * open Element
 	 **/
 	open: function() {
 		this.$toggleButton.removeClass("open");
-		this.$element.find('.body').show();
+		this.$content.show();
 	},
 	/**
 	 * title fix to do not hide 

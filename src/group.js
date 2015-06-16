@@ -4,109 +4,51 @@ ne.component.Layout.Group = ne.util.defineClass({
 	/**
 	 * init default field
 	 **/
-	init: function() {
-		this.first = null;
-		this.last = null;
-	},
-	/**
-	 * @param {object} item to add
-	 * @param {object} item add to
-	 * @param {boolean} isPrev whether prev or not 
-	 **/
-	add: function(item, target, isPrev) {
-		var next, prev;
-		if (!this.first) {
-			this.first = item;
-			this.last = item;
-		} else if (arguments.length < 2) {
-			this.addToLast(item);
-		} else {
-			if (isPrev) {
-				this.addToPrev(target, item);
-			} else {
-				this.addToNext(target, item);
-			}
-		}
-	},
-	/**
-	 * add to next to target
-	 * @param {object} target stand target
-	 * @param {object} item to be added
-	 **/
-	addToNext: function(target, item) {
-		var next = target.getNext();
-
-		if (next) {			
-			next.setPrev(item);
-			item.setNext(next);
-			target.setNext(item);
-		} else {
-			target.setNext(item);
-			item.setPrev(target);
+	init: function(options) {
+		if (!options) {
+			throw new Error(ERROR.OPTIONS_NOT_DEFINED);
 		}
 
-		if (target === this.last) {
-			this.last = item;
-		}
-		
-	},
-	/**
-	 * add to prev to target
-	 * @param {object} target stand target
-	 * @param {object} item to be added
-	 **/
-	addToPrev: function(target, item) {
-		var prev = target.getPrev();
+		this.size = options.width;
+		this.type = options.type;
+		this.$element = $(options.html || HTML.GROUP);
 
-		prev.setNext(item);
-		item.setPrev(prev);
-		target.setPrev(item);
-
-		if (target === this.first) {
-			this.first = item;
-		}
+		this._makeItems(options.items);
 	},
 	/**
-	 * add last item
-	 * @param {object} item to be added
+	 * make item list by items
+	 * @param {array} list item ids
 	 **/
-	addToLast: function(item) {
-		this.last.setNext(item);
-		item.setPrev(this.last);
-		this.last = item;
+	_makeItems: function(list) {
+		this.list = ne.util.map(list, function(item, index) {
+			return new ne.component.Layout.Item({
+				id: item.id,
+				contentID: item.contentID,
+				groupInfo: this.type,
+				isDraggable: item.isDraggable,
+				isClose: item.isClose,
+				title: item.title,
+				index: index
+			});
+		});
 	},
 	/**
-	 * get target by index
-	 * @param {number} index target index
-	 **/
-	getTarget: function(index) {
-		var i = 0,
-			temp = this.first;
-		while (i < index) {
-			temp = temp.getNext();
-			i++;
-		}
-		return temp;
-	},
-	/**
-	 * remove item
-	 * @param {nubmer} index remove item index
+	 * remove item by index
+	 * @param {number} index remove item index
 	 **/
 	remove: function(index) {
-		var target = this.getTarget(index),
-			prev = target.getPrev(),
-			next = target.getNext();
-		prev.setNext(next);
-		next.setPrev(prev);
-		// disconnect target from any items
-		target.setNext(null);
-		target.setPrev(null);
+		this.list.splice(index, 1);
 	},
 	/**
-	 * reset
+	 * add item
+	 * @param {number} [index] add item position
 	 **/
-	reset: function() {
-		this.first = null;
-		this.last = null;
+	add: function(item, index) {
+		if (arguments.length > 1) {
+			this.list.splice(index, 0, item);
+		} else {
+			this.list.push(item);
+		}
 	}
 });
+

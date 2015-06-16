@@ -1,94 +1,81 @@
-// describe('group', function() {
-// 	var group;
+describe('group', function() {
+	var group,
+		group2;
 
-// 	beforeEach(function() {
-// 		group = new ne.component.Layout.Group();
-// 	});
+	beforeEach(function() {
+		group = new ne.component.Layout.Group({
+			width: 300,
+			items: [
+				{
+					id: 'item1',
+					contentID : 'viewItem1',
+					title: 'title1'
+				},
+				{
+					id: 'item2',
+					contentID : 'viewItem2',
+					title: 'title2'
+				},
+				{
+					id: 'item3',
+					contentID : 'viewItem3',
+					title: 'title3'
+				},
+				{
+					id: 'item4',
+					contentID : 'viewItem3',
+					title: 'title4'
+				}
+			]
+		});
+		group2 = new ne.component.Layout.Group({
+			width: 500
+		});
+		group3 = new ne.component.Layout.Group({
+			width: 500,
+			items: [
+				{
+					id: 'item5',
+					contentID : 'viewItem5',
+					title: 'title5'
+				},
+				{
+					id: 'item6',
+					contentID : 'viewItem6',
+					title: 'title6'
+				}
+			]
+		});
+	});
 
-// 	it('group is defined and has list', function() {
-// 		expect(group).toBeDefined();
-// 	});
 
-// 	it('group item add first', function() {
-// 		var item1 = new ne.component.Layout.Item({
-// 			width:300,
-// 			group:'top',
-// 			title:'asdf',
-// 			type: 'type'
-// 		});
-// 		var item2 = new ne.component.Layout.Item({
-// 			width:300,
-// 			group:'top',
-// 			title:'asdf',
-// 			type: 'type'
-// 		});
-// 		group.add(item1);
-// 		expect(group.first).toBe(item1);
-// 	});
+	it('group defined', function() {
+		expect(group).toBeDefined();
+		expect(group2).toBeDefined();
+		expect(group3).toBeDefined();
+	});
 
-// 	it('group item add next to first item', function() {
-// 		var item1 = new ne.component.Layout.Item({
-// 			width:300,
-// 			group:'top',
-// 			title:'asdf',
-// 			type: 'type'
-// 		});
-// 		var item2 = new ne.component.Layout.Item({
-// 			width:300,
-// 			group:'top',
-// 			title:'asdf',
-// 			type: 'type'
-// 		});
-// 		group.add(item1);
-// 		group.add(item2);
-// 		expect(group.first.getNext()).toBe(item2);
-// 	});
+	it('group has list', function() {
+		expect(group.list.length).toBe(4);
+		expect(group2.list.length).toBe(0);
+		expect(group3.list.length).toBe(2);
+	});
 
-// 	it('group item add with target', function() {
-// 		var i = 0, item = [];
-// 		for (; i < 10; i++) {
-// 			item.push(new ne.component.Layout.Item({
-// 				width:300,
-// 				group:'top',
-// 				title:'asdf' + i,
-// 				type: 'type'
-// 			}));
-// 		}
+	it('group move to', function() {
+		var item1 = group.list[0];
+		group.remove(0);
+		group2.add(item1);
+		expect(group2.list[0]).toBe(item1);
+		expect(group.list[0]).not.toBe(item1);
+	});
 
-// 		group.add(item[0]);
-// 		group.add(item[1]);
-// 		group.add(item[1], item[2], true);
+	it('group move to by index', function() {
+		var item1 = group.list[2];
+		group.remove(2);
+		group3.add(item1, 1);
+		expect(group.list.length).toBe(3);
+		expect(group3.list.length).toBe(3);
+		expect(group3.list[1]).toBe(item1);
+	});
 
-// //		expect(group.getTarget(1)).toBe(item[2]);
-// 	});
-
-// 	it('getTarget', function() {
-// 		var i = 0, item = [];
-// 		for (; i < 10; i++) {
-// 			item.push(new ne.component.Layout.Item({
-// 				width:300,
-// 				group:'top',
-// 				title:'asdf' + i,
-// 				type: 'type'
-// 			}));
-// 			group.add(item[i]);
-// 		}
-// 		expect(group.getTarget(2)).toBe(item[2]);
-// 	});
-
-// 	it('remove', function() {
-// 		var i = 0, item = [];
-// 		for (; i < 10; i++) {
-// 			item.push(new ne.component.Layout.Item({
-// 				width:300,
-// 				group:'top',
-// 				title:'asdf' + i,
-// 				type: 'type'
-// 			}));
-// 			group.add(item[i]);
-// 		}
-// 		group.remove(3);
-// 		expect(group.getTarget(3)).toBe(item[4]);
-// 	});
-
-// });
+});
