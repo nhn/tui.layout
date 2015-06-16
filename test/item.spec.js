@@ -6,7 +6,7 @@ describe('item set', function() {
 		item = new ne.component.Layout.Item({
 			title: 'title1',
 			id: 'id1',
-			contentID: 'lifeStyle',
+			contentId: 'lifeStyle',
 			groupInfo: 'groupA',
 			isDraggable: true,
 			isClose: true,
@@ -14,7 +14,7 @@ describe('item set', function() {
 		});
 		item2 = new ne.component.Layout.Item({
 			id: 'iddddd1',
-			contentID: 'lifeStyle',
+			contentId: 'lifeStyle',
 			groupInfo: 'groupA',
 			isDraggable: true,
 			isClose: false,
@@ -22,7 +22,7 @@ describe('item set', function() {
 		});
 		item3 = new ne.component.Layout.Item({
 			id: 'id2',
-			contentID: 'lifeStyle',
+			contentId: 'lifeStyle',
 			groupInfo: 'groupA',
 			isClose: false,
 			index: 2
@@ -30,7 +30,7 @@ describe('item set', function() {
 		item4 = new ne.component.Layout.Item({
 			title: 'asdf',
 			id: 'id2',
-			contentID: 'lifeStyle',
+			contentId: 'lifeStyle',
 			groupInfo: 'groupA',
 			index: 3
 		});	
@@ -47,18 +47,18 @@ describe('item set', function() {
 	});
 
 	it('make option isOpen item, item display block', function() {
-		expect(item.$element.find('.body').css('display')).toBe('none');
-		expect(item2.$element.find('.body').css('display')).not.toBe('none');
+		expect(item.$content.css('display')).toBe('none');
+		expect(item2.$content.css('display')).not.toBe('none');
 	});
 
 	it('toggle is working none -> block', function() {
 		item.toggle();
-		expect(item.$element.find('.body').css('display')).not.toBe('none');
+		expect(item.$content.css('display')).not.toBe('none');
 	});
 
 	it('toggle is working(2) block -> none', function() {
 		item2.toggle();
-		expect(item2.$element.find('.body').css('display')).toBe('none');
+		expect(item2.$content.css('display')).toBe('none');
 	});
 
 	it('item4 title is fixed', function() {

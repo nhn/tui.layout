@@ -1,7 +1,7 @@
 
 var HTML = {
 		MOVEBUTTON: '<button class="move">move</button>',
-		ELEMENT: '<div class="item" data-index="{{number}}"><div class="item-body"></div></div>',
+		ELEMENT: '<div class="item" data-index="{{number}}"><div class="{{wrapperClass}}"></div></div>',
 		TITLE: '<div class="title"></div>',
 		TOGGLEBUTTON: '<button class="toggle"></button>',
 		GROUP : '<div class="group"></div>'
@@ -11,4 +11,5 @@ var HTML = {
 	},
 	ERROR = {
 		OPTIONS_NOT_DEFINED : 'options are not defined'
-	};
+	},
+	DEFAULT_WRPPER_CLASS = 'item-body';

@@ -4,22 +4,137 @@
 	<style>
 		.item { width: 300px; height:100px; }
 	</style>
+	<script type="text/javascript">
+	var layout = new ne.component.Layout({
+		typeInfo: {
+			name: 'half',
+			grouplist: [
+				{
+					id: 'g1',
+					isWide: false,
+					ratio: '5'
+				},
+				{
+					id: 'g2',
+					isWide: false,
+					ratio: '5'
+				}
+			]
+		},
+		items : [
+			{
+				id : 'item-lifeStyle',
+				contentID: 'lifeStyle',
+				title: "Life Style Seciton",
+				isClose: false,
+				isDragable: true,
+				group: 'g1'
+			},
+			{
+				id : 'item-calendar', // 변경가능
+				contentID: 'calendar',
+				title: "Calendar Seciton",
+				isClose: false,
+				isDragable: true,
+				group: 'g1'
+			},
+			{
+				id : 'item-weather', // 변경가능
+				contentID: 'weather',
+				title: "Weather Seciton",
+				isClose: false,
+				isDragable: true,
+				group: 'g2'
+			},
+			{
+				id : 'item-todoList', // 변경가능
+				contentID: 'todoList',
+				title: "TodoList Seciton",
+				isClose: false,
+				isDragable: true,
+				group: 'g1'
+			},
+			{
+				id : 'item-news', // 변경가능
+				contentID: 'news',
+				title: "News Seciton",
+				isClose: true,
+				isDragable: true,
+				group: 'g2'
+			}
+		]
+	}, $('#layout'));
+	</script>
 </head>
 <body>
-<div class="item item1">
-	<button item-name="item1">button1</button>
+<!-- lifeStyle section -->
+<div id="lifeStyle">
+	<div>life Style</div>
 </div>
-<div class="item item2">
-	<button item-name="item2">button2</button>
+
+<!-- calendar section -->
+<div id="calendar">
+	<table>
+		<thead>
+			<tr>
+				<th>mon</th>
+				<th>tue</th>
+				<th>wed</th>
+				<th>thu</th>
+				<th>fri</th>
+				<th>sat</th>
+				<th>sun</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>-</td>
+				<td>-</td>
+				<td>-</td>
+				<td>-</td>
+				<td>-</td>
+				<td>1</td>
+				<td>2</td>
+			</tr>
+			<tr>
+				<td>3</td>
+				<td>4</td>
+				<td>5</td>
+				<td>6</td>
+				<td>7</td>
+				<td>8</td>
+				<td>9</td>
+			</tr>
+		</tbody>
+	</table>
 </div>
-<div class="item item3">
-	<button item-name="item3">button3</button>
+
+<!-- weahter section -->
+<div id="weather">
+	<div class="sunny">맑음</div>
+	<div>
+		<span>습도 : <em>30%</em></span>
+		<strong>풍랑주의보</strong>
+	</div>
 </div>
-<div class="item item4">
-	<button item-name="item4">button4</button>
+
+<!-- todolist section -->
+<div id="todoList">
+	<ul>
+		<li><input type="checkbox" /> 아침먹고 땡</li>
+		<li><input type="checkbox" /> 점심먹고 땡</li>
+		<li><input type="checkbox" /> 저녁먹고 땡</li>
+	</ul>
 </div>
-<div class="item item5">
-	<button item-name="item5">button5</button>
+
+<!-- today's news section -->
+<div id="news">
+	<ul>
+		<li><a href="#">메르스 낙타만 주의하면 됩니다.</a></li>
+		<li><a href="#">대통령이 사랑한 낙타</a></li>
+		<li><a href="#">과천태생 낙타, 격리수용에 격분하여 청와대로 돌진</a></li>
+	</ul>
+	<a href="#">더보기</a>
 </div>
 </body>
 </html>

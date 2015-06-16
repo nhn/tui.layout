@@ -10,47 +10,82 @@ ne.component.Layout.Item = ne.util.defineClass({
 			throw new Error(ERROR.OPTIONS_NOT_DEFINED);
 		}
 
-		this._makeElement(options.index);
+		this.setIndex(options.index);
+		this._makeElement(options);
 		
-		// use title case, make title element
-		this.isDraggable = !!options.isDraggable;
-		this._makeTitle(options);
-
 		// title used, and fix title (no hide)
 		if (!ne.util.isBoolean(options.isClose)) {
 			this.titleFix();
 		}
-
-		this._makeToggleButton(options.toggleButtonHTML || HTML.TOGGLEBUTTON);
 	
-
-		// close body
+		// close body(I don't like this code, are there any ways to fix it.)
 		if (options.isClose) {
 			this.close();
 		} else {
 			this.open();
 		}
 
-		this.$content.append($(options.contentID));
+		this.$content.append($(options.contentId));
 		this._setEvents();
 	},
+	
+	/**
+	 * set Index by group
+	 **/
+	setIndex: function(index) {
+		this.index = index;
+	},
+
+	/**
+	 * get Index
+	 **/
+	getIndex: function() {
+		return this.index;
+	},
+
 	/**
 	 * make item root element 
-	 * @param {nubmer} index item index of group
+	 * @param {object} options item options
 	 * @private
 	 **/
-	_makeElement: function(index) {
-		this.$element = $(HTML.ELEMENT.replace('{{number}}', index));
-		this.$content = this.$element.find('.item-body');
+	_makeElement: function(options) {
+		var wrapperClass = options.wrapperClass || DEFAULT_WRPPER_CLASS,
+			elementHTML = this._getMarkup(options.elementHTML, wrapperClass);
+
+		this.$element = $(elementHTML);
+		this.$content = this.$element.find('.' + wrapperClass);
+		
+		this.isDraggable = !!options.isDraggable;
+		this._makeTitle(options);
 	},
+
 	/**
-	 * make title element
+	 * make markup with template
+	 * @param {string} html  item element html
+	 * @param {string} wrapperClass content wrapper class
+	 **/
+	_getMarkup: function(html, wrapperClass) {
+		var map = {
+				number : this.index,
+				wrapperClass: wrapperClass
+			};
+
+		html = html || HTML.ELEMENT;
+		html = html.replace(/\{\{([^\}]+)\}\}/g, function(mstr, name) {
+			return map[name];
+		});
+
+		return html;
+	},
+
+	/**
+	 * make title element and elements belong to title
 	 * @param {object} options item options
 	 * @private
 	 **/
 	_makeTitle: function(options) {
-		var moveButtonHTML = options.moveButtonHTML || HTML.MOVEBUTTON;
-		var titleHTML = options.titleHTML || HTML.TITLE;
+		var moveButtonHTML = options.moveButtonHTML || HTML.MOVEBUTTON,
+			titleHTML = options.titleHTML || HTML.TITLE;
 		
 		this.$titleElement = $(titleHTML);
 		this.$titleElement.html(options.title || TEXT.DEFAULT_TITLE);
@@ -60,7 +95,9 @@ ne.component.Layout.Item = ne.util.defineClass({
 		}
 
 		this.$content.before(this.$titleElement);
+		this._makeToggleButton(options.toggleButtonHTML || HTML.TOGGLEBUTTON);
 	},
+
 	/**
 	 * make drag button 
 	 * @param {string} html button html
@@ -69,6 +106,7 @@ ne.component.Layout.Item = ne.util.defineClass({
 	_makeDragButton: function(html) {
 		this.$titleElement.append($(html));
 	},
+
 	/**
 	 * make Toggle button
 	 * @private
@@ -76,6 +114,7 @@ ne.component.Layout.Item = ne.util.defineClass({
 	_makeToggleButton: function(toggleHTML) {
 		this.$toggleButton = $(toggleHTML);
 	},
+
 	/**
 	 * close Element
 	 **/
@@ -83,6 +122,7 @@ ne.component.Layout.Item = ne.util.defineClass({
 		this.$toggleButton.addClass("open");
 		this.$content.hide();
 	},
+
 	/**
 	 * open Element
 	 **/
@@ -90,6 +130,7 @@ ne.component.Layout.Item = ne.util.defineClass({
 		this.$toggleButton.removeClass("open");
 		this.$content.show();
 	},
+
 	/**
 	 * title fix to do not hide 
 	 **/
@@ -97,12 +138,14 @@ ne.component.Layout.Item = ne.util.defineClass({
 		this.titleOn();
 		this.isTitleFix = true;
 	},
+
 	/**
 	 * show title
 	 **/
 	titleOn: function() {
 		this.$titleElement.show();
 	},
+
 	/**
 	 * hide title
 	 **/
@@ -111,6 +154,7 @@ ne.component.Layout.Item = ne.util.defineClass({
 			this.$titleElement.hide();
 		}
 	},
+
 	/**
 	 * toggle open/close
 	 **/
@@ -121,6 +165,7 @@ ne.component.Layout.Item = ne.util.defineClass({
 			this.close();
 		}
 	},
+
 	/**
 	 * set all event about item
 	 **/

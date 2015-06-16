@@ -23,7 +23,7 @@ ne.component.Layout.Group = ne.util.defineClass({
 		this.list = ne.util.map(list, function(item, index) {
 			return new ne.component.Layout.Item({
 				id: item.id,
-				contentID: item.contentID,
+				contentId: item.contentId,
 				groupInfo: this.type,
 				isDraggable: item.isDraggable,
 				isClose: item.isClose,

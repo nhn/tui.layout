@@ -8,22 +8,22 @@ describe('group', function() {
 			items: [
 				{
 					id: 'item1',
-					contentID : 'viewItem1',
+					contentId : 'viewItem1',
 					title: 'title1'
 				},
 				{
 					id: 'item2',
-					contentID : 'viewItem2',
+					contentId : 'viewItem2',
 					title: 'title2'
 				},
 				{
 					id: 'item3',
-					contentID : 'viewItem3',
+					contentId : 'viewItem3',
 					title: 'title3'
 				},
 				{
 					id: 'item4',
-					contentID : 'viewItem3',
+					contentId : 'viewItem3',
 					title: 'title4'
 				}
 			]
@@ -36,12 +36,12 @@ describe('group', function() {
 			items: [
 				{
 					id: 'item5',
-					contentID : 'viewItem5',
+					contentId : 'viewItem5',
 					title: 'title5'
 				},
 				{
 					id: 'item6',
-					contentID : 'viewItem6',
+					contentId : 'viewItem6',
 					title: 'title6'
 				}
 			]
