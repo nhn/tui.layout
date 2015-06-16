@@ -25,10 +25,11 @@ ne.component.Layout.Item = ne.util.defineClass({
 			this.open();
 		}
 
+		this.groupInfo = options.groupInfo;
 		this.$content.append($(options.contentId));
 		this._setEvents();
 	},
-	
+
 	/**
 	 * set Index by group
 	 **/

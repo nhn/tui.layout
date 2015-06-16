@@ -2,6 +2,10 @@ ne.util.defineNamespace('ne.component.Layout');
 
 ne.component.Layout.Group = ne.util.defineClass({
 	/**
+	 * pool element
+	 **/
+	$pool: $('<div class="pool" style="display:none"></div>'),
+	/**
 	 * init default field
 	 **/
 	init: function(options) {
@@ -10,27 +14,24 @@ ne.component.Layout.Group = ne.util.defineClass({
 		}
 
 		this.size = options.width;
-		this.type = options.type;
+		this.id = options.id;
 		this.$element = $(options.html || HTML.GROUP);
 
 		this._makeItems(options.items);
+		this.render();
 	},
 	/**
 	 * make item list by items
 	 * @param {array} list item ids
 	 **/
 	_makeItems: function(list) {
+		var options = {
+			groupInfo: this.id
+		}
 		this.list = ne.util.map(list, function(item, index) {
-			return new ne.component.Layout.Item({
-				id: item.id,
-				contentId: item.contentId,
-				groupInfo: this.type,
-				isDraggable: item.isDraggable,
-				isClose: item.isClose,
-				title: item.title,
-				index: index
-			});
-		});
+			ne.util.extend(item, options);
+			return new ne.component.Layout.Item(item);
+		}, this);	
 	},
 	/**
 	 * remove item by index
@@ -38,6 +39,7 @@ ne.component.Layout.Group = ne.util.defineClass({
 	 **/
 	remove: function(index) {
 		this.list.splice(index, 1);
+		this.render();
 	},
 	/**
 	 * add item
@@ -49,6 +51,25 @@ ne.component.Layout.Group = ne.util.defineClass({
 		} else {
 			this.list.push(item);
 		}
+		item.groupInfo = this.id;
+		this.render();
+	},
+	/**
+	 * re arrange group
+	 **/
+	render: function() {
+		this._storePool();
+		ne.util.forEach(this.list, function(item) {
+			this.$element.append(item.$element);
+		}, this);
+	},
+	/**
+	 * store items to pool
+	 **/
+	_storePool: function() {
+		ne.util.forEach(this.list, function(item) {
+			this.$pool.append(item.$element);
+		}, this);
 	}
 });
 
