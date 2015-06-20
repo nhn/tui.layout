@@ -114,4 +114,9 @@ describe('layout', function() {
 		expect(item2).toBeDefined();
 		expect(item3).toBeDefined();
 	});
+
+	it('create group elements', function() {
+		var $group = layout1.groups[0].$element;
+		expect($.contains(layout1.$element[0], $group[0])).toBe(true);
+	});
 });

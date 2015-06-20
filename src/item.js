@@ -10,6 +10,8 @@ ne.component.Layout.Item = ne.util.defineClass({
 			throw new Error(ERROR.OPTIONS_NOT_DEFINED);
 		}
 
+		this.groupInfo = options.groupInfo;
+		this.contentId = options.contentId;
 		this.setIndex(options.index);
 		this._makeElement(options);
 		
@@ -24,9 +26,8 @@ ne.component.Layout.Item = ne.util.defineClass({
 		} else {
 			this.open();
 		}
-
-		this.groupInfo = options.groupInfo;
-		this.$content.append($(options.contentId));
+		this.$content.append($('#' + options.contentId));
+		this.$element.attr('id', 'item_id_' + options.contentId);
 		this._setEvents();
 	},
 
@@ -51,11 +52,22 @@ ne.component.Layout.Item = ne.util.defineClass({
 	 **/
 	_makeElement: function(options) {
 		var wrapperClass = options.wrapperClass || DEFAULT_WRPPER_CLASS,
-			elementHTML = this._getMarkup(options.elementHTML, wrapperClass);
+			elementHTML = this._getMarkup(options.elementHTML, wrapperClass),
+			$dimmed = $('<div class="' + DIMMED_LAYER_CLASS + '"></div>');
+		$dimmed.css({
+			position: 'absolute',
+			left:0,
+			top:0, 
+			bottom:0,
+			right:0,
+			display: 'none'
+		});
 
 		this.$element = $(elementHTML);
+		this.$element.css('position', 'relative');
 		this.$content = this.$element.find('.' + wrapperClass);
-		
+		this.$element.append($dimmed);
+
 		this.isDraggable = !!options.isDraggable;
 		this._makeTitle(options);
 	},
@@ -105,6 +117,7 @@ ne.component.Layout.Item = ne.util.defineClass({
 	 * @private
 	 **/
 	_makeDragButton: function(html) {
+		html = html.replace(/{{item-id}}/g, 'item_id_' + this.contentId);
 		this.$titleElement.append($(html));
 	},
 
@@ -114,6 +127,7 @@ ne.component.Layout.Item = ne.util.defineClass({
 	 **/
 	_makeToggleButton: function(toggleHTML) {
 		this.$toggleButton = $(toggleHTML);
+		this.$titleElement.append(this.$toggleButton);
 	},
 
 	/**

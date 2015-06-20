@@ -13,12 +13,22 @@ ne.component.Layout.Group = ne.util.defineClass({
 			throw new Error(ERROR.OPTIONS_NOT_DEFINED);
 		}
 
-		this.size = options.width;
+		this.size = options.ratio || '10d';
 		this.id = options.id;
-		this.$element = $(options.html || HTML.GROUP);
+
+		this._makeElement(options.html || HTML.GROUP);
 
 		this._makeItems(options.items);
 		this.render();
+	},
+	/**
+	 * make group element
+	 * @param {string} html 
+	 **/
+	_makeElement: function(html) {
+		html = html.replace(/{{group-id}}/g, this.id);
+		html = html.replace(/{{width}}/g, this.size);
+		this.$element = $(html);
 	},
 	/**
 	 * make item list by items
@@ -31,15 +41,16 @@ ne.component.Layout.Group = ne.util.defineClass({
 		this.list = ne.util.map(list, function(item, index) {
 			ne.util.extend(item, options);
 			return new ne.component.Layout.Item(item);
-		}, this);	
+		}, this);
 	},
 	/**
 	 * remove item by index
 	 * @param {number} index remove item index
 	 **/
 	remove: function(index) {
+		this._storePool(this.list[index]);
 		this.list.splice(index, 1);
-		this.render();
+		console.log(this.list);
 	},
 	/**
 	 * add item
@@ -52,24 +63,31 @@ ne.component.Layout.Group = ne.util.defineClass({
 			this.list.push(item);
 		}
 		item.groupInfo = this.id;
-		this.render();
+		console.log(this.list);
 	},
 	/**
 	 * re arrange group
 	 **/
 	render: function() {
 		this._storePool();
-		ne.util.forEach(this.list, function(item) {
+		this.$element.empty();
+		ne.util.forEach(this.list, function(item, index) {
 			this.$element.append(item.$element);
+			item.$element.attr('data-index', index);
 		}, this);
 	},
 	/**
 	 * store items to pool
+	 * @param {object} $element object
 	 **/
-	_storePool: function() {
-		ne.util.forEach(this.list, function(item) {
-			this.$pool.append(item.$element);
-		}, this);
+	_storePool: function($element) {
+		if ($element) {
+			this.$pool.append($element);
+		} else {
+			ne.util.forEach(this.list, function(item) {
+				this.$pool.append(item.$element);
+			}, this);
+		}
 	}
 });
 

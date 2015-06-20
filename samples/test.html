@@ -1,69 +1,66 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-	<style>
-		.item { width: 300px; height:100px; }
-	</style>
+	<link rel="stylesheet" href="css/default.css" type="text/css" />
+	<link rel="stylesheet" href="css/layout.css" type="text/css" />
+	<script type="text/javascript" src="../lib/jquery/jquery.js"></script>
+	<script type="text/javascript" src="../lib/ne-code-snippet/code-snippet.js"></script>
+	<script type="text/javascript" src="../src/statics.js"></script>
+	<script type="text/javascript" src="../src/layout.js"></script>
+	<script type="text/javascript" src="../src/group.js"></script>
+	<script type="text/javascript" src="../src/item.js"></script>
+	<script type="text/javascript" src="../src/drag.js"></script>
 	<script type="text/javascript">
+$(window).ready(function() {
+
 	var layout = new ne.component.Layout({
-		typeInfo: {
-			name: 'half',
-			grouplist: [
-				{
-					id: 'g1',
-					isWide: false,
-					ratio: '5'
-				},
-				{
-					id: 'g2',
-					isWide: false,
-					ratio: '5'
-				}
-			]
-		},
-		items : [
-			{
-				id : 'item-lifeStyle',
-				contentID: 'lifeStyle',
-				title: "Life Style Seciton",
-				isClose: false,
-				isDragable: true,
-				group: 'g1'
-			},
-			{
-				id : 'item-calendar', // 변경가능
-				contentID: 'calendar',
-				title: "Calendar Seciton",
-				isClose: false,
-				isDragable: true,
-				group: 'g1'
-			},
-			{
-				id : 'item-weather', // 변경가능
-				contentID: 'weather',
-				title: "Weather Seciton",
-				isClose: false,
-				isDragable: true,
-				group: 'g2'
-			},
-			{
-				id : 'item-todoList', // 변경가능
-				contentID: 'todoList',
-				title: "TodoList Seciton",
-				isClose: false,
-				isDragable: true,
-				group: 'g1'
-			},
-			{
-				id : 'item-news', // 변경가능
-				contentID: 'news',
-				title: "News Seciton",
-				isClose: true,
-				isDragable: true,
-				group: 'g2'
-			}
-		]
-	}, $('#layout'));
+    name: 'half',
+    grouplist: [
+    {
+        id: 'g1',
+        ratio: '5',
+        items: [{
+            id : 'item-lifeStyle',
+            contentId: 'lifeStyle',
+            title: "Life Style Seciton",
+            isClose: false,
+            isDraggable: true
+        },
+        {
+            id : 'item-calendar', // 변경가능
+            contentId: 'calendar',
+            title: "Calendar Seciton",
+            isClose: false,
+            isDraggable: true
+        },
+        {
+            id : 'item-todoList', // 변경가능
+            contentId: 'todoList',
+            title: "TodoList Seciton",
+            isClose: false,
+            isDraggable: true
+        }]
+    },
+    {
+        id: 'g2',
+        ratio: '5',
+        items: [{
+            id : 'item-weather', // 변경가능
+            contentId: 'weather',
+            title: "Weather Seciton",
+            isClose: false,
+            isDraggable: true
+        },
+        {
+            id : 'item-news', // 변경가능
+            contentId: 'news',
+            title: "News Seciton",
+            isClose: true,
+            isDraggable: true
+        }]
+    }
+]}, $('#layout'));
+});
 	</script>
 </head>
 <body>
@@ -74,7 +71,7 @@
 
 <!-- calendar section -->
 <div id="calendar">
-	<table>
+	<table width="100%">
 		<thead>
 			<tr>
 				<th>mon</th>
@@ -136,5 +133,6 @@
 	</ul>
 	<a href="#">더보기</a>
 </div>
+<div id="layout"></div>
 </body>
 </html>

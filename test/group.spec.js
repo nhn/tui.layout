@@ -87,6 +87,7 @@ describe('group', function() {
 		expect(group3.list[1]).toBe(item1);
 		expect($.contains(group3.$element[0], item1.$element[0])).toBe(true);
 		expect($.contains(group.$element[0], item1.$element[0])).toBe(false);
+		expect(item1.$element.attr('data-index')).toBe('1');
 	});
 
 	it('if item move to other group, item groupInfo changed', function() {

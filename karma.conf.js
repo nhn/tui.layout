@@ -41,6 +41,7 @@ module.exports = function(config) {
             'lib/jquery/jquery.js',
             'node_modules/jasmine-jquery/lib/jasmine-jquery.js',
             'src/**/layout.js',
+            'src/**/drag.js',
             'src/**/statics.js',
             'src/**/item.js',
             'src/**/group.js',
