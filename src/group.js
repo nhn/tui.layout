@@ -17,8 +17,9 @@ ne.component.Layout.Group = ne.util.defineClass({
 		this.id = options.id;
 
 		this._makeElement(options.html || HTML.GROUP);
-
 		this._makeItems(options.items);
+		this._appendDimmed();
+
 		this.render();
 	},
 	/**
@@ -29,6 +30,7 @@ ne.component.Layout.Group = ne.util.defineClass({
 		html = html.replace(/{{group-id}}/g, this.id);
 		html = html.replace(/{{width}}/g, this.size);
 		this.$element = $(html);
+		this.$element.css('position', 'relative');
 	},
 	/**
 	 * make item list by items
@@ -44,13 +46,35 @@ ne.component.Layout.Group = ne.util.defineClass({
 		}, this);
 	},
 	/**
+	 * make dimmed element
+	 **/
+	_makeDimmed: function() {
+		this.$dimmed = $('<div class="' + DIMMED_LAYER_CLASS + '"></div>');
+		this.$dimmed.css({
+			position: 'absolute',
+			left:0,
+			top:0, 
+			bottom:0,
+			right:0,
+			display: 'none'
+		});
+	},
+	/**
+	 * append dimmed element
+	 **/
+	_appendDimmed: function() {
+		if (!this.$dimmed) {
+			this._makeDimmed();
+		}
+		this.$element.append(this.$dimmed);
+	},
+	/**
 	 * remove item by index
 	 * @param {number} index remove item index
 	 **/
 	remove: function(index) {
 		this._storePool(this.list[index]);
 		this.list.splice(index, 1);
-		console.log(this.list);
 	},
 	/**
 	 * add item
@@ -63,18 +87,18 @@ ne.component.Layout.Group = ne.util.defineClass({
 			this.list.push(item);
 		}
 		item.groupInfo = this.id;
-		console.log(this.list);
 	},
 	/**
 	 * re arrange group
 	 **/
 	render: function() {
 		this._storePool();
-		this.$element.empty();
 		ne.util.forEach(this.list, function(item, index) {
-			this.$element.append(item.$element);
+			this.$dimmed.before(item.$element);
 			item.$element.attr('data-index', index);
+			item.$element.attr('data-groupInfo', this.id);
 		}, this);
+		this.$dimmed.hide();
 	},
 	/**
 	 * store items to pool

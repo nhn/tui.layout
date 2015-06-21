@@ -11,6 +11,7 @@
 .gp_g1 {float: left;}
 .gp_g2 {float: left;}
 
+.group { min-height: 50px; outline:1px dashed #eee;}
 .item {width:auto;margin:0 10px; background-color:#fdc; margin-bottom: 5px;}
 .item .title {text-align:center; background-color:#eee; padding:10px 0;}
 .item .item-body {padding: 20px 0;}
