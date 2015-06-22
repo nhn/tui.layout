@@ -42,7 +42,10 @@ ne.component.Layout.Group = ne.util.defineClass({
 		html = html.replace(/{{group-id}}/g, this.id);
 		html = html.replace(/{{width}}/g, this.size);
 		this.$element = $(html);
-		this.$element.css('position', 'relative');
+		this.$element.css({
+			'position': 'relative',
+			'width': this.size * 10 + '%'
+		});
 	},
 
 	/**

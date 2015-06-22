@@ -282,9 +282,7 @@ ne.component.Layout = ne.util.defineClass({
 				y: e.clientY + this.getY()
 			}, group);
 
-		if ($target) {
-			this._update();
-		}
+		this._update();
 		drag.finish();
 
 		$doc.off('mousemove', this.onMouseMove);
@@ -303,7 +301,7 @@ ne.component.Layout = ne.util.defineClass({
 			addIndex = this._getAddIndex(),
 			item = oldGroup.list[removeIndex];
 
-		if (ne.util.isNumber(addIndex)) {
+		if (!isNaN(addIndex)) {
 			oldGroup.storePool();
 			targetGroup.storePool();
 			oldGroup.remove(removeIndex);
