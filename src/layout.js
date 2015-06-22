@@ -1,6 +1,7 @@
 /**
  * @fileoverview layout component
  * @dependency code-snippet.js jquery.1.8.3
+ * @author NHN entertainment FE dev team Jein Yi(jein.yi@nhnent.com)
  */
 ne.util.defineNamespace('ne.component');
 
@@ -35,7 +36,7 @@ ne.component.Layout = ne.util.defineClass({
 
 	/**
 	 * get group item
-	 * @param {(string|object)} object group item id or information to find group
+	 * @param {(string|object)} group item id or information to find group
 	 * @returns {*}
 	 * @private
 	 */
@@ -51,12 +52,12 @@ ne.component.Layout = ne.util.defineClass({
 	},
 
 	/**
-	 * make drag and drop event
+	 * make guide object
 	 * @param {string} [guideHTML] guide element html
 	 * @private
 	 */
 	_makeGuide: function(guideHTML) {
-		this._drag = new ne.component.Layout.Guide({
+		this._guide = new ne.component.Layout.Guide({
 			guideHTML: guideHTML
 		});
 	},
@@ -78,9 +79,10 @@ ne.component.Layout = ne.util.defineClass({
 	 * @private
 	 */
 	_onMouseDown: function(e) {
+		var $doc = $(document);
 		this._setGuide(e.target, e.clientX, e.clientY);
-		$(document).on('mousemove', this.onMouseMove);
-		$(document).on('mouseup', this.onMouseUp);
+		$doc.on('mousemove', this.onMouseMove);
+		$doc.on('mouseup', this.onMouseUp);
 	},
 
 	/**
@@ -97,8 +99,8 @@ ne.component.Layout = ne.util.defineClass({
 			},
 			itemId = $(target).attr('data-item'),
 			$moveEl = $('#' + itemId);
-		this._drag.ready(initPos);
-		this._drag.setMoveElement($moveEl);
+		this._guide.ready(initPos);
+		this._guide.setMoveElement($moveEl);
 		this.$temp = $moveEl;
 	},
 
@@ -110,31 +112,30 @@ ne.component.Layout = ne.util.defineClass({
 	_onMouseMove: function(e) {		
 		var parent = $(e.target).parent(),
 			pointX = e.clientX + this.getX(),
-			pointY = e.clientY + this.getY(),
-			group = parent.attr('data-group');
+			group = parent.attr('data-group'),
+			pointY = e.clientY + this.getY();
 
 		this._moveGuide(pointX, pointY);
 
-		if (!group) {
-			return;
+		if (group) {
+			this._detectMove(parent, pointX, pointY);
 		}
-
-		this._detectMove(group, pointX, pointY);
 	},
 
 	/**
 	 * detect move with group
-	 * @param {object} group compare position with
+	 * @param {object} item compare position with
 	 * @param {number} pointX x position
 	 * @param {number} pointY y position
 	 * @private
 	 */
-	_detectMove: function(group, pointX, pointY) {
-		var groupInst = this._getGroup(group),
+	_detectMove: function(item, pointX, pointY) {
+		var groupInst = this._getGroup(item),
+			group = item.attr('data-group'),
 			$before;
 
 		if (ne.util.isEmpty(groupInst.list)) {
-			parent.append(this.$temp);
+			item.append(this.$temp);
 			this.$temp.way = 'after';
 			this.$temp.index = 0;
 		} else {
@@ -158,7 +159,7 @@ ne.component.Layout = ne.util.defineClass({
 	 * @private
 	 */
 	_moveGuide: function(x, y) {
-		this._drag.moveTo({
+		this._guide.moveTo({
 			x: x + 10 + 'px',
 			y: y + 10 + 'px'
 		});
@@ -191,7 +192,7 @@ ne.component.Layout = ne.util.defineClass({
 	 * @private
 	 */
 	_getTarget: function(item, pos, group) {
-		var bound = item.$element[0].getBoundingClientRect(),
+		var bound = item.$element.offset(),
 			bottom = this._getBottom(item, group),
 			height = item.$element.height(),
 			top = this.getY() + bound.top,
@@ -214,7 +215,7 @@ ne.component.Layout = ne.util.defineClass({
 	 * @private
 	 */
 	_isValidItem: function(item) {
-		return !!(item.$element[0] !== this.$temp[0]);
+		return (item.$element[0] !== this.$temp[0]);
 	},
 
 	/**
@@ -227,7 +228,7 @@ ne.component.Layout = ne.util.defineClass({
 	_getBottom: function(item, group) {
 		var next = item.$element.next(),
 			bottom,
-			gbound = group.$element[0].getBoundingClientRect(),
+			gbound = group.$element.offset(),
 			limit = this.getY() + gbound.top + group.$element.height();
 		if (next.hasClass(DIMMED_LAYER_CLASS)) {
 			bottom = limit;
@@ -273,13 +274,14 @@ ne.component.Layout = ne.util.defineClass({
 	 * @private
 	 */
 	_onMouseUp: function(e) {
-		var drag = this._drag;
+		var drag = this._guide,
+			$doc = $(document);
 
 		this._update();
 		drag.finish();
 
-		$(document).off('mousemove', this.onMouseMove);
-		$(document).off('mouseup', this.onMouseUp);
+		$doc.off('mousemove', this.onMouseMove);
+		$doc.off('mouseup', this.onMouseUp);
 	},
 
 	/**
@@ -293,7 +295,10 @@ ne.component.Layout = ne.util.defineClass({
 			removeIndex = parseInt(temp.attr('data-index'), 10),
 			addIndex = this._getAddIndex(),
 			item = oldGroup.list[removeIndex];
-		if (addIndex) {
+
+		if (ne.util.isNumber(addIndex)) {
+			oldGroup.storePool();
+			targetGroup.storePool();
 			oldGroup.remove(removeIndex);
 			targetGroup.add(item, addIndex);
 			targetGroup.render();

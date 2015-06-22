@@ -1,6 +1,7 @@
 /**
  * @fileoverview layout item. contain original items.
  * @dependency code-snippet, jquery1.8.3, layout.js
+ * @author NHN entertainment FE dev team Jein Yi(jein.yi@nhnent.com)
  */
 ne.util.defineNamespace('ne.component.Layout');
 
@@ -37,7 +38,7 @@ ne.component.Layout.Item = ne.util.defineClass({
 		
 		// title used, and fix title (no hide)
 		if (!ne.util.isBoolean(this.isClose)) {
-			this.titleFix();
+			this.fixTitle();
 		}
 	
 		// close body(I don't like this code, are there any ways to fix it.)
@@ -122,8 +123,9 @@ ne.component.Layout.Item = ne.util.defineClass({
 
 	/**
 	 * make Toggle button
+	 * @param {string} toggleHTML
 	 * @private
-	 **/
+	 */
 	_makeToggleButton: function(toggleHTML) {
 		this.$toggleButton = $(toggleHTML);
 		this.$titleElement.append(this.$toggleButton);
@@ -148,22 +150,22 @@ ne.component.Layout.Item = ne.util.defineClass({
 	/**
 	 * title fix to do not hide 
 	 **/
-	titleFix: function() {
-		this.titleOn();
+	fixTitle: function() {
+		this.showTitle();
 		this.isTitleFix = true;
 	},
 
 	/**
 	 * show title
 	 **/
-	titleOn: function() {
+	showTitle: function() {
 		this.$titleElement.show();
 	},
 
 	/**
 	 * hide title
 	 **/
-	titleOff: function() {
+	hideTitle: function() {
 		if (!this.isTitleFix) {
 			this.$titleElement.hide();
 		}

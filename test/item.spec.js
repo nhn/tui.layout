@@ -62,7 +62,7 @@ describe('item set', function() {
 	});
 
 	it('item4 title is fixed', function() {
-		item4.titleOff();
+		item4.hideTitle();
 		// event run title Off still title is on
 		expect(item4.$titleElement.css('display')).toBe('block');
 	});

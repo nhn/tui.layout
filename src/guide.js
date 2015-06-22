@@ -1,6 +1,7 @@
 /**
  * @fileoverview layout guide. to help watch move element.
  * @dependency code-snippet, jquery1.8.3, layout.js
+ * @author NHN entertainment FE dev team Jein Yi(jein.yi@nhnent.com)
  */
 ne.util.defineNamespace('ne.component.Layout');
 
@@ -15,7 +16,7 @@ ne.component.Layout.Guide = ne.util.defineClass({
 		this.$element = $(options.guideHTML || HTML.GUIDE);
 		this.$element.css('position', 'absolute');
 		this.$element.appendTo(document.body);
-		this.$element.hide();
+		this.hide();
 	},
 	
 	/**
@@ -23,10 +24,7 @@ ne.component.Layout.Guide = ne.util.defineClass({
 	 * @param {object} pos position to init guide element
 	 **/
 	ready: function(pos) {
-		this.$element.css({
-			left: pos.x,
-			top: pos.y
-		});
+		this.setPos(pos);
 		$('.' +  DIMMED_LAYER_CLASS).show();
 		this.$element.show();
 	},

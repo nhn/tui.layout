@@ -1,6 +1,7 @@
 /**
  * @fileoverview layout group. group include item.
  * @dependency code-snippet, jquery1.8.3, layout.js
+ * @author NHN entertainment FE dev team Jein Yi(jein.yi@nhnent.com)
  */
 ne.util.defineNamespace('ne.component.Layout');
 
@@ -34,7 +35,7 @@ ne.component.Layout.Group = ne.util.defineClass({
 
 	/**
 	 * make group element
-	 * @param {string} html 
+	 * @param {string} html The html string to create the html element
 	 **/
 	_makeElement: function(html) {
 		html = html.replace(/{{group-id}}/g, this.id);
@@ -45,13 +46,13 @@ ne.component.Layout.Group = ne.util.defineClass({
 
 	/**
 	 * make item list by items
-	 * @param {array} list item ids
+	 * @param {array} list The list of item's IDs
 	 **/
 	_makeItems: function(list) {
 		var options = {
 			groupInfo: this.id
 		};
-		this.list = ne.util.map(list, function(item, index) {
+		this.list = ne.util.map(list, function(item) {
 			ne.util.extend(item, options);
 			return new ne.component.Layout.Item(item);
 		}, this);
@@ -84,17 +85,18 @@ ne.component.Layout.Group = ne.util.defineClass({
 
 	/**
 	 * remove item by index
-	 * @param {number} index remove item index
+	 * @param {number} index The index of the item to remove
 	 **/
 	remove: function(index) {
-		this._storePool(this.list[index]);
+		this.storePool(this.list[index]);
 		this.list.splice(index, 1);
 	},
 
 	/**
 	 * add item
-	 * @param {number} [index] add item position
-	 **/
+	 * @param {object} item item object
+	 * @param {number} [index] add The index of the item to add
+	 */
 	add: function(item, index) {
 		if (arguments.length > 1) {
 			this.list.splice(index, 0, item);
@@ -105,24 +107,25 @@ ne.component.Layout.Group = ne.util.defineClass({
 	},
 
 	/**
-	 * re arrange group
+	 * rearrange group
 	 **/
 	render: function() {
-		this._storePool();
 		ne.util.forEach(this.list, function(item, index) {
 			this.$dimmed.before(item.$element);
-			item.$element.attr('data-index', index);
 			item.index = index;
-			item.$element.attr('data-groupInfo', this.id);
+			item.$element.attr({
+				'data-index' : index,
+				'data-groupInfo': this.id
+			});
 		}, this);
 		this.$dimmed.hide();
 	},
 
 	/**
 	 * store items to pool
-	 * @param {object} $element object
+	 * @param {object} $element A JQuery element to store in the pool
 	 **/
-	_storePool: function($element) {
+	storePool: function($element) {
 		if ($element) {
 			this.$pool.append($element);
 		} else {
