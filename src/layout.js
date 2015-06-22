@@ -81,11 +81,8 @@ ne.component.Layout = ne.util.defineClass({
 	 **/
 	_onMouseMove: function(e) {		
 		var parent = $(e.target).parent(),
-			x = this.getX(),
-			y = this.getY(),
 			pointX = e.clientX + this.getX(),
 			pointY = e.clientY + this.getY(),
-			drag = this._drag,
 			group = parent.attr('data-group'),
 			groupInst,
 			$before;
