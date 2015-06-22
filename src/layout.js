@@ -132,7 +132,9 @@ ne.component.Layout = ne.util.defineClass({
 	_detectMove: function(item, pointX, pointY) {
 		var groupInst = this._getGroup(item),
 			group = item.attr('data-group'),
-			$before;
+			$before,
+			top = $(document).scrollTop(),
+			left = $(document).scrollLeft();
 
 		if (ne.util.isEmpty(groupInst.list)) {
 			item.append(this.$temp);
@@ -140,8 +142,8 @@ ne.component.Layout = ne.util.defineClass({
 			this.$temp.index = 0;
 		} else {
 			$before = this._detectTargetByPosition({
-				x: pointX,
-				y: pointY
+				x: pointX + left,
+				y: pointY + top
 			}, groupInst);
 
 			if ($before && $before.way) {
