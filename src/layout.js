@@ -7,6 +7,7 @@ ne.component.Layout = ne.util.defineClass({
 		this._makeDragAndDrop(opitons.guideHTML);
 		this._setEvents();
 	},
+
 	/**
 	 * make group
 	 * @param {array} grouplist list of group options
@@ -20,6 +21,7 @@ ne.component.Layout = ne.util.defineClass({
 			this.$element.append(group.$element);
 		}, this);
 	},
+
 	/**
 	 * @param {(string|object)} object group item id or information to find group
 	 **/
@@ -33,6 +35,7 @@ ne.component.Layout = ne.util.defineClass({
 		}
 		return this.groups[group];
 	},
+
 	/**
 	 * make drag and drop event
 	 * @param {string} [guideHTML] guide element html
@@ -42,6 +45,7 @@ ne.component.Layout = ne.util.defineClass({
 			guideHTML: guideHTML
 		});
 	},
+
 	/**
 	 * set Events
 	 **/
@@ -51,6 +55,7 @@ ne.component.Layout = ne.util.defineClass({
 		this.onMouseUp = $.proxy(this._onMouseUp, this);
 		$('.drag-item-move').on('mousedown', this.onMouseDown);
 	},
+
 	/**
 	 * mouse down event handler
 	 * @param {JqueryEvent} e event object
@@ -69,6 +74,7 @@ ne.component.Layout = ne.util.defineClass({
 		$(document).on('mousemove', this.onMouseMove);
 		$(document).on('mouseup', this.onMouseUp);
 	},
+
 	/**
 	 * mouse move handler
 	 * @param {JqueryEvent} e event object
@@ -109,6 +115,7 @@ ne.component.Layout = ne.util.defineClass({
 			}
 		}
 	},
+
 	/**
 	 * move drag effect element
 	 * @param {number} x move position x
@@ -120,6 +127,7 @@ ne.component.Layout = ne.util.defineClass({
 			y: y + 10 + 'px'
 		});
 	},
+
 	/**
 	 * detect target by move element position
 	 * @param {object} pos position to detect
@@ -129,7 +137,6 @@ ne.component.Layout = ne.util.defineClass({
 	_detectTargetByPosition: function(pos, group) {
 		var target, 
 			bound,
-			next, 
 			bottom,
 			top,
 			height;
@@ -156,12 +163,14 @@ ne.component.Layout = ne.util.defineClass({
 
 		return target;
 	},
+
 	/**
 	 * check is Vaild item
 	 **/
 	_isValidItem: function(item) {
 		return !!(item.$element[0] !== this.$temp[0]);
 	},
+
 	/**
 	 * 다음요소가 있을 경우, 비교할 bottom 값으로 다음요소 top값을 넣어줌, 다음요소가 없으면 마지막 요소로 판단하여 limit(그룹의 bottom)값을 넣어줌
 	 * @param {object} item
@@ -179,6 +188,7 @@ ne.component.Layout = ne.util.defineClass({
 		}
 		return bottom;
 	},
+
 	/**
 	 * get add index by $temp, $temp.way 
 	 **/
@@ -190,18 +200,21 @@ ne.component.Layout = ne.util.defineClass({
 		}
 		return index;
 	},
+
 	/**
 	 * get scrollX
 	 **/
 	getX: function() {
 		return (window.scrollX || $(window).scrollLeft());
 	},
+
 	/**
 	 * get scrollY
 	 **/
 	getY: function() {
 		return (window.scrollY || $(window).scrollTop());
 	},
+
 	/**
 	 * mouse up handler
 	 * @param {JqueryEvent} e event object

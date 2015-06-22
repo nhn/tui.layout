@@ -22,6 +22,7 @@ ne.component.Layout.Group = ne.util.defineClass({
 
 		this.render();
 	},
+
 	/**
 	 * make group element
 	 * @param {string} html 
@@ -32,6 +33,7 @@ ne.component.Layout.Group = ne.util.defineClass({
 		this.$element = $(html);
 		this.$element.css('position', 'relative');
 	},
+
 	/**
 	 * make item list by items
 	 * @param {array} list item ids
@@ -45,6 +47,7 @@ ne.component.Layout.Group = ne.util.defineClass({
 			return new ne.component.Layout.Item(item);
 		}, this);
 	},
+
 	/**
 	 * make dimmed element
 	 **/
@@ -59,6 +62,7 @@ ne.component.Layout.Group = ne.util.defineClass({
 			display: 'none'
 		});
 	},
+
 	/**
 	 * append dimmed element
 	 **/
@@ -68,6 +72,7 @@ ne.component.Layout.Group = ne.util.defineClass({
 		}
 		this.$element.append(this.$dimmed);
 	},
+
 	/**
 	 * remove item by index
 	 * @param {number} index remove item index
@@ -76,6 +81,7 @@ ne.component.Layout.Group = ne.util.defineClass({
 		this._storePool(this.list[index]);
 		this.list.splice(index, 1);
 	},
+
 	/**
 	 * add item
 	 * @param {number} [index] add item position
@@ -88,6 +94,7 @@ ne.component.Layout.Group = ne.util.defineClass({
 		}
 		item.groupInfo = this.id;
 	},
+
 	/**
 	 * re arrange group
 	 **/
@@ -100,6 +107,7 @@ ne.component.Layout.Group = ne.util.defineClass({
 		}, this);
 		this.$dimmed.hide();
 	},
+
 	/**
 	 * store items to pool
 	 * @param {object} $element object
