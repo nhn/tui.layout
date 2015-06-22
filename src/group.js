@@ -8,7 +8,7 @@ ne.util.defineNamespace('ne.component.Layout');
 ne.component.Layout.Group = ne.util.defineClass({
 	/**
 	 * pool element
-	 **/
+	 */
 	$pool: $('<div class="pool" style="display:none"></div>'),
 	/**
 	 * init default field
@@ -17,7 +17,7 @@ ne.component.Layout.Group = ne.util.defineClass({
 	 *	@param {array} options.items array of items
 	 * 	@param {string} [options.html] html of group element
 	 * 	@param {(number|string)} [options.ratio] ratio
-	 **/
+	 */
 	init: function(options) {
 		if (!options) {
 			throw new Error(ERROR.OPTIONS_NOT_DEFINED);
@@ -36,7 +36,8 @@ ne.component.Layout.Group = ne.util.defineClass({
 	/**
 	 * make group element
 	 * @param {string} html The html string to create the html element
-	 **/
+	 * @private
+	 */
 	_makeElement: function(html) {
 		html = html.replace(/{{group-id}}/g, this.id);
 		html = html.replace(/{{width}}/g, this.size);
@@ -47,7 +48,8 @@ ne.component.Layout.Group = ne.util.defineClass({
 	/**
 	 * make item list by items
 	 * @param {array} list The list of item's IDs
-	 **/
+	 * @private
+	 */
 	_makeItems: function(list) {
 		var options = {
 			groupInfo: this.id
@@ -60,7 +62,8 @@ ne.component.Layout.Group = ne.util.defineClass({
 
 	/**
 	 * make dimmed element
-	 **/
+	 * @private
+	 */
 	_makeDimmed: function() {
 		this.$dimmed = $('<div class="' + DIMMED_LAYER_CLASS + '"></div>');
 		this.$dimmed.css({
@@ -75,7 +78,8 @@ ne.component.Layout.Group = ne.util.defineClass({
 
 	/**
 	 * append dimmed element
-	 **/
+	 * @private
+	 */
 	_appendDimmed: function() {
 		if (!this.$dimmed) {
 			this._makeDimmed();
@@ -107,8 +111,8 @@ ne.component.Layout.Group = ne.util.defineClass({
 	},
 
 	/**
-	 * rearrange group
-	 **/
+	 * rearrange group items
+	 */
 	render: function() {
 		ne.util.forEach(this.list, function(item, index) {
 			this.$dimmed.before(item.$element);
@@ -124,7 +128,7 @@ ne.component.Layout.Group = ne.util.defineClass({
 	/**
 	 * store items to pool
 	 * @param {object} $element A JQuery element to store in the pool
-	 **/
+	 */
 	storePool: function($element) {
 		if ($element) {
 			this.$pool.append($element);

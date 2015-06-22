@@ -17,7 +17,7 @@ ne.component.Layout.Item = ne.util.defineClass({
 	 *  @param {string} [options.moveButtonHTML] move button HTML
 	 *  @param {string} [options.elementHTML] item element HTML
 	 *  @param {string} [options.titleHTML] item title element HTML
-	 **/
+	 */
 	init : function(options) {
 
 		if (!options) {
@@ -55,7 +55,7 @@ ne.component.Layout.Item = ne.util.defineClass({
 
 	/**
 	 * get Index
-	 **/
+	 */
 	getIndex: function() {
 		return this.index;
 	},
@@ -63,7 +63,7 @@ ne.component.Layout.Item = ne.util.defineClass({
 	/**
 	 * make item root element
 	 * @private
-	 **/
+	 */
 	_makeElement: function() {
 		var wrapperClass = this.wrapperClass || DEFAULT_WRPPER_CLASS,
 			elementHTML = this._getMarkup(this.elementHTML, wrapperClass);
@@ -79,7 +79,7 @@ ne.component.Layout.Item = ne.util.defineClass({
 	/**
 	 * make title element and elements belong to title
 	 * @private
-	 **/
+	 */
 	_makeTitle: function() {
 
 		this.$titleElement = $(this.titleHTML);
@@ -97,7 +97,7 @@ ne.component.Layout.Item = ne.util.defineClass({
 	 * make markup with template
 	 * @param {string} html  item element html
 	 * @param {string} wrapperClass content wrapper class
-	 **/
+	 */
 	_getMarkup: function(html, wrapperClass) {
 		var map = {
 				number : this.index,
@@ -115,7 +115,7 @@ ne.component.Layout.Item = ne.util.defineClass({
 	 * make drag button 
 	 * @param {string} html button html
 	 * @private
-	 **/
+	 */
 	_makeDragButton: function(html) {
 		html = html.replace(/{{item-id}}/g, 'item_id_' + this.contentId);
 		this.$titleElement.append($(html));
@@ -133,7 +133,7 @@ ne.component.Layout.Item = ne.util.defineClass({
 
 	/**
 	 * close Element
-	 **/
+	 */
 	close: function() {
 		this.$toggleButton.addClass("open");
 		this.$content.hide();
@@ -141,7 +141,7 @@ ne.component.Layout.Item = ne.util.defineClass({
 
 	/**
 	 * open Element
-	 **/
+	 */
 	open: function() {
 		this.$toggleButton.removeClass("open");
 		this.$content.show();
@@ -149,7 +149,7 @@ ne.component.Layout.Item = ne.util.defineClass({
 
 	/**
 	 * title fix to do not hide 
-	 **/
+	 */
 	fixTitle: function() {
 		this.showTitle();
 		this.isTitleFix = true;
@@ -157,14 +157,14 @@ ne.component.Layout.Item = ne.util.defineClass({
 
 	/**
 	 * show title
-	 **/
+	 */
 	showTitle: function() {
 		this.$titleElement.show();
 	},
 
 	/**
 	 * hide title
-	 **/
+	 */
 	hideTitle: function() {
 		if (!this.isTitleFix) {
 			this.$titleElement.hide();
@@ -173,7 +173,7 @@ ne.component.Layout.Item = ne.util.defineClass({
 
 	/**
 	 * toggle open/close
-	 **/
+	 */
 	toggle: function() {
 		if (this.$toggleButton.hasClass('open')) {
 			this.open();
@@ -184,7 +184,8 @@ ne.component.Layout.Item = ne.util.defineClass({
 
 	/**
 	 * set all event about item
-	 **/
+	 * @private
+	 */
 	_setEvents: function() {
 		this.$toggleButton.on('click', $.proxy(this.toggle, this));
 	}

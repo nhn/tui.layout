@@ -40,7 +40,7 @@ ne.component.Layout.Guide = ne.util.defineClass({
 	/**
 	 * move to position
 	 * @param {object} pos position to move
-	 **/
+	 */
 	moveTo: function(pos) {
 		this.setPos(pos);
 	},
@@ -48,7 +48,7 @@ ne.component.Layout.Guide = ne.util.defineClass({
 	/**
 	 * setPos for move
 	 * @param {object} pos 
-	 **/
+	 */
 	setPos: function(pos) {
 		this.$element.css({
 			left: pos.x,	
@@ -59,14 +59,14 @@ ne.component.Layout.Guide = ne.util.defineClass({
 	/**
 	 * set guide content
 	 * @param {string} content 
-	 **/
+	 */
 	setContent: function(content) {
 		this.$element.html(content);
 	},
 	
 	/**
 	 * show element
-	 **/
+	 */
 	show: function() {
 		if (!this.isDisable) {
 			this.$element.show();
@@ -75,21 +75,21 @@ ne.component.Layout.Guide = ne.util.defineClass({
 	
 	/**
 	 * hide element
-	 **/
+	 */
 	hide: function() {
 		this.$element.hide();
 	},
 	
 	/**
 	 * disable guide
-	 **/
+	 */
 	disable: function() {
 		this.isDisable = true;
 	},
 
 	/**
 	 * enable guide
-	 **/
+	 */
 	enable: function() {
 		this.isDisable = false;
 	},
@@ -97,7 +97,7 @@ ne.component.Layout.Guide = ne.util.defineClass({
 	/**
 	 * set move target
 	 * @param {object} move element
-	 **/
+	 */
 	setMoveElement: function($el) {
 		this.$moveElement = $el;
 	},
