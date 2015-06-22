@@ -75,23 +75,40 @@ describe('group', function() {
 		group2.add(item1);
 		expect(group2.list[0]).toBe(item1);
 		expect(group.list[0]).not.toBe(item1);
+	});
+
+	it('storePool can store all element of group', function() {
+		var item1 = group.list[0];
+		expect($.contains(group.$element[0], item1.$element[0])).toBe(true);
+		group.storePool();
+		expect($.contains(group.$element[0], item1.$element[0])).toBe(false);
+	});
+
+	it('after move render group', function() {
+		var item1 = group.list[0];
+		group.remove(0);
+		group2.add(item1);
+		group.render();
+		group2.render();
 		expect($.contains(group2.$element[0], item1.$element[0])).toBe(true);
 		expect($.contains(group.$element[0], item1.$element[0])).toBe(false);
 	});
 
-	xit('group move to by index', function() {
+	it('group move to by index', function() {
 		var item1 = group.list[2];
 		group.remove(2);
 		group3.add(item1, 1);
 		expect(group.list.length).toBe(3);
 		expect(group3.list.length).toBe(3);
 		expect(group3.list[1]).toBe(item1);
+		group.render();
+		group3.render();
 		expect($.contains(group3.$element[0], item1.$element[0])).toBe(true);
 		expect($.contains(group.$element[0], item1.$element[0])).toBe(false);
 		expect(item1.$element.attr('data-index')).toBe('1');
 	});
 
-	xit('if item move to other group, item groupInfo changed', function() {
+	it('if item move to other group, item groupInfo changed', function() {
 		var item = group.list[2];
 		group.remove(2);
 		group3.add(item, 1);

@@ -1,7 +1,5 @@
 describe('view drag', function() {
-	var drag = new ne.component.Layout.Guide({
-		enableDist: 5
-	});
+	var drag = new ne.component.Layout.Guide();
 	jasmine.getFixtures().fixturesPath = 'base';
 	beforeEach(function() {
 		loadFixtures('test/html/guide.html');
@@ -13,23 +11,23 @@ describe('view drag', function() {
 			y: 200
 		});
 
-		expect(drag.element.css('left')).toBe('100px');
-		expect(drag.element.css('top')).toBe('200px');
+		expect(drag.$element.css('left')).toBe('100px');
+		expect(drag.$element.css('top')).toBe('200px');
 	});
 	it('set Content', function() {
-		var content = 'guide content';
-		drag.setContent(content);
-		expect(drag.element.html()).toBe(content);
+		var $content = $('<div class="content"></div>');
+		drag.setContent($content);
+		expect(drag.$element.children().first().hasClass('content')).toBe(true);
 	});
 	it('show with isDisable', function() {
 		var status1, status2;
 		drag.hide();
 		drag.disable();
 		drag.show();
-		status1 = drag.element[0].style.display;
+		status1 = drag.$element[0].style.display;
 		drag.enable();
 		drag.show();
-		status2 = drag.element[0].style.display;
+		status2 = drag.$element[0].style.display;
 		expect(status1).toBe('none');
 		expect(status2).not.toBe('none');
 	});
@@ -39,7 +37,7 @@ describe('view drag', function() {
 			y: 200
 		});
 
-		expect(drag.element.css('left')).toBe('100px');
-		expect(drag.element.css('top')).toBe('200px');
+		expect(drag.$element.css('left')).toBe('100px');
+		expect(drag.$element.css('top')).toBe('200px');
 	});
 });

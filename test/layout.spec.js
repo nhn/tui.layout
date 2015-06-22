@@ -1,76 +1,64 @@
-xdescribe('layout', function() {
+describe('layout', function() {
 	var layout1,
-		layout2,
-		layout3,
 		groupList1 = [
 			{
-				id: 'g1',
-				ratio: '50%',
+				id: 'g0',
+				ratio: '10',
 				items: [{
-		            id : 'item-lifeStyle',
-		            contentID: 'lifeStyle',
-		            title: "Life Style Seciton",
-		            isClose: false,
-		            isDragable: true,
-		            group: 'g1'
-		        },
-		        {
-		            id : 'item-calendar', // 변경가능
-		            contentID: 'calendar',
-		            title: "Calendar Seciton",
-		            isClose: false,
-		            isDragable: true,
-		            group: 'g1'
-		        },
-		        {
-		            id : 'item-todoList', // 변경가능
-		            contentID: 'todoList',
-		            title: "TodoList Seciton",
-		            isClose: false,
-		            isDragable: true,
-		            group: 'g1'
-		        }]
+					id : 'item-lifeStyle',
+					contentId: 'lifeStyle',
+					title: "Sports",
+					isDraggable: true
+				},
+					{
+						id : 'item-game',
+						contentId: 'game',
+						title: "Game",
+						isDraggable: true
+					}]
+			},
+			{
+				id: 'g1',
+				ratio: '4',
+				items: [{
+					id : 'item-sports',
+					contentId: 'sports',
+					title: "Life Style Seciton",
+					isClose: false,
+					isDraggable: true
+				},
+					{
+						id : 'item-calendar', // 변경가능
+						contentId: 'calendar',
+						title: "Calendar Seciton",
+						isClose: false,
+						isDraggable: true
+					},
+					{
+						id : 'item-todoList', // 변경가능
+						contentId: 'todoList',
+						title: "TodoList Seciton",
+						isClose: false,
+						isDraggable: true
+					}]
 			},
 			{
 				id: 'g2',
-				ratio: '50%',
+				ratio: '6',
 				items: [{
-		            id : 'item-weather', // 변경가능
-		            contentID: 'weather',
-		            title: "Weather Seciton",
-		            isClose: false,
-		            isDragable: true
-		        },
-		        {
-		            id : 'item-news', // 변경가능
-		            contentID: 'news',
-		            title: "News Seciton",
-		            isClose: true,
-		            isDragable: true
-		        }]
-			}
-		],
-		groupList2 = [
-			{
-				id: 'g1',
-				ratio: '50%',
-				items: [{
-		            id : 'item-lifeStyle',
-		            contentID: 'lifeStyle',
-		            title: "Life Style Seciton",
-		            isClose: false,
-		            isDragable: true
-		        }]
-			},
-			{
-				id: 'g2',
-				items: [{
-		            id : 'item-lifeStyle',
-		            contentID: 'lifeStyle',
-		            title: "Life Style Seciton",
-		            isClose: false,
-		            isDragable: true
-		        }]
+					id : 'item-weather', // 변경가능
+					contentId: 'weather',
+					title: "Weather Seciton",
+					isClose: false,
+					isDraggable: true
+				},
+					{
+						id : 'item-news', // 변경가능
+						contentId: 'news',
+						title: "News Seciton",
+						isClose: true,
+						isDraggable: true
+					}]
 			}
 		];
 
@@ -81,42 +69,55 @@ xdescribe('layout', function() {
 
 	beforeEach(function() {
 		layout1 = new ne.component.Layout({
-			name: 'half',
 		    grouplist: groupList1
 		}, $('#layout1'));
-		layout2 = new ne.component.Layout({
-			name: 'half',
-		    grouplist: groupList2
-		}, $('#layout2'));
-		layout3 = new ne.component.Layout({
-			name: 'half',
-		    grouplist: groupList2
-		}, $('#layout3'));
 	});
 
 	it('define', function() {
 		expect(layout1).toBeDefined();
-		expect(layout2).toBeDefined();
-		expect(layout3).toBeDefined();
 	});
 
 	it('create group and items', function() {
-		var group1 = layout1.groups[0],
-			group2 = layout2.groups[0],
-			group3 = layout3.groups[0],
-			item1 = layout1.groups[0].list[0],
-			item2 = layout2.groups[0].list[0],
-			item3 = layout3.groups[0].list[0];
+		var group1 = layout1.groups['g1'],
+			list1 = group1.list;
+
 		expect(group1).toBeDefined();
-		expect(group2).toBeDefined();
-		expect(group3).toBeDefined();
-		expect(item1).toBeDefined();
-		expect(item2).toBeDefined();
-		expect(item3).toBeDefined();
+		expect(list1).toBeDefined();
+
 	});
 
-	it('create group elements', function() {
-		var $group = layout1.groups[0].$element;
-		expect($.contains(layout1.$element[0], $group[0])).toBe(true);
+	it('getGroup with string', function() {
+		var group = layout1._getGroup('g1');
+		expect(group).toBe(layout1.groups['g1']);
+	});
+
+	it('getGroup with element', function() {
+		var origin = layout1.groups['g1'],
+			group = layout1._getGroup('g1'),
+			$groupEl = group.$element,
+			$itemEl = group.list[0].$element;
+		expect(group).toBe(origin);
+		expect(layout1._getGroup($groupEl)).toBe(origin);
+		expect(layout1._getGroup($itemEl)).toBe(origin);
+	});
+
+	it('setGuide', function() {
+		var group = layout1.groups['g1'],
+			target = group.list[0].$element.find('.move-button')[0],
+			left,
+			top;
+
+		layout1._setGuide(target, 300, 100);
+		left = parseInt(layout1._guide.$element.css('left'), 10);
+		top = parseInt(layout1._guide.$element.css('top'));
+		expect(left).toBe(310);
+		expect(top).toBe(110);
+	});
+
+	xit('onmousedown', function() {
+		var e = {
+
+		}
+		layout1._onMouseDown(e);
 	});
 });

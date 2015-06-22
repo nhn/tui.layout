@@ -114,7 +114,6 @@ ne.component.Layout = ne.util.defineClass({
 		var group = this._getGroup(this.$temp),
 			item = group.list[this.$temp.attr('data-index')];
 		this.$temp.css('opacity', '0.2');
-		console.log(item.contentId);
 		this.$temp.find('#' + item.contentId).css('visibility', 'hidden');
 	},
 

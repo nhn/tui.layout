@@ -49,6 +49,7 @@ module.exports = function(config) {
             'test/**/layout.spec.js',
             'test/**/item.spec.js',
             'test/**/group.spec.js',
+            'test/**/guide.spec.js',
             //{ pattern: 'src/js/movehelper.js', included: true },
             //{ pattern: 'src/js/*.js', included: true },    // 웹서버에 포함은 하지만 테스트 페이지에 include안함
             { pattern: 'test/**/*.html', included: true },

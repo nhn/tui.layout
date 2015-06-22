@@ -1,6 +1,8 @@
 describe('item set', function() {
 	var item,
-		item2;
+		item2,
+		item3,
+		item4;
 
 	beforeEach(function() {
 		item = new ne.component.Layout.Item({
