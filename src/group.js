@@ -39,7 +39,7 @@ ne.component.Layout.Group = ne.util.defineClass({
 	_makeItems: function(list) {
 		var options = {
 			groupInfo: this.id
-		}
+		};
 		this.list = ne.util.map(list, function(item, index) {
 			ne.util.extend(item, options);
 			return new ne.component.Layout.Item(item);
@@ -52,10 +52,10 @@ ne.component.Layout.Group = ne.util.defineClass({
 		this.$dimmed = $('<div class="' + DIMMED_LAYER_CLASS + '"></div>');
 		this.$dimmed.css({
 			position: 'absolute',
-			left:0,
-			top:0, 
-			bottom:0,
-			right:0,
+			left: 0,
+			top: 0, 
+			bottom: 0,
+			right: 0,
 			display: 'none'
 		});
 	},

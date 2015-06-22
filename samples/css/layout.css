@@ -1,3 +1,10 @@
+#layout {
+	width: 600px;
+	margin: 40px auto;
+}
+ul, ol {list-style-type: none;}
+a {color:#000;}
+
 .gp_w10 { width: 100%;}
 .gp_w5 { width:50%;}
 .gp_w1 { width:10%;}

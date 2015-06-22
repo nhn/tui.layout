@@ -6,7 +6,6 @@ ne.component.Layout = ne.util.defineClass({
 		this._makeGroup(opitons.grouplist);
 		this._makeDragAndDrop(opitons.guideHTML);
 		this._setEvents();
-		this._pos = {};
 	},
 	/**
 	 * make group
@@ -44,10 +43,12 @@ ne.component.Layout = ne.util.defineClass({
 		});
 	},
 	/**
-	 * set Event 
+	 * set Events
 	 **/
 	_setEvents: function() {
 		this.onMouseDown = $.proxy(this._onMouseDown, this);
+		this.onMouseMove = $.proxy(this._onMouseMove, this);
+		this.onMouseUp = $.proxy(this._onMouseUp, this);
 		$('.drag-item-move').on('mousedown', this.onMouseDown);
 	},
 	/**
@@ -55,13 +56,15 @@ ne.component.Layout = ne.util.defineClass({
 	 * @param {JqueryEvent} e event object
 	 **/
 	_onMouseDown: function(e) {
-		this._pos.x = e.clientX + this.getX() + 10;
-		this._pos.y = e.clientY + this.getY() + 10;
-		this._drag.ready(this._pos);
-		this.onMouseMove = $.proxy(this._onMouseMove, this);
-		this.onMouseUp = $.proxy(this._onMouseUp, this);
-		this._drag.setMoveElement($('#' + e.target.getAttribute('data-item')));
-		this.$temp = this._drag.moveElement; 
+		var initPos = {
+			x: e.clientX + this.getX() + 10,
+			y: e.clientY + this.getY() + 10
+		},
+		itemId = $(e.target).attr('data-item'),
+		$moveEl = $('#' + itemId);
+		this._drag.ready(initPos);
+		this._drag.setMoveElement($moveEl);
+		this.$temp = $moveEl;
 		this.$temp.addClass('drag-clone');
 		$(document).on('mousemove', this.onMouseMove);
 		$(document).on('mouseup', this.onMouseUp);
@@ -76,18 +79,12 @@ ne.component.Layout = ne.util.defineClass({
 			y = this.getY(),
 			pointX = e.clientX + this.getX(),
 			pointY = e.clientY + this.getY(),
-			pos = this._pos,
-			flow,
 			drag = this._drag,
 			group = parent.attr('data-group'),
 			groupInst,
 			$before;
 
-		drag.moveTo({
-			x: pos.x + (e.clientX + x -pos.x) + 10 + 'px',
-			y: pos.y + (e.clientY + y-pos.y) + 10 + 'px'
-		});
-
+		this._moveGuide(pointX, pointY);
 
 		if (!group) {
 			return;
@@ -101,8 +98,8 @@ ne.component.Layout = ne.util.defineClass({
 			this.$temp.index = 0;
 		} else {
 			$before = this._detectTargetByPosition({
-				x: pos.x + (e.clientX +  x - pos.x),
-				y: pos.y + (e.clientY + y - pos.y)
+				x: pointX,
+				y: pointY
 			}, groupInst);
 
 			if ($before && $before.way) {
@@ -111,6 +108,17 @@ ne.component.Layout = ne.util.defineClass({
 				this.$temp.index = $before.attr('data-index');
 			}
 		}
+	},
+	/**
+	 * move drag effect element
+	 * @param {number} x move position x
+	 * @param {number} y move position y
+	 **/
+	_moveGuide: function(x, y) {
+		this._drag.moveTo({
+			x: x + 10 + 'px',
+			y: y + 10 + 'px'
+		});
 	},
 	/**
 	 * detect target by move element position

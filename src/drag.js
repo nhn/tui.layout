@@ -3,29 +3,29 @@ ne.util.defineNamespace('ne.component.Layout');
 ne.component.Layout.Drag = ne.util.defineClass({
 	init: function(options) {
 		options = options || {};
-		this.element = $(options.guideHTML || HTML.GUIDE);
-		this.element.css('position', 'absolute');
-		this.element.appendTo(document.body);
-		this.element.hide();
+		this.$elmeent = $(options.guideHTML || HTML.GUIDE);
+		this.$elmeent.css('position', 'absolute');
+		this.$elmeent.appendTo(document.body);
+		this.$elmeent.hide();
 	},
 	/**
 	 * show each dimmed layer
 	 * @param {object} pos position to init guide element
 	 **/
 	ready: function(pos) {
-		this.element.css({
+		this.$elmeent.css({
 			left: pos.x,
 			top: pos.y
 		});
 		$('.' +  DIMMED_LAYER_CLASS).show();
-		this.element.show();
+		this.$elmeent.show();
 	},
 	/**
 	 * hide each dimmed layer
 	 **/
 	finish: function() {
 		$('.' +  DIMMED_LAYER_CLASS).hide();
-		this.element.hide();
+		this.$elmeent.hide();
 	},
 	/**
 	 * @param {object} pos position to move
@@ -38,7 +38,7 @@ ne.component.Layout.Drag = ne.util.defineClass({
 	 * @param {object} pos 
 	 **/
 	setPos: function(pos) {
-		this.element.css({
+		this.$elmeent.css({
 			left: pos.x,	
 			top: pos.y
 		});
@@ -48,21 +48,21 @@ ne.component.Layout.Drag = ne.util.defineClass({
 	 * @param {string} content 
 	 **/
 	setContent: function(content) {
-		this.element.html(content);
+		this.$elmeent.html(content);
 	},
 	/**
 	 * 
 	 **/
 	show: function() {
 		if (!this.isDisable) {
-			this.element.show();
+			this.$elmeent.show();
 		}
 	},
 	/**
 	 * 
 	 **/
 	hide: function() {
-		this.element.hide();
+		this.$elmeent.hide();
 	},
 	/**
 	 * 
@@ -81,14 +81,7 @@ ne.component.Layout.Drag = ne.util.defineClass({
 	 * @param {object} move element
 	 **/
 	setMoveElement: function($el) {
-		this.moveElement = $el;
-	},
-	/**
-	 * set target element 
-	 * @param {object} target element
-	 **/
-	setTargetElement: function($el) {
-		this.targetElement = $el;
+		this.$moveElement = $el;
 	},
 	/**
 	 * get scoll left 
