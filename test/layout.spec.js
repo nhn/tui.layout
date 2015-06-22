@@ -1,4 +1,4 @@
-describe('layout', function() {
+xdescribe('layout', function() {
 	var layout1,
 		layout2,
 		layout3,

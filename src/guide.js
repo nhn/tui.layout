@@ -22,10 +22,16 @@ ne.component.Layout.Guide = ne.util.defineClass({
 	/**
 	 * show each dimmed layer
 	 * @param {object} pos position to init guide element
+	 * @param {jQuerObject} $element for helper
 	 **/
-	ready: function(pos) {
+	ready: function(pos, $element) {
 		this.setPos(pos);
 		$('.' +  DIMMED_LAYER_CLASS).show();
+
+		if ($element) {
+			this.setContent($element);
+		}
+
 		this.$element.show();
 	},
 	
@@ -58,10 +64,15 @@ ne.component.Layout.Guide = ne.util.defineClass({
 	
 	/**
 	 * set guide content
-	 * @param {string} content 
+	 * @param {string} $content
 	 */
-	setContent: function(content) {
-		this.$element.html(content);
+	setContent: function($content) {
+		this.$element.empty();
+		this.$element.append($content.clone());
+		this.$element.css({
+			width: $content.width() + 'px',
+			height: $content.height() + 'px'
+		})
 	},
 	
 	/**

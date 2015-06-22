@@ -33,31 +33,6 @@ describe('view drag', function() {
 		expect(status1).toBe('none');
 		expect(status2).not.toBe('none');
 	});
-	it('drag target', function() {
-		var el = $('.item1'),
-		target = $('.item3');
-		drag.setMoveElement(el);
-		drag.setTargetElement(target);
-		expect(drag.figureValidTarget()).toBe(true);
-		drag.setTargetElement(el);
-		expect(drag.figureValidTarget()).toBe(false);
-	});
-	it('enable target drag zone', function() {
-		var moveEl = $('.item2'),
-		target = $('.item1'),
-		point = {
-			x : 4,
-			y : 5
-		};
-		point2 = {
-			x : 40,
-			y : 50
-		};
-		drag.setTargetElement(target);
-		drag.setMoveElement(moveEl);
-		expect(drag.figureValidArea(point)).toBe(true);
-		expect(drag.figureValidArea(point2)).toBe(false);
-	});
 	it('shadow move Element', function() {
 		drag.moveTo({
 			x: 100,

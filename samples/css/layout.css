@@ -29,6 +29,6 @@ a {color:#000;}
 .toggle-button {margin-left:4px; background:url('https://ssl.pstatic.net/static/pwe/common/sp_dh_widget_1404032_opt.png') no-repeat -138px -45px; border:0;}
 .toggle-button  { background-position: -138px -45px;}
 .toggle-button.open {background-position: -119px -46px;}
-.item-guide {width: 100px; height:100px; border: 4px dashed #eee; background-color:#fff; opacity: 0.5;}
+.item-guide { border: 2px dashed #eee; background-color:#fff; opacity: 0.5;}
 
 

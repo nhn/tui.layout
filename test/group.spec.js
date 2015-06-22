@@ -1,10 +1,11 @@
 describe('group', function() {
 	var group,
-		group2;
+		group2,
+		group3;
 
 	beforeEach(function() {
 		group = new ne.component.Layout.Group({
-			ratio: '50%',
+			ratio: '5',
 			items: [
 				{
 					id: 'item1',
@@ -30,11 +31,11 @@ describe('group', function() {
 			id: 'groupA'
 		});
 		group2 = new ne.component.Layout.Group({
-			ratio: '100%',
+			ratio: '10',
 			id: 'groupB'
 		});
 		group3 = new ne.component.Layout.Group({
-			ratio: '50%',
+			ratio: '5',
 			items: [
 				{
 					id: 'item5',
@@ -78,7 +79,7 @@ describe('group', function() {
 		expect($.contains(group.$element[0], item1.$element[0])).toBe(false);
 	});
 
-	it('group move to by index', function() {
+	xit('group move to by index', function() {
 		var item1 = group.list[2];
 		group.remove(2);
 		group3.add(item1, 1);
@@ -90,7 +91,7 @@ describe('group', function() {
 		expect(item1.$element.attr('data-index')).toBe('1');
 	});
 
-	it('if item move to other group, item groupInfo changed', function() {
+	xit('if item move to other group, item groupInfo changed', function() {
 		var item = group.list[2];
 		group.remove(2);
 		group3.add(item, 1);

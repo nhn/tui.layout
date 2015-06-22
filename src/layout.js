@@ -99,9 +99,34 @@ ne.component.Layout = ne.util.defineClass({
 			},
 			itemId = $(target).attr('data-item'),
 			$moveEl = $('#' + itemId);
-		this._guide.ready(initPos);
+
+		this._guide.ready(initPos, $moveEl);
 		this._guide.setMoveElement($moveEl);
 		this.$temp = $moveEl;
+		this._lockTemp();
+	},
+
+	/**
+	 *
+	 * @private
+	 */
+	_lockTemp: function() {
+		var group = this._getGroup(this.$temp),
+			item = group.list[this.$temp.attr('data-index')];
+		this.$temp.css('opacity', '0.2');
+		console.log(item.contentId);
+		this.$temp.find('#' + item.contentId).css('visibility', 'hidden');
+	},
+
+	/**
+	 *
+	 * @private
+	 */
+	_unlickTemp: function() {
+		var group = this._getGroup(this.$temp),
+			item = group.list[this.$temp.attr('data-index')];
+		this.$temp.css('opacity', '1');
+		this.$temp.find('#' + item.contentId).css('visibility', 'visible');
 	},
 
 	/**
@@ -285,6 +310,7 @@ ne.component.Layout = ne.util.defineClass({
 			}, group);
 
 		this._update();
+		this._unlickTemp();
 		drag.finish();
 
 		$doc.off('mousemove', this.onMouseMove);
