@@ -219,21 +219,21 @@ ne.component.Layout = ne.util.defineClass({
 	},
 
 	/**
-	 * 다음요소가 있을 경우, 비교할 bottom 값으로 다음요소 top값을 넣어줌, 다음요소가 없으면 마지막 요소로 판단하여 limit(그룹의 bottom)값을 넣어줌
-	 * @param {object} item
-	 * @param {object} group
+	 * if next element exist, set bottom next element's top position, else set bottom limit(group element's bottom position) position
+	 * @param {object} item The object to figure bottom position
+	 * @param {object} group The group to figure bottom position
 	 * @returns {*}
 	 * @private
 	 */
 	_getBottom: function(item, group) {
-		var next = item.$element.next(),
+		var $next = item.$element.next(),
 			bottom,
 			gbound = group.$element.offset(),
 			limit = this.getY() + gbound.top + group.$element.height();
-		if (next.hasClass(DIMMED_LAYER_CLASS)) {
+		if ($next.hasClass(DIMMED_LAYER_CLASS)) {
 			bottom = limit;
 		} else {
-			bottom = this.getY() + next[0].getBoundingClientRect().top;
+			bottom = this.getY() + $next.offset().top;
 		}
 		return bottom;
 	},
