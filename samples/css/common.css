@@ -1,0 +1,9 @@
+#layout {width:900px; margin:0 auto;}
+.group { width:50%; float:left; background-color:#fff; outline: 1px solid #ccc; position: relative;}
+.dimmed { position: absolute; top:0; bottom:0; left:0; right:0; background-color:#fff; opacity: 0.5; display:none; filter:alpha(opacity=50);}
+.item {width:100%; padding:0 0 50px 0;border-bottom: 1px solid red; text-align: center; font-family: cursive;position: relative; }
+.item h1 { text-align: center; width:100%; margin-top:0;}
+.item h1 button {vertical-align: middle;margin-left:15px; font-size:9px; background-color:green;border:0;}
+.group.wide { float:none; width:100%; }
+.disable { opacity: 0.2; }
+.temp { background-color: green; height: 4px;}
