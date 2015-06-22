@@ -2,6 +2,9 @@
 	width: 600px;
 	margin: 40px auto;
 }
+#layout.test {
+	width: auto;
+}
 ul, ol {list-style-type: none;}
 a {color:#000;}
 

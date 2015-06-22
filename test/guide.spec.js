@@ -1,5 +1,5 @@
 describe('view drag', function() {
-	var drag = new ne.component.Layout.Drag({
+	var drag = new ne.component.Layout.Guide({
 		enableDist: 5
 	});
 	jasmine.getFixtures().fixturesPath = 'base';

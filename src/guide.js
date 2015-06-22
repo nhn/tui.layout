@@ -1,6 +1,11 @@
 ne.util.defineNamespace('ne.component.Layout');
 
-ne.component.Layout.Drag = ne.util.defineClass({
+ne.component.Layout.Guide = ne.util.defineClass({
+	/**
+	 * initialize group
+	 * @param {object} [options]
+	 * 	@param {string} [options.guideHTML] guide elementHTML
+	 */
 	init: function(options) {
 		options = options || {};
 		this.$element = $(options.guideHTML || HTML.GUIDE);
@@ -8,7 +13,6 @@ ne.component.Layout.Drag = ne.util.defineClass({
 		this.$element.appendTo(document.body);
 		this.$element.hide();
 	},
-	
 	
 	/**
 	 * show each dimmed layer
@@ -32,6 +36,7 @@ ne.component.Layout.Drag = ne.util.defineClass({
 	},
 	
 	/**
+	 * move to position
 	 * @param {object} pos position to move
 	 **/
 	moveTo: function(pos) {
@@ -96,15 +101,17 @@ ne.component.Layout.Drag = ne.util.defineClass({
 	},
 
 	/**
-	 * get scoll left 
-	 **/
+	 * get scoll left
+	 * @returns {Number}
+	 */
 	getScrollLeft: function() {
 		return (window.scrollX || $(window).scrollLeft());
 	},
 
 	/**
-	 * get scroll top 
-	 **/
+	 * get scroll top
+	 * @returns {Number}
+	 */
 	getScrollTop: function() {
 		return (window.scrollY || $(window).scrollTop());
 	}

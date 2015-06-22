@@ -10,12 +10,11 @@
 	<script type="text/javascript" src="../src/layout.js"></script>
 	<script type="text/javascript" src="../src/group.js"></script>
 	<script type="text/javascript" src="../src/item.js"></script>
-	<script type="text/javascript" src="../src/drag.js"></script>
+	<script type="text/javascript" src="../src/guide.js"></script>
 	<script type="text/javascript">
 $(window).ready(function() {
 
 	var layout = new ne.component.Layout({
-    name: 'half',
     grouplist: [
     {
         id: 'g1',
@@ -134,7 +133,7 @@ $(window).ready(function() {
 	</ul>
 	<a href="#">더보기</a>
 </div>
-<div id="layout"></div>
+<div id="layout" class="test"></div>
 <div id="state"></div>
 </body>
 </html>

@@ -7,13 +7,18 @@ ne.component.Layout.Group = ne.util.defineClass({
 	$pool: $('<div class="pool" style="display:none"></div>'),
 	/**
 	 * init default field
+	 * @param {object} options
+	 * 	@param {string} options.id
+	 *	@param {array} options.items array of items
+	 * 	@param {string} [options.html] html of group element
+	 * 	@param {(number|string)} [options.ratio] ratio
 	 **/
 	init: function(options) {
 		if (!options) {
 			throw new Error(ERROR.OPTIONS_NOT_DEFINED);
 		}
 
-		this.size = options.ratio || '10d';
+		this.size = options.ratio || '10';
 		this.id = options.id;
 
 		this._makeElement(options.html || HTML.GROUP);
@@ -103,6 +108,7 @@ ne.component.Layout.Group = ne.util.defineClass({
 		ne.util.forEach(this.list, function(item, index) {
 			this.$dimmed.before(item.$element);
 			item.$element.attr('data-index', index);
+			item.index = index;
 			item.$element.attr('data-groupInfo', this.id);
 		}, this);
 		this.$dimmed.hide();

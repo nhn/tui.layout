@@ -2,7 +2,16 @@ ne.util.defineNamespace('ne.component.Layout');
 
 ne.component.Layout.Item = ne.util.defineClass({
 	/**
+	 * initialize
 	 * @param {object} options
+	 * 	@param {string} options.groupInfo group that has item name
+	 * 	@param {string} options.contentId content element id
+	 * 	@param {boolean} options.isClose content close or not
+	 * 	@param {boolean} options.isDraggable drag helper element use or not
+	 * 	@param {number} options.index index of content in group
+	 *  @param {string} [options.moveButtonHTML] move button HTML
+	 *  @param {string} [options.elementHTML] item element HTML
+	 *  @param {string} [options.titleHTML] item title element HTML
 	 **/
 	init : function(options) {
 
@@ -10,32 +19,33 @@ ne.component.Layout.Item = ne.util.defineClass({
 			throw new Error(ERROR.OPTIONS_NOT_DEFINED);
 		}
 
-		this.groupInfo = options.groupInfo;
-		this.contentId = options.contentId;
-		this.setIndex(options.index);
-		this._makeElement(options);
+		// html 들을 정리한다
+		ne.util.extend(options, {
+			elementHTML: options.elementHTML || HTML.ELEMENT,
+			moveButtonHTML: options.moveButtonHTML || HTML.MOVEBUTTON,
+			titleHTML: options.titleHTML || HTML.TITLE,
+			toggleButtonHTML: options.toggleButtonHTML || HTML.TOGGLEBUTTON,
+			title: options.title || TEXT.DEFAULT_TITLE
+		});
+		ne.util.extend(this, options);
+
+		this._makeElement();
 		
 		// title used, and fix title (no hide)
-		if (!ne.util.isBoolean(options.isClose)) {
+		if (!ne.util.isBoolean(this.isClose)) {
 			this.titleFix();
 		}
 	
 		// close body(I don't like this code, are there any ways to fix it.)
-		if (options.isClose) {
+		if (this.isClose) {
 			this.close();
 		} else {
 			this.open();
 		}
-		this.$content.append($('#' + options.contentId));
-		this.$element.attr('id', 'item_id_' + options.contentId);
-		this._setEvents();
-	},
 
-	/**
-	 * set Index by group
-	 **/
-	setIndex: function(index) {
-		this.index = index;
+		this.$content.append($('#' + this.contentId));
+		this.$element.attr('id', 'item_id_' + this.contentId);
+		this._setEvents();
 	},
 
 	/**
@@ -46,21 +56,36 @@ ne.component.Layout.Item = ne.util.defineClass({
 	},
 
 	/**
-	 * make item root element 
-	 * @param {object} options item options
+	 * make item root element
 	 * @private
 	 **/
-	_makeElement: function(options) {
-		var wrapperClass = options.wrapperClass || DEFAULT_WRPPER_CLASS,
-			elementHTML = this._getMarkup(options.elementHTML, wrapperClass);
-			
+	_makeElement: function() {
+		var wrapperClass = this.wrapperClass || DEFAULT_WRPPER_CLASS,
+			elementHTML = this._getMarkup(this.elementHTML, wrapperClass);
 
 		this.$element = $(elementHTML);
 		this.$element.css('position', 'relative');
 		this.$content = this.$element.find('.' + wrapperClass);
 
-		this.isDraggable = !!options.isDraggable;
-		this._makeTitle(options);
+		this.isDraggable = !!this.isDraggable;
+		this._makeTitle();
+	},
+
+	/**
+	 * make title element and elements belong to title
+	 * @private
+	 **/
+	_makeTitle: function() {
+
+		this.$titleElement = $(this.titleHTML);
+		this.$titleElement.html(this.title);
+
+		if (this.isDraggable) {
+			this._makeDragButton(this.moveButtonHTML);
+		}
+
+		this.$content.before(this.$titleElement);
+		this._makeToggleButton(this.toggleButtonHTML);
 	},
 
 	/**
@@ -74,32 +99,11 @@ ne.component.Layout.Item = ne.util.defineClass({
 				wrapperClass: wrapperClass
 			};
 
-		html = html || HTML.ELEMENT;
 		html = html.replace(/\{\{([^\}]+)\}\}/g, function(mstr, name) {
 			return map[name];
 		});
 
 		return html;
-	},
-
-	/**
-	 * make title element and elements belong to title
-	 * @param {object} options item options
-	 * @private
-	 **/
-	_makeTitle: function(options) {
-		var moveButtonHTML = options.moveButtonHTML || HTML.MOVEBUTTON,
-			titleHTML = options.titleHTML || HTML.TITLE;
-		
-		this.$titleElement = $(titleHTML);
-		this.$titleElement.html(options.title || TEXT.DEFAULT_TITLE);
-
-		if (this.isDraggable) {
-			this._makeDragButton(moveButtonHTML);
-		}
-
-		this.$content.before(this.$titleElement);
-		this._makeToggleButton(options.toggleButtonHTML || HTML.TOGGLEBUTTON);
 	},
 
 	/**
