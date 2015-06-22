@@ -1,3 +1,7 @@
+/**
+ * @fileoverview layout guide. to help watch move element.
+ * @dependency code-snippet, jquery1.8.3, layout.js
+ */
 ne.util.defineNamespace('ne.component.Layout');
 
 ne.component.Layout.Guide = ne.util.defineClass({
@@ -63,7 +67,7 @@ ne.component.Layout.Guide = ne.util.defineClass({
 	},
 	
 	/**
-	 * 
+	 * show element
 	 **/
 	show: function() {
 		if (!this.isDisable) {
@@ -72,21 +76,21 @@ ne.component.Layout.Guide = ne.util.defineClass({
 	},
 	
 	/**
-	 * 
+	 * hide element
 	 **/
 	hide: function() {
 		this.$element.hide();
 	},
 	
 	/**
-	 * 
+	 * disable guide
 	 **/
 	disable: function() {
 		this.isDisable = true;
 	},
 
 	/**
-	 * 
+	 * enable guide
 	 **/
 	enable: function() {
 		this.isDisable = false;

@@ -1,3 +1,7 @@
+/**
+ * @fileoverview layout group. group include item.
+ * @dependency code-snippet, jquery1.8.3, layout.js
+ */
 ne.util.defineNamespace('ne.component.Layout');
 
 ne.component.Layout.Group = ne.util.defineClass({

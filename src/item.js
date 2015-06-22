@@ -1,3 +1,7 @@
+/**
+ * @fileoverview layout item. contain original items.
+ * @dependency code-snippet, jquery1.8.3, layout.js
+ */
 ne.util.defineNamespace('ne.component.Layout');
 
 ne.component.Layout.Item = ne.util.defineClass({
