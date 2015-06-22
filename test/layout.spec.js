@@ -109,15 +109,38 @@ describe('layout', function() {
 
 		layout1._setGuide(target, 300, 100);
 		left = parseInt(layout1._guide.$element.css('left'), 10);
-		top = parseInt(layout1._guide.$element.css('top'));
+		top = parseInt(layout1._guide.$element.css('top'), 10);
 		expect(left).toBe(310);
 		expect(top).toBe(110);
 	});
 
-	xit('onmousedown', function() {
-		var e = {
-
-		}
-		layout1._onMouseDown(e);
+	it('unlockTemp', function() {
+		var $item = layout1.groups['g1'].list[0].$element,
+			opacity;
+		layout1.$temp = $item;
+		layout1._lockTemp();
+		opacity = parseFloat($item.css('opacity')).toFixed(1);
+		expect(opacity).toBe('0.2');
+		layout1._unlockTemp();
+		opacity = parseFloat($item.css('opacity')).toFixed(1);
+		expect(opacity).toBe('1.0');
 	});
+
+	it('_onMouseMove', function() {
+		var $item = layout1.groups['g1'].list[0].$element,
+			target = $item[0],
+			e = {target: target, clientX: 100, clientY: 50},
+			left,
+			top;
+
+		layout1.$temp = $item;
+
+		layout1._onMouseMove(e);
+		left = parseInt(layout1._guide.$element.css('left'), 10);
+		top = parseInt(layout1._guide.$element.css('top'), 10);
+		expect(left).toBe(110);
+		expect(top).toBe(60);
+	});
+
+
 });

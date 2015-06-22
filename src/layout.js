@@ -121,7 +121,7 @@ ne.component.Layout = ne.util.defineClass({
 	 *
 	 * @private
 	 */
-	_unlickTemp: function() {
+	_unlockTemp: function() {
 		var group = this._getGroup(this.$temp),
 			item = group.list[this.$temp.attr('data-index')];
 		this.$temp.css('opacity', '1');
@@ -309,7 +309,7 @@ ne.component.Layout = ne.util.defineClass({
 			}, group);
 
 		this._update();
-		this._unlickTemp();
+		this._unlockTemp();
 		drag.finish();
 
 		$doc.off('mousemove', this.onMouseMove);
