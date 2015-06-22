@@ -275,9 +275,16 @@ ne.component.Layout = ne.util.defineClass({
 	 */
 	_onMouseUp: function(e) {
 		var drag = this._guide,
-			$doc = $(document);
+			$doc = $(document),
+			group = this._getGroup(this.$temp.attr('data-groupInfo')),
+			$target = this._detectTargetByPosition({
+				x: e.clientX + this.getX(),
+				y: e.clientY + this.getY()
+			}, group);
 
-		this._update();
+		if ($target) {
+			this._update();
+		}
 		drag.finish();
 
 		$doc.off('mousemove', this.onMouseMove);
