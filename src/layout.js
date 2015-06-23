@@ -199,7 +199,6 @@ ne.component.Layout = ne.util.defineClass({
 	 * @private
 	 */
 	_detectTargetByPosition: function(pos, group) {
-
 		var target;
 
 		ne.util.forEach(group.list, function(item) {
