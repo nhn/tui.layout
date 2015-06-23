@@ -63,8 +63,10 @@ describe('layout', function() {
 		];
 
 	jasmine.getFixtures().fixturesPath = 'base';
-	beforeEach(function() {
+	jasmine.getStyleFixtures().fixturesPath = 'base';
+		beforeEach(function() {
 		loadFixtures('test/html/layout.html');
+		loadStyleFixtures('test/css/layout.css');
 	});
 
 	beforeEach(function() {
@@ -142,5 +144,20 @@ describe('layout', function() {
 		expect(top).toBe(60);
 	});
 
+	it('_detectMove', function(done) {
+		var group = layout1.groups['g0'],
+			item = layout1.groups['g0'].list[0],
+			pos = {
+				x: 100,
+				y: 40
+			},
+			$target;
 
+		$target = layout1._getTarget(item, pos, group);
+		console.log($target);
+		//expect($target.way).toBe('before');
+		setTimeout(function() {
+			done();
+		}, 3000)
+	});
 });

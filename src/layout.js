@@ -214,7 +214,9 @@ ne.component.Layout = ne.util.defineClass({
 
 	/**
 	 * get target element
-	 * @param {object} item
+	 * @param {object} item The item to compare with pos
+	 * @param {object} pos The pos to figure whether target or not
+	 * @param {object} group The group has item
 	 * @private
 	 */
 	_getTarget: function(item, pos, group) {
