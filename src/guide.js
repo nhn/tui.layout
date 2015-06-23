@@ -16,6 +16,7 @@ ne.component.Layout.Guide = ne.util.defineClass({
 		this.$element = $(options.guideHTML || HTML.GUIDE);
 		this.$element.css('position', 'absolute');
 		this.$element.appendTo(document.body);
+		this.$dimElements = $('.' +  DIMMED_LAYER_CLASS);
 		this.hide();
 	},
 	
@@ -26,7 +27,7 @@ ne.component.Layout.Guide = ne.util.defineClass({
 	 **/
 	ready: function(pos, $element) {
 		this.setPos(pos);
-		$('.' +  DIMMED_LAYER_CLASS).show();
+		this.$dimElements.show();
 
 		if ($element) {
 			this.setContent($element);
@@ -39,7 +40,7 @@ ne.component.Layout.Guide = ne.util.defineClass({
 	 * hide each dimmed layer
 	 **/
 	finish: function() {
-		$('.' +  DIMMED_LAYER_CLASS).hide();
+		this.$dimElements.hide();
 		this.$element.hide();
 	},
 	

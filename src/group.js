@@ -23,7 +23,7 @@ ne.component.Layout.Group = ne.util.defineClass({
 			throw new Error(ERROR.OPTIONS_NOT_DEFINED);
 		}
 
-		this.size = options.ratio || '10';
+		this.size = options.ratio + '%';
 		this.id = options.id;
 
 		this._makeElement(options.html || HTML.GROUP);
@@ -46,7 +46,7 @@ ne.component.Layout.Group = ne.util.defineClass({
 		this.$element = $(html);
 		this.$element.css({
 			'position': 'relative',
-			'width': this.size * 10 + '%'
+			'width': this.size
 		});
 	},
 
