@@ -39,13 +39,29 @@ ne.component.Layout.Group = ne.util.defineClass({
 	 * @private
 	 */
 	_makeElement: function(html) {
-		html = html.replace(/{{group-id}}/g, this.id);
-		html = html.replace(/{{width}}/g, this.size);
+		html = this._getHtml(html, {
+			'group-id': this.id
+		});
+
 		this.$element = $(html);
 		this.$element.css({
 			'position': 'relative',
 			'width': this.size * 10 + '%'
 		});
+	},
+
+	/**
+	 * make markup with template
+	 * @param {string} html A item element html
+	 * @param {object} map The map to change html string
+	 * @returns {string}
+	 * @private
+	 */
+	_getHtml: function(html, map) {
+		html = html.replace(/\{\{([^\}]+)\}\}/g, function(mstr, name) {
+			return map[name];
+		});
+		return html;
 	},
 
 	/**

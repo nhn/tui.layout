@@ -1,10 +1,10 @@
 
 var HTML = {
 		MOVEBUTTON: '<button class="move-button drag-item-move" data-item="{{item-id}}">move</button>',
-		ELEMENT: '<div class="item" data-index="{{number}}"><div class="{{wrapperClass}}"></div></div>',
+		ELEMENT: '<div class="item" data-index="{{number}}"><div class="{{wrapper}}"></div></div>',
 		TITLE: '<div class="title"></div>',
 		TOGGLEBUTTON: '<button class="toggle-button">toggle</button>',
-		GROUP : '<div class="group gp_{{group-id}} gp_w{{width}}" data-group="{{group-id}}"></div>',
+		GROUP : '<div class="group gp_{{group-id}}" data-group="{{group-id}}"></div>',
 		GUIDE: '<div class="item-guide"></div>'
 	},
 	TEXT = {

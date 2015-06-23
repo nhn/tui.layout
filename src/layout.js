@@ -21,7 +21,7 @@ ne.component.Layout = ne.util.defineClass({
 
 	/**
 	 * make group
-	 * @param {array} grouplist list of group options
+	 * @param {array} grouplist The list of group options
 	 * @private
 	 */
 	_makeGroup: function(grouplist) {
@@ -36,7 +36,7 @@ ne.component.Layout = ne.util.defineClass({
 
 	/**
 	 * get group item
-	 * @param {(string|object)} group item id or information to find group
+	 * @param {(string|object)} group The item id or information to find group
 	 * @returns {*}
 	 * @private
 	 */
@@ -237,7 +237,7 @@ ne.component.Layout = ne.util.defineClass({
 	},
 
 	/**
-	 * check is Vaild item
+	 * check whether Vaild item or not
 	 * @param {param} item
 	 * @returns {boolean}
 	 * @private
@@ -298,7 +298,7 @@ ne.component.Layout = ne.util.defineClass({
 
 	/**
 	 * mouse up handler
-	 * @param {JqueryEvent} e event object
+	 * @param {JqueryEvent} e A event object
 	 * @private
 	 */
 	_onMouseUp: function(e) {

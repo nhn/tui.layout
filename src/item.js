@@ -66,7 +66,10 @@ ne.component.Layout.Item = ne.util.defineClass({
 	 */
 	_makeElement: function() {
 		var wrapperClass = this.wrapperClass || DEFAULT_WRPPER_CLASS,
-			elementHTML = this._getMarkup(this.elementHTML, wrapperClass);
+			elementHTML = this._getHtml(this.elementHTML, {
+				number : this.index,
+				wrapper: wrapperClass
+			});
 
 		this.$element = $(elementHTML);
 		this.$element.css('position', 'relative');
@@ -95,19 +98,15 @@ ne.component.Layout.Item = ne.util.defineClass({
 
 	/**
 	 * make markup with template
-	 * @param {string} html  item element html
-	 * @param {string} wrapperClass content wrapper class
+	 * @param {string} html A item element html
+	 * @param {object} map The map to change html string
+	 * @returns {string}
+	 * @private
 	 */
-	_getMarkup: function(html, wrapperClass) {
-		var map = {
-				number : this.index,
-				wrapperClass: wrapperClass
-			};
-
+	_getHtml: function(html, map) {
 		html = html.replace(/\{\{([^\}]+)\}\}/g, function(mstr, name) {
 			return map[name];
 		});
-
 		return html;
 	},
 
@@ -117,7 +116,9 @@ ne.component.Layout.Item = ne.util.defineClass({
 	 * @private
 	 */
 	_makeDragButton: function(html) {
-		html = html.replace(/{{item-id}}/g, 'item_id_' + this.contentId);
+		html = this._getHtml(html, {
+			'item-id': 'item_id_' + this.contentId
+		});
 		this.$titleElement.append($(html));
 	},
 
