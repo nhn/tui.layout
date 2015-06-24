@@ -1,8 +1,8 @@
 /**
- * @fileoverview layout component
- * @dependency code-snippet.js jquery.1.8.3
- * @author NHN entertainment FE dev team Jein Yi(jein.yi@nhnent.com)
- */
+* @fileoverview layout component
+* @dependency code-snippet.js jquery.1.8.3
+* @author NHN entertainment FE dev team Jein Yi(jein.yi@nhnent.com)
+*/
 ne.util.defineNamespace('ne.component');
 
 ne.component.Layout = ne.util.defineClass({
@@ -80,6 +80,7 @@ ne.component.Layout = ne.util.defineClass({
 	 */
 	_onMouseDown: function(e) {
 		var $doc = $(document);
+		this.height($doc.height());
 		this._setGuide(e.target, e.clientX, e.clientY);
 		$doc.on('mousemove', this.onMouseMove);
 		$doc.on('mouseup', this.onMouseUp);
@@ -93,9 +94,10 @@ ne.component.Layout = ne.util.defineClass({
 	 * @private
 	 */
 	_setGuide: function(target, pointX, pointY) {
-		var initPos = {
-				x: pointX + this.getX() + 10,
-				y: pointY + this.getY() + 10
+		var $doc = $(document),
+			initPos = {
+				x: pointX + $doc.scrollLeft() + 10,
+				y: pointY + $doc.scrollTop() + 10
 			},
 			itemId = $(target).attr('data-item'),
 			$moveEl = $('#' + itemId);
@@ -133,12 +135,17 @@ ne.component.Layout = ne.util.defineClass({
 	 * @param {JqueryEvent} e event object
 	 * @private
 	 */
-	_onMouseMove: function(e) {		
-		var parent = $(e.target).parent(),
-			pointX = e.clientX + this.getX(),
-			group = parent.attr('data-group'),
-			pointY = e.clientY + this.getY();
+	_onMouseMove: function(e) {
 
+		var parent, $doc, pointX, pointY, group;
+
+		parent = $(e.target).parent();
+		$doc = $(document);
+		pointX = e.clientX + $doc.scrollLeft();
+		pointY = e.clientY + $doc.scrollTop();
+		group = parent.attr('data-group');
+
+		this._setScrollState(pointX, pointY);
 		this._moveGuide(pointX, pointY);
 
 		if (group) {
@@ -147,6 +154,34 @@ ne.component.Layout = ne.util.defineClass({
 	},
 
 	/**
+	 * if element move over area, scroll move to show element
+	 * @private
+	 */
+	_setScrollState: function(x, y) {
+		var $doc = $(document),
+			$win = $(window),
+			docHeight = this.height(),
+			height = $win.height(),
+			top = $doc.scrollTop(),
+			limit = docHeight - height;
+
+		if (height + top < y) {
+			$doc.scrollTop(Math.min(top + (y - height + top), limit));
+		}
+	},
+
+	/**
+	 * save document height or return height
+	 * @param {number} height
+	 */
+	height: function(height) {
+		if (ne.util.isUndefined(height)) {
+			return this._height;
+		} else {
+			this._height = height;
+		}
+	},
+	/**
 	 * detect move with group
 	 * @param {object} item compare position with
 	 * @param {number} pointX x position
@@ -154,14 +189,16 @@ ne.component.Layout = ne.util.defineClass({
 	 * @private
 	 */
 	_detectMove: function(item, pointX, pointY) {
-		var groupInst = this._getGroup(item),
+		var $doc = $(document),
+			groupInst = this._getGroup(item),
 			group = item.attr('data-group'),
 			$before,
-			top = $(document).scrollTop(),
-			left = $(document).scrollLeft();
+			top = $doc.scrollTop(),
+			left = $doc.scrollLeft();
 
 		if (ne.util.isEmpty(groupInst.list)) {
 			item.append(this.$temp);
+			this.height($doc.height());
 			this.$temp.way = 'after';
 			this.$temp.index = 0;
 		} else {
@@ -172,6 +209,7 @@ ne.component.Layout = ne.util.defineClass({
 
 			if ($before && $before.way) {
 				$before[$before.way](this.$temp);
+				this.height($doc.height());
 				this.$temp.way = $before.way;
 				this.$temp.index = $before.attr('data-index');
 			}
@@ -222,7 +260,7 @@ ne.component.Layout = ne.util.defineClass({
 		var bound = item.$element.offset(),
 			bottom = this._getBottom(item, group),
 			height = item.$element.height(),
-			top = this.getY() + bound.top,
+			top = $(document).scrollTop() + bound.top,
 			$target;
 		if (pos.y > top && pos.y <= top + (height / 2)) {
 			$target = item.$element;
@@ -255,12 +293,13 @@ ne.component.Layout = ne.util.defineClass({
 	_getBottom: function(item, group) {
 		var $next = item.$element.next(),
 			bottom,
+			$doc = $(document),
 			gbound = group.$element.offset(),
-			limit = this.getY() + gbound.top + group.$element.height();
+			limit = $doc.scrollTop() + gbound.top + group.$element.height();
 		if ($next.hasClass(DIMMED_LAYER_CLASS)) {
 			bottom = limit;
 		} else {
-			bottom = this.getY() + $next.offset().top;
+			bottom = $doc.scrollTop() + $next.offset().top;
 		}
 		return bottom;
 	},
@@ -280,22 +319,6 @@ ne.component.Layout = ne.util.defineClass({
 	},
 
 	/**
-	 * get scrollX
-	 * @returns {Number}
-	 */
-	getX: function() {
-		return (window.scrollX || $(window).scrollLeft());
-	},
-
-	/**
-	 * get scrollY
-	 * @returns {Number}
-	 */
-	getY: function() {
-		return (window.scrollY || $(window).scrollTop());
-	},
-
-	/**
 	 * mouse up handler
 	 * @param {JqueryEvent} e A event object
 	 * @private
@@ -305,8 +328,8 @@ ne.component.Layout = ne.util.defineClass({
 			$doc = $(document),
 			group = this._getGroup(this.$temp.attr('data-groupInfo')),
 			$target = this._detectTargetByPosition({
-				x: e.clientX + this.getX(),
-				y: e.clientY + this.getY()
+				x: e.clientX + $doc.scrollLeft(),
+				y: e.clientY + $doc.scrollTop()
 			}, group);
 
 		this._update();
