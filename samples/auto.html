@@ -4,13 +4,10 @@
 	<meta charset="utf-8">
 	<link rel="stylesheet" href="css/default.css" type="text/css" />
 	<link rel="stylesheet" href="css/layout.css" type="text/css" />
-	<script type="text/javascript" src="../lib/jquery/jquery.js"></script>
-	<script type="text/javascript" src="../lib/ne-code-snippet/code-snippet.js"></script>
-	<script type="text/javascript" src="../src/statics.js"></script>
-	<script type="text/javascript" src="../src/layout.js"></script>
-	<script type="text/javascript" src="../src/group.js"></script>
-	<script type="text/javascript" src="../src/item.js"></script>
-	<script type="text/javascript" src="../src/guide.js"></script>
+	<script type="text/javascript" src="js/jquery.js"></script>
+	<script type="text/javascript" src="js/code-snippet.js"></script>
+	<script type="text/javascript" src="js/calendar.js"></script>
+	<script type="text/javascript" src="js/layout.js"></script>
 	<script type="text/javascript">
 $(window).ready(function() {
 
@@ -18,7 +15,7 @@ $(window).ready(function() {
     grouplist: [
     {
         id: 'g1',
-        ratio: '5',
+        ratio: '50',
         items: [{
             id : 'item-lifeStyle',
             contentId: 'lifeStyle',
@@ -43,7 +40,7 @@ $(window).ready(function() {
     },
     {
         id: 'g2',
-        ratio: '5',
+        ratio: '50',
         items: [{
             id : 'item-weather', // 변경가능
             contentId: 'weather',
