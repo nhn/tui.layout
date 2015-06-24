@@ -8,59 +8,9 @@
 	<script type="text/javascript" src="js/code-snippet.js"></script>
 	<script type="text/javascript" src="js/calendar.js"></script>
 	<script type="text/javascript" src="js/layout.js"></script>
-	<script type="text/javascript">
-$(window).ready(function() {
 
-	var layout = new ne.component.Layout({
-    grouplist: [
-    {
-        id: 'g1',
-        ratio: '50',
-        items: [{
-            id : 'item-lifeStyle',
-            contentId: 'lifeStyle',
-            title: "Life Style Seciton",
-            isClose: false,
-            isDraggable: true
-        },
-        {
-            id : 'item-calendar', // 변경가능
-            contentId: 'calendar',
-            title: "Calendar Seciton",
-            isClose: false,
-            isDraggable: true
-        },
-        {
-            id : 'item-todoList', // 변경가능
-            contentId: 'todoList',
-            title: "TodoList Seciton",
-            isClose: false,
-            isDraggable: true
-        }]
-    },
-    {
-        id: 'g2',
-        ratio: '50',
-        items: [{
-            id : 'item-weather', // 변경가능
-            contentId: 'weather',
-            title: "Weather Seciton",
-            isClose: false,
-            isDraggable: true
-        },
-        {
-            id : 'item-news', // 변경가능
-            contentId: 'news',
-            title: "News Seciton",
-            isClose: true,
-            isDraggable: true
-        }]
-    }
-]}, $('#layout'));
-});
-	</script>
 </head>
-<body>
+<body style="height:600px;">
 <!-- lifeStyle section -->
 <div id="lifeStyle">
 	<div>life Style</div>
@@ -132,5 +82,56 @@ $(window).ready(function() {
 </div>
 <div id="layout" class="test"></div>
 <div id="state"></div>
+<script type="text/javascript">
+	$(window).ready(function() {
+
+		var layout = new ne.component.Layout({
+			grouplist: [
+				{
+					id: 'g1',
+					ratio: '50',
+					items: [{
+						id : 'item-lifeStyle',
+						contentId: 'lifeStyle',
+						title: "Life Style Seciton",
+						isClose: false,
+						isDraggable: true
+					},
+						{
+							id : 'item-calendar', // 변경가능
+							contentId: 'calendar',
+							title: "Calendar Seciton",
+							isClose: false,
+							isDraggable: true
+						},
+						{
+							id : 'item-todoList', // 변경가능
+							contentId: 'todoList',
+							title: "TodoList Seciton",
+							isClose: false,
+							isDraggable: true
+						}]
+				},
+				{
+					id: 'g2',
+					ratio: '50',
+					items: [{
+						id : 'item-weather', // 변경가능
+						contentId: 'weather',
+						title: "Weather Seciton",
+						isClose: false,
+						isDraggable: true
+					},
+						{
+							id : 'item-news', // 변경가능
+							contentId: 'news',
+							title: "News Seciton",
+							isClose: true,
+							isDraggable: true
+						}]
+				}
+			]}, $('#layout'));
+	});
+</script>
 </body>
 </html>

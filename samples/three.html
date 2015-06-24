@@ -10,76 +10,8 @@
 	<script type="text/javascript" src="js/code-snippet.js"></script>
 	<script type="text/javascript" src="js/calendar.js"></script>
 	<script type="text/javascript" src="js/layout.js"></script>
-	<script type="text/javascript">
-$(window).ready(function() {
-
-	var layout = new ne.component.Layout({
-    name: 'half',
-    grouplist: [
-    {
-    	id: 'g0',
-    	ratio: '100',
-    	items: [{
-    		id : 'item-lifeStyle',
-    		contentId: 'lifeStyle',
-    		title: "Sports",
-    		isDraggable: true
-    	},
-    	{
-    		id : 'item-game',
-    		contentId: 'game',
-    		title: "Game",
-    		isDraggable: true
-    	}]
-    },
-    {
-        id: 'g1',
-        ratio: '40',
-        items: [{
-            id : 'item-sports',
-            contentId: 'sports',
-            title: "Life Style Seciton",
-            isClose: false,
-            isDraggable: true
-        },
-        {
-            id : 'item-calendar', // 변경가능
-            contentId: 'calendar',
-            title: "Calendar Seciton",
-            isClose: false,
-            isDraggable: true
-        },
-        {
-            id : 'item-todoList', // 변경가능
-            contentId: 'todoList',
-            title: "TodoList Seciton",
-            isClose: false,
-            isDraggable: true
-        }]
-    },
-    {
-        id: 'g2',
-        ratio: '60',
-        items: [{
-            id : 'item-weather', // 변경가능
-            contentId: 'weather',
-            title: "Weather Seciton",
-            isClose: false,
-            isDraggable: true
-        },
-        {
-            id : 'item-news', // 변경가능
-            contentId: 'news',
-            title: "News Seciton",
-            isClose: true,
-            isDraggable: true
-        }]
-    }
-]}, $('#layout'));
-});
-	</script>
 </head>
-<body>
+<body style="height:1200px;">
 <!-- lifeStyle section -->
 <div id="lifeStyle">
 	<iframe width="100%" height="500" frameborder="0" src="https://nhnent.github.io/fe.application-grid/1.0.0b/tutorials/sample1.html"></iframe>
@@ -151,5 +83,73 @@ $(window).ready(function() {
 </div>
 <div id="layout"></div>
 <div id="state"></div>
+<script type="text/javascript">
+	$(window).ready(function() {
+
+		var layout = new ne.component.Layout({
+			name: 'half',
+			grouplist: [
+				{
+					id: 'g0',
+					ratio: '100',
+					items: [{
+						id : 'item-lifeStyle',
+						contentId: 'lifeStyle',
+						title: "Sports",
+						isDraggable: true
+					},
+						{
+							id : 'item-game',
+							contentId: 'game',
+							title: "Game",
+							isDraggable: true
+						}]
+				},
+				{
+					id: 'g1',
+					ratio: '40',
+					items: [{
+						id : 'item-sports',
+						contentId: 'sports',
+						title: "Life Style Seciton",
+						isClose: false,
+						isDraggable: true
+					},
+						{
+							id : 'item-calendar', // 변경가능
+							contentId: 'calendar',
+							title: "Calendar Seciton",
+							isClose: false,
+							isDraggable: true
+						},
+						{
+							id : 'item-todoList', // 변경가능
+							contentId: 'todoList',
+							title: "TodoList Seciton",
+							isClose: false,
+							isDraggable: true
+						}]
+				},
+				{
+					id: 'g2',
+					ratio: '60',
+					items: [{
+						id : 'item-weather', // 변경가능
+						contentId: 'weather',
+						title: "Weather Seciton",
+						isClose: false,
+						isDraggable: true
+					},
+						{
+							id : 'item-news', // 변경가능
+							contentId: 'news',
+							title: "News Seciton",
+							isClose: true,
+							isDraggable: true
+						}]
+				}
+			]}, $('#layout'));
+	});
+</script>
 </body>
 </html>
