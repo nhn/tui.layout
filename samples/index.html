@@ -4,6 +4,8 @@
 	<meta charset="utf-8">
 	<link rel="stylesheet" href="css/default.css" type="text/css" />
 	<link rel="stylesheet" href="css/layout.css" type="text/css" />
+	<link rel="stylesheet" href="css/calendar.css" type="text/css" />
+	<link rel="stylesheet" href="css/sample.css" type="text/css" />
 	<script type="text/javascript" src="../lib/jquery/jquery.js"></script>
 	<script type="text/javascript" src="../lib/ne-code-snippet/code-snippet.js"></script>
 	<script type="text/javascript" src="../src/statics.js"></script>
@@ -11,6 +13,7 @@
 	<script type="text/javascript" src="../src/group.js"></script>
 	<script type="text/javascript" src="../src/item.js"></script>
 	<script type="text/javascript" src="../src/guide.js"></script>
+	<script type="text/javascript" src="../lib/ne-component-calendar/calendar.js"></script>
 	<script type="text/javascript">
 $(window).ready(function() {
 
@@ -19,10 +22,10 @@ $(window).ready(function() {
     grouplist: [
     {
     	id: 'g0',
-    	ratio: '10',
+    	ratio: '100',
     	items: [{
-    		id : 'item-sports',
-    		contentId: 'sports',
+    		id : 'item-lifeStyle',
+    		contentId: 'lifeStyle',
     		title: "Sports",
     		isDraggable: true
     	},
@@ -35,10 +38,10 @@ $(window).ready(function() {
     },
     {
         id: 'g1',
-        ratio: '5',
+        ratio: '40',
         items: [{
-            id : 'item-lifeStyle',
-            contentId: 'lifeStyle',
+            id : 'item-sports',
+            contentId: 'sports',
             title: "Life Style Seciton",
             isClose: false,
             isDraggable: true
@@ -60,7 +63,7 @@ $(window).ready(function() {
     },
     {
         id: 'g2',
-        ratio: '5',
+        ratio: '60',
         items: [{
             id : 'item-weather', // 변경가능
             contentId: 'weather',
@@ -83,45 +86,25 @@ $(window).ready(function() {
 <body>
 <!-- lifeStyle section -->
 <div id="lifeStyle">
-	<div>life Style</div>
+	<iframe width="100%" height="500" frameborder="0" src="https://nhnent.github.io/fe.application-grid/1.0.0b/tutorials/sample1.html"></iframe>
 </div>
 
 <!-- calendar section -->
-<div id="calendar">
-	<table width="100%">
-		<thead>
-			<tr>
-				<th>mon</th>
-				<th>tue</th>
-				<th>wed</th>
-				<th>thu</th>
-				<th>fri</th>
-				<th>sat</th>
-				<th>sun</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr>
-				<td>-</td>
-				<td>-</td>
-				<td>-</td>
-				<td>-</td>
-				<td>-</td>
-				<td>1</td>
-				<td>2</td>
-			</tr>
-			<tr>
-				<td>3</td>
-				<td>4</td>
-				<td>5</td>
-				<td>6</td>
-				<td>7</td>
-				<td>8</td>
-				<td>9</td>
-			</tr>
-		</tbody>
-	</table>
+<div id="calendar" class="layer">
+	<div id="cal"></div>
+	<script type="text/javascript">
+		var cal = new ne.component.Calendar({
+			element: $('#cal'),
+			year: 1983,     // 달력이 보여줄 날짜-년도
+			month: 5,       // 달력이 보여줄 날짜-월
+			titleFormat: "yyyy-mm", //설정될 title의 형식
+			todayFormat: "yyyy - mm - dd (D)", // 설정된 오늘의 날짜 형식
+			monthTitles: ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"], //월의 이름을 설정 "title" 세팅시 적용
+			dayTitles: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'] // 요일 문자값
+		});
+	</script>
 </div>
+
 
 <!-- weahter section -->
 <div id="weather">
