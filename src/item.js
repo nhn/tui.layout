@@ -5,7 +5,11 @@
  */
 ne.util.defineNamespace('ne.component.Layout');
 
-ne.component.Layout.Item = ne.util.defineClass({
+/**
+ * make item element
+ * @constructor
+ */
+ne.component.Layout.Item = ne.util.defineClass(/** @lends ne.component.Layout.Item.prototype */{
 	/**
 	 * initialize
 	 * @param {object} options

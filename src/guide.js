@@ -5,7 +5,11 @@
  */
 ne.util.defineNamespace('ne.component.Layout');
 
-ne.component.Layout.Guide = ne.util.defineClass({
+/**
+ * make helper element
+ * @constructor
+ */
+ne.component.Layout.Guide = ne.util.defineClass(/**@lends ne.component.Layout.Guide.prototype */{
 	/**
 	 * initialize group
 	 * @param {object} [options]

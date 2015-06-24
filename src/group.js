@@ -5,7 +5,11 @@
  */
 ne.util.defineNamespace('ne.component.Layout');
 
-ne.component.Layout.Group = ne.util.defineClass({
+/**
+ * make item list and group element
+ * @constructor
+ */
+ne.component.Layout.Group = ne.util.defineClass(/**@lends ne.component.Layout.Group.prototype */{
 	/**
 	 * pool element
 	 */

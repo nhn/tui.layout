@@ -5,7 +5,11 @@
 */
 ne.util.defineNamespace('ne.component');
 
-ne.component.Layout = ne.util.defineClass({
+/**
+ * make layout element and include groups, controll item move and set events
+ * @constructor
+ */
+ne.component.Layout = ne.util.defineClass(/**@lends ne.component.Layout.prototype */{
 	/**
 	 * initialize layout
 	 * @param {object} opitons
