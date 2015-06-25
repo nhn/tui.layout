@@ -33,3 +33,6 @@ Layout
 | Version | Description | Date | Developer |
 | ---- | ---- | ---- | ---- |
 | 1.0.0 | 배포 | 2015.06 | FE개발팀 이제인 <jein.yi@nhnent.com> |
+
+## LICENSE
+[MIT 라이선스](LICENSE)로 자유롭게 사용할 수 있습니다.
