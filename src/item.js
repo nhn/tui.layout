@@ -6,12 +6,12 @@
 ne.util.defineNamespace('ne.component.Layout');
 
 /**
- * make item element
+ * Item class(ne.component.Layout.Item) is manage item state and title.
  * @constructor
  */
 ne.component.Layout.Item = ne.util.defineClass(/** @lends ne.component.Layout.Item.prototype */{
 	/**
-	 * initialize
+	 * Initialize meember filed and state
 	 * @param {object} options
 	 * 	@param {string} options.groupInfo group that has item name
 	 * 	@param {string} options.contentId content element id
@@ -28,7 +28,7 @@ ne.component.Layout.Item = ne.util.defineClass(/** @lends ne.component.Layout.It
 			throw new Error(ERROR.OPTIONS_NOT_DEFINED);
 		}
 
-		// html 들을 정리한다
+		// html set
 		ne.util.extend(options, {
 			elementHTML: options.elementHTML || HTML.ELEMENT,
 			moveButtonHTML: options.moveButtonHTML || HTML.MOVEBUTTON,
@@ -58,14 +58,14 @@ ne.component.Layout.Item = ne.util.defineClass(/** @lends ne.component.Layout.It
 	},
 
 	/**
-	 * get Index
+	 * Get Index
 	 */
 	getIndex: function() {
 		return this.index;
 	},
 
 	/**
-	 * make item root element
+	 * Make item root element
 	 * @private
 	 */
 	_makeElement: function() {
@@ -84,7 +84,7 @@ ne.component.Layout.Item = ne.util.defineClass(/** @lends ne.component.Layout.It
 	},
 
 	/**
-	 * make title element and elements belong to title
+	 * Make title element and elements belong to title
 	 * @private
 	 */
 	_makeTitle: function() {
@@ -101,7 +101,7 @@ ne.component.Layout.Item = ne.util.defineClass(/** @lends ne.component.Layout.It
 	},
 
 	/**
-	 * make markup with template
+	 * Make markup with template
 	 * @param {string} html A item element html
 	 * @param {object} map The map to change html string
 	 * @returns {string}
@@ -115,7 +115,7 @@ ne.component.Layout.Item = ne.util.defineClass(/** @lends ne.component.Layout.It
 	},
 
 	/**
-	 * make drag button 
+	 * Make drag button in title
 	 * @param {string} html button html
 	 * @private
 	 */
@@ -127,7 +127,7 @@ ne.component.Layout.Item = ne.util.defineClass(/** @lends ne.component.Layout.It
 	},
 
 	/**
-	 * make Toggle button
+	 * Make Toggle button in title
 	 * @param {string} toggleHTML
 	 * @private
 	 */
@@ -137,7 +137,7 @@ ne.component.Layout.Item = ne.util.defineClass(/** @lends ne.component.Layout.It
 	},
 
 	/**
-	 * close Element
+	 * Close item element
 	 */
 	close: function() {
 		this.$toggleButton.addClass("open");
@@ -145,7 +145,7 @@ ne.component.Layout.Item = ne.util.defineClass(/** @lends ne.component.Layout.It
 	},
 
 	/**
-	 * open Element
+	 * Open item element
 	 */
 	open: function() {
 		this.$toggleButton.removeClass("open");
@@ -153,7 +153,7 @@ ne.component.Layout.Item = ne.util.defineClass(/** @lends ne.component.Layout.It
 	},
 
 	/**
-	 * title fix to do not hide 
+	 * Fix title to do not hide. After fixTitle called, hideTitle do not work.
 	 */
 	fixTitle: function() {
 		this.showTitle();
@@ -161,14 +161,14 @@ ne.component.Layout.Item = ne.util.defineClass(/** @lends ne.component.Layout.It
 	},
 
 	/**
-	 * show title
+	 * Show title
 	 */
 	showTitle: function() {
 		this.$titleElement.show();
 	},
 
 	/**
-	 * hide title
+	 * Hide title
 	 */
 	hideTitle: function() {
 		if (!this.isTitleFix) {
@@ -177,7 +177,7 @@ ne.component.Layout.Item = ne.util.defineClass(/** @lends ne.component.Layout.It
 	},
 
 	/**
-	 * toggle open/close
+	 * Toggle open/close
 	 */
 	toggle: function() {
 		if (this.$toggleButton.hasClass('open')) {
@@ -188,7 +188,7 @@ ne.component.Layout.Item = ne.util.defineClass(/** @lends ne.component.Layout.It
 	},
 
 	/**
-	 * set all event about item
+	 * Set all event about item
 	 * @private
 	 */
 	_setEvents: function() {

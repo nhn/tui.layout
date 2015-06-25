@@ -1,19 +1,19 @@
 /**
-* @fileoverview layout component
+* @fileoverview Layout component
 * @dependency code-snippet.js jquery.1.8.3
 * @author NHN entertainment FE dev team Jein Yi(jein.yi@nhnent.com)
 */
 ne.util.defineNamespace('ne.component');
 
 /**
- * make layout element and include groups, controll item move and set events
+ * Layout class(ne.component.Layout) make layout element(JQueryObject) and include groups, control item move and set events.
  * @constructor
  */
 ne.component.Layout = ne.util.defineClass(/**@lends ne.component.Layout.prototype */{
 	/**
-	 * initialize layout
+	 * Initialize layout
 	 * @param {object} opitons
-	 * 	@param {array} options.grouplist group option list
+	 * 	@param {array} options.grouplist The list of group options
 	 * @param {JQueryObject} $element
 	 */
 	init: function(opitons, $element) {
@@ -24,7 +24,7 @@ ne.component.Layout = ne.util.defineClass(/**@lends ne.component.Layout.prototyp
 	},
 
 	/**
-	 * make group
+	 * Make group
 	 * @param {array} grouplist The list of group options
 	 * @private
 	 */
@@ -39,8 +39,8 @@ ne.component.Layout = ne.util.defineClass(/**@lends ne.component.Layout.prototyp
 	},
 
 	/**
-	 * get group item
-	 * @param {(string|object)} group The item id or information to find group
+	 * Get group item
+	 * @param {(string|object)} group The item ID or information to find group
 	 * @returns {*}
 	 * @private
 	 */
@@ -56,8 +56,8 @@ ne.component.Layout = ne.util.defineClass(/**@lends ne.component.Layout.prototyp
 	},
 
 	/**
-	 * make guide object
-	 * @param {string} [guideHTML] guide element html
+	 * Make guide object
+	 * @param {string} [guideHTML] guide The html will be usded to make guide element
 	 * @private
 	 */
 	_makeGuide: function(guideHTML) {
@@ -67,7 +67,7 @@ ne.component.Layout = ne.util.defineClass(/**@lends ne.component.Layout.prototyp
 	},
 
 	/**
-	 * set Events
+	 * Set Events
 	 * @private
 	 */
 	_setEvents: function() {
@@ -78,7 +78,7 @@ ne.component.Layout = ne.util.defineClass(/**@lends ne.component.Layout.prototyp
 	},
 
 	/**
-	 * mouse down event handler
+	 * Mouse down event handler
 	 * @param e
 	 * @private
 	 */
@@ -91,10 +91,10 @@ ne.component.Layout = ne.util.defineClass(/**@lends ne.component.Layout.prototyp
 	},
 
 	/**
-	 * set guide
-	 * @param {object} target guide target
-	 * @param {number} pointX
-	 * @param {number} pointY
+	 * Set guide
+	 * @param {object} target The target to set guide's move-statement element
+	 * @param {number} pointX The position x to set guide element left.
+	 * @param {number} pointY The position y to set guide element top.
 	 * @private
 	 */
 	_setGuide: function(target, pointX, pointY) {
@@ -113,7 +113,7 @@ ne.component.Layout = ne.util.defineClass(/**@lends ne.component.Layout.prototyp
 	},
 
 	/**
-	 *
+	 * It make item element seems to be locked.
 	 * @private
 	 */
 	_lockTemp: function() {
@@ -124,7 +124,7 @@ ne.component.Layout = ne.util.defineClass(/**@lends ne.component.Layout.prototyp
 	},
 
 	/**
-	 *
+	 * It make item element seems to be unlocked.
 	 * @private
 	 */
 	_unlockTemp: function() {
@@ -135,8 +135,8 @@ ne.component.Layout = ne.util.defineClass(/**@lends ne.component.Layout.prototyp
 	},
 
 	/**
-	 * mouse move handler
-	 * @param {JqueryEvent} e event object
+	 * Mouse move handler
+	 * @param {JqueryEvent} e JqueryEvent object
 	 * @private
 	 */
 	_onMouseMove: function(e) {
@@ -158,7 +158,7 @@ ne.component.Layout = ne.util.defineClass(/**@lends ne.component.Layout.prototyp
 	},
 
 	/**
-	 * if element move over area, scroll move to show element
+	 * If element move over area, scroll move to show element
 	 * @private
 	 */
 	_setScrollState: function(x, y) {
@@ -175,8 +175,8 @@ ne.component.Layout = ne.util.defineClass(/**@lends ne.component.Layout.prototyp
 	},
 
 	/**
-	 * save document height or return height
-	 * @param {number} height
+	 * Save document height or return height
+	 * @param {number} [height] The height value to save _height feild
 	 */
 	height: function(height) {
 		if (ne.util.isUndefined(height)) {
@@ -186,10 +186,10 @@ ne.component.Layout = ne.util.defineClass(/**@lends ne.component.Layout.prototyp
 		}
 	},
 	/**
-	 * detect move with group
+	 * Detect move with group
 	 * @param {object} item compare position with
-	 * @param {number} pointX x position
-	 * @param {number} pointY y position
+	 * @param {number} pointX The position x will be detect which element selected.
+	 * @param {number} pointY The position y will be detect which element selected.
 	 * @private
 	 */
 	_detectMove: function(item, pointX, pointY) {
@@ -221,7 +221,7 @@ ne.component.Layout = ne.util.defineClass(/**@lends ne.component.Layout.prototyp
 	},
 
 	/**
-	 * move drag effect element
+	 * Move helper object
 	 * @param {number} x move position x
 	 * @param {number} y move position y
 	 * @private
@@ -234,9 +234,9 @@ ne.component.Layout = ne.util.defineClass(/**@lends ne.component.Layout.prototyp
 	},
 
 	/**
-	 * detect target by move element position
-	 * @param {object} pos position to detect
-	 * @param {object} group  group that has child
+	 * Detect target by move element position
+	 * @param {object} pos The position to detect
+	 * @param {object} group The group that has child items
 	 * @returns {string|*}
 	 * @private
 	 */
@@ -254,7 +254,7 @@ ne.component.Layout = ne.util.defineClass(/**@lends ne.component.Layout.prototyp
 	},
 
 	/**
-	 * get target element
+	 * Get target element
 	 * @param {object} item The item to compare with pos
 	 * @param {object} pos The pos to figure whether target or not
 	 * @param {object} group The group has item
@@ -278,8 +278,8 @@ ne.component.Layout = ne.util.defineClass(/**@lends ne.component.Layout.prototyp
 	},
 
 	/**
-	 * check whether Vaild item or not
-	 * @param {param} item
+	 * Check whether Vaild item or not
+	 * @param {param} item The item To be compared with temp.
 	 * @returns {boolean}
 	 * @private
 	 */
@@ -288,7 +288,7 @@ ne.component.Layout = ne.util.defineClass(/**@lends ne.component.Layout.prototyp
 	},
 
 	/**
-	 * if next element exist, set bottom next element's top position, else set bottom limit(group element's bottom position) position
+	 * If next element exist, set bottom next element's top position, else set bottom limit(group element's bottom position) position
 	 * @param {object} item The object to figure bottom position
 	 * @param {object} group The group to figure bottom position
 	 * @returns {*}
@@ -309,7 +309,7 @@ ne.component.Layout = ne.util.defineClass(/**@lends ne.component.Layout.prototyp
 	},
 
 	/**
-	 * get add index by $temp, $temp.way
+	 * Get add index by $temp, $temp.way
 	 * @returns {Number}
 	 * @private
 	 */
@@ -323,7 +323,7 @@ ne.component.Layout = ne.util.defineClass(/**@lends ne.component.Layout.prototyp
 	},
 
 	/**
-	 * mouse up handler
+	 * Mouse up handler
 	 * @param {JqueryEvent} e A event object
 	 * @private
 	 */
@@ -345,7 +345,7 @@ ne.component.Layout = ne.util.defineClass(/**@lends ne.component.Layout.prototyp
 	},
 
 	/**
-	 * update groups
+	 * Update groups
 	 * @private
 	 */
 	_update: function() {

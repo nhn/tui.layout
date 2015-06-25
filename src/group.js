@@ -6,16 +6,16 @@
 ne.util.defineNamespace('ne.component.Layout');
 
 /**
- * make item list and group element
+ * The group(ne.component.Layout.Group) class make list of item and group element(jQueryObject).
  * @constructor
  */
 ne.component.Layout.Group = ne.util.defineClass(/**@lends ne.component.Layout.Group.prototype */{
 	/**
-	 * pool element
+	 * Element pool
 	 */
 	$pool: $('<div class="pool" style="display:none"></div>'),
 	/**
-	 * init default field
+	 * Initailize default member field
 	 * @param {object} options
 	 * 	@param {string} options.id
 	 *	@param {array} options.items array of items
@@ -38,7 +38,7 @@ ne.component.Layout.Group = ne.util.defineClass(/**@lends ne.component.Layout.Gr
 	},
 
 	/**
-	 * make group element
+	 * Make group element(JqueryObject)
 	 * @param {string} html The html string to create the html element
 	 * @private
 	 */
@@ -55,7 +55,7 @@ ne.component.Layout.Group = ne.util.defineClass(/**@lends ne.component.Layout.Gr
 	},
 
 	/**
-	 * make markup with template
+	 * Make markup with template
 	 * @param {string} html A item element html
 	 * @param {object} map The map to change html string
 	 * @returns {string}
@@ -69,7 +69,7 @@ ne.component.Layout.Group = ne.util.defineClass(/**@lends ne.component.Layout.Gr
 	},
 
 	/**
-	 * make item list by items
+	 * Make list of item by items
 	 * @param {array} list The list of item's IDs
 	 * @private
 	 */
@@ -84,7 +84,7 @@ ne.component.Layout.Group = ne.util.defineClass(/**@lends ne.component.Layout.Gr
 	},
 
 	/**
-	 * make dimmed element
+	 * Make dimmed element
 	 * @private
 	 */
 	_makeDimmed: function() {
@@ -100,7 +100,7 @@ ne.component.Layout.Group = ne.util.defineClass(/**@lends ne.component.Layout.Gr
 	},
 
 	/**
-	 * append dimmed element
+	 * Append dimmed element
 	 * @private
 	 */
 	_appendDimmed: function() {
@@ -111,7 +111,7 @@ ne.component.Layout.Group = ne.util.defineClass(/**@lends ne.component.Layout.Gr
 	},
 
 	/**
-	 * remove item by index
+	 * Remove item by index
 	 * @param {number} index The index of the item to remove
 	 **/
 	remove: function(index) {
@@ -120,7 +120,7 @@ ne.component.Layout.Group = ne.util.defineClass(/**@lends ne.component.Layout.Gr
 	},
 
 	/**
-	 * add item
+	 * Add item to item list
 	 * @param {object} item item object
 	 * @param {number} [index] add The index of the item to add
 	 */
@@ -134,7 +134,7 @@ ne.component.Layout.Group = ne.util.defineClass(/**@lends ne.component.Layout.Gr
 	},
 
 	/**
-	 * rearrange group items
+	 * Rearrange group items
 	 */
 	render: function() {
 		ne.util.forEach(this.list, function(item, index) {
@@ -149,7 +149,7 @@ ne.component.Layout.Group = ne.util.defineClass(/**@lends ne.component.Layout.Gr
 	},
 
 	/**
-	 * store items to pool
+	 * Store items to pool
 	 * @param {object} $element A JQuery element to store in the pool
 	 */
 	storePool: function($element) {

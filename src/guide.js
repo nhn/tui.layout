@@ -1,19 +1,19 @@
 /**
- * @fileoverview layout guide. to help watch move element.
+ * @fileoverview Layout helper object. Guide mouse move-statement to know what is dragged well.
  * @dependency code-snippet, jquery1.8.3, layout.js
  * @author NHN entertainment FE dev team Jein Yi(jein.yi@nhnent.com)
  */
 ne.util.defineNamespace('ne.component.Layout');
 
 /**
- * make helper element
+ * Guide class(ne.component.Layout.Guide) make helper element and move helper element by position.
  * @constructor
  */
 ne.component.Layout.Guide = ne.util.defineClass(/**@lends ne.component.Layout.Guide.prototype */{
 	/**
-	 * initialize group
+	 * Initialize guide object with options
 	 * @param {object} [options]
-	 * 	@param {string} [options.guideHTML] guide elementHTML
+	 * 	@param {string} [options.guideHTML] guide The html will be guide element.
 	 */
 	init: function(options) {
 		options = options || {};
@@ -25,9 +25,9 @@ ne.component.Layout.Guide = ne.util.defineClass(/**@lends ne.component.Layout.Gu
 	},
 	
 	/**
-	 * show each dimmed layer
-	 * @param {object} pos position to init guide element
-	 * @param {jQuerObject} $element for helper
+	 * Show each dimmed layer
+	 * @param {object} pos The position to initialize guide element
+	 * @param {jQuerObject} $element The helper element
 	 **/
 	ready: function(pos, $element) {
 		this.setPos(pos);
@@ -41,7 +41,7 @@ ne.component.Layout.Guide = ne.util.defineClass(/**@lends ne.component.Layout.Gu
 	},
 	
 	/**
-	 * hide each dimmed layer
+	 * Hide each dimmed layer
 	 **/
 	finish: function() {
 		this.$dimElements.hide();
@@ -49,16 +49,16 @@ ne.component.Layout.Guide = ne.util.defineClass(/**@lends ne.component.Layout.Gu
 	},
 	
 	/**
-	 * move to position
-	 * @param {object} pos position to move
+	 * Move to position
+	 * @param {object} pos The position to move
 	 */
 	moveTo: function(pos) {
 		this.setPos(pos);
 	},
 	
 	/**
-	 * setPos for move
-	 * @param {object} pos 
+	 * Set Pos for move
+	 * @param {object} pos  The position to move
 	 */
 	setPos: function(pos) {
 		this.$element.css({
@@ -68,8 +68,8 @@ ne.component.Layout.Guide = ne.util.defineClass(/**@lends ne.component.Layout.Gu
 	},
 	
 	/**
-	 * set guide content
-	 * @param {string} $content
+	 * Set guide content
+	 * @param {string} $content The content object to copy and append to guide element.
 	 */
 	setContent: function($content) {
 		this.$element.empty();
@@ -81,7 +81,7 @@ ne.component.Layout.Guide = ne.util.defineClass(/**@lends ne.component.Layout.Gu
 	},
 	
 	/**
-	 * show element
+	 * Show element
 	 */
 	show: function() {
 		if (!this.isDisable) {
@@ -90,36 +90,36 @@ ne.component.Layout.Guide = ne.util.defineClass(/**@lends ne.component.Layout.Gu
 	},
 	
 	/**
-	 * hide element
+	 * Hide element
 	 */
 	hide: function() {
 		this.$element.hide();
 	},
 	
 	/**
-	 * disable guide
+	 * Disable guide
 	 */
 	disable: function() {
 		this.isDisable = true;
 	},
 
 	/**
-	 * enable guide
+	 * Enable guide
 	 */
 	enable: function() {
 		this.isDisable = false;
 	},
 
 	/**
-	 * set move target
-	 * @param {object} move element
+	 * Set move target
+	 * @param {object} $el The element is moving in layout.
 	 */
 	setMoveElement: function($el) {
 		this.$moveElement = $el;
 	},
 
 	/**
-	 * get scoll left
+	 * Get scoll left
 	 * @returns {Number}
 	 */
 	getScrollLeft: function() {
@@ -127,7 +127,7 @@ ne.component.Layout.Guide = ne.util.defineClass(/**@lends ne.component.Layout.Gu
 	},
 
 	/**
-	 * get scroll top
+	 * Get scroll top
 	 * @returns {Number}
 	 */
 	getScrollTop: function() {
