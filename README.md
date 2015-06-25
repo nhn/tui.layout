@@ -10,9 +10,8 @@ Layout
 
 ## Documentation
 * **API** : https://nhnent.github.io/fe.component-layout/1.0.0
-* **Tutorial** : https://github.com/nhnent/fe.component-calendar/wiki/레이아웃-컴포넌트-적용방법
+* **Tutorial** : https://github.com/nhnent/fe.component-layout/wiki/레이아웃-컴포넌트-적용방법
 * **Sample** - https://nhnent.github.io/fe.component-layout/1.0.0/tutorial-index.html
-* **CI** : http://fe.nhnent.com:8080/jenkins/job/component-layout/
 
 ## Dependency
 * jquery: ~1.8.3
