@@ -1,0 +1,155 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<link rel="stylesheet" href="css/default.css" type="text/css" />
+	<link rel="stylesheet" href="css/layout.css" type="text/css" />
+	<link rel="stylesheet" href="css/calendar.css" type="text/css" />
+	<link rel="stylesheet" href="css/sample.css" type="text/css" />
+	<script type="text/javascript" src="js/jquery.js"></script>
+	<script type="text/javascript" src="js/code-snippet.js"></script>
+	<script type="text/javascript" src="js/calendar.js"></script>
+	<script type="text/javascript" src="js/layout.js"></script>
+	<script type="text/javascript">
+$(window).ready(function() {
+
+	var layout = new ne.component.Layout({
+    name: 'half',
+    grouplist: [
+    {
+    	id: 'g0',
+    	ratio: '100',
+    	items: [{
+    		id : 'item-lifeStyle',
+    		contentId: 'lifeStyle',
+    		title: "Sports",
+    		isDraggable: true
+    	},
+    	{
+    		id : 'item-game',
+    		contentId: 'game',
+    		title: "Game",
+    		isDraggable: true
+    	}]
+    },
+    {
+        id: 'g1',
+        ratio: '40',
+        items: [{
+            id : 'item-sports',
+            contentId: 'sports',
+            title: "Life Style Seciton",
+            isClose: false,
+            isDraggable: true
+        },
+        {
+            id : 'item-calendar', // 변경가능
+            contentId: 'calendar',
+            title: "Calendar Seciton",
+            isClose: false,
+            isDraggable: true
+        },
+        {
+            id : 'item-todoList', // 변경가능
+            contentId: 'todoList',
+            title: "TodoList Seciton",
+            isClose: false,
+            isDraggable: true
+        }]
+    },
+    {
+        id: 'g2',
+        ratio: '60',
+        items: [{
+            id : 'item-weather', // 변경가능
+            contentId: 'weather',
+            title: "Weather Seciton",
+            isClose: false,
+            isDraggable: true
+        },
+        {
+            id : 'item-news', // 변경가능
+            contentId: 'news',
+            title: "News Seciton",
+            isClose: true,
+            isDraggable: true
+        }]
+    }
+]}, $('#layout'));
+});
+	</script>
+</head>
+<body>
+<!-- lifeStyle section -->
+<div id="lifeStyle">
+	<iframe width="100%" height="500" frameborder="0" src="https://nhnent.github.io/fe.application-grid/1.0.0b/tutorials/sample1.html"></iframe>
+</div>
+
+<!-- calendar section -->
+<div id="calendar" class="layer">
+	<div id="cal"></div>
+	<script type="text/javascript">
+		var cal = new ne.component.Calendar({
+			element: $('#cal'),
+			year: 1983,     // 달력이 보여줄 날짜-년도
+			month: 5,       // 달력이 보여줄 날짜-월
+			titleFormat: "yyyy-mm", //설정될 title의 형식
+			todayFormat: "yyyy - mm - dd (D)", // 설정된 오늘의 날짜 형식
+			monthTitles: ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"], //월의 이름을 설정 "title" 세팅시 적용
+			dayTitles: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'] // 요일 문자값
+		});
+	</script>
+</div>
+
+
+<!-- weahter section -->
+<div id="weather">
+	<div class="sunny">맑음</div>
+	<div>
+		<span>습도 : <em>30%</em></span>
+		<strong>풍랑주의보</strong>
+	</div>
+</div>
+
+<!-- todolist section -->
+<div id="todoList">
+	<ul>
+		<li><input type="checkbox" /> 아침</li>
+		<li><input type="checkbox" /> 점심</li>
+		<li><input type="checkbox" /> 저녁</li>
+	</ul>
+</div>
+
+<!-- today's news section -->
+<div id="news">
+	<ul>
+		<li><a href="#">메르스 낙타만 주의하면 됩니다.</a></li>
+		<li><a href="#">대통령이 사랑한 낙타</a></li>
+		<li><a href="#">과천태생 낙타, 격리수용에 격분하여 청와대로 돌진</a></li>
+	</ul>
+	<a href="#">더보기</a>
+</div>
+
+
+<!-- sports section -->
+<div id="sports">
+	<ul>
+		<li><a href="#">운동 열심히 하는 사람이 더 빨리 죽는다는 충격적결과</a></li>
+		<li><a href="#">여자 축구... 하고있는지도 몰랐다는...</a></li>
+	</ul>
+	<a href="#">더보기</a>
+</div>
+
+<!-- Game section -->
+<div id="game">
+	<p><strong>신작 출시 안내</strong></p>
+	<ul>
+		<li><a href="#">시조새 파킹....</a></li>
+		<li><a href="#">러브 라이브 업데이트</a></li>
+	</ul>
+	<a href="#">더보기</a>
+</div>
+<div id="layout"></div>
+<div id="state"></div>
+</body>
+</html>

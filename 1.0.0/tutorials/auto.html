@@ -1,0 +1,137 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<link rel="stylesheet" href="css/default.css" type="text/css" />
+	<link rel="stylesheet" href="css/layout.css" type="text/css" />
+	<script type="text/javascript" src="js/jquery.js"></script>
+	<script type="text/javascript" src="js/code-snippet.js"></script>
+	<script type="text/javascript" src="js/calendar.js"></script>
+	<script type="text/javascript" src="js/layout.js"></script>
+
+</head>
+<body style="height:600px;">
+<!-- lifeStyle section -->
+<div id="lifeStyle">
+	<div>life Style</div>
+</div>
+
+<!-- calendar section -->
+<div id="calendar">
+	<table width="100%">
+		<thead>
+			<tr>
+				<th>mon</th>
+				<th>tue</th>
+				<th>wed</th>
+				<th>thu</th>
+				<th>fri</th>
+				<th>sat</th>
+				<th>sun</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>-</td>
+				<td>-</td>
+				<td>-</td>
+				<td>-</td>
+				<td>-</td>
+				<td>1</td>
+				<td>2</td>
+			</tr>
+			<tr>
+				<td>3</td>
+				<td>4</td>
+				<td>5</td>
+				<td>6</td>
+				<td>7</td>
+				<td>8</td>
+				<td>9</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+
+<!-- weahter section -->
+<div id="weather">
+	<div class="sunny">맑음</div>
+	<div>
+		<span>습도 : <em>30%</em></span>
+		<strong>풍랑주의보</strong>
+	</div>
+</div>
+
+<!-- todolist section -->
+<div id="todoList">
+	<ul>
+		<li><input type="checkbox" /> 아침먹고 땡</li>
+		<li><input type="checkbox" /> 점심먹고 땡</li>
+		<li><input type="checkbox" /> 저녁먹고 땡</li>
+	</ul>
+</div>
+
+<!-- today's news section -->
+<div id="news">
+	<ul>
+		<li><a href="#">메르스 낙타만 주의하면 됩니다.</a></li>
+		<li><a href="#">대통령이 사랑한 낙타</a></li>
+		<li><a href="#">과천태생 낙타, 격리수용에 격분하여 청와대로 돌진</a></li>
+	</ul>
+	<a href="#">더보기</a>
+</div>
+<div id="layout" class="test"></div>
+<div id="state"></div>
+<script type="text/javascript">
+	$(window).ready(function() {
+
+		var layout = new ne.component.Layout({
+			grouplist: [
+				{
+					id: 'g1',
+					ratio: '50',
+					items: [{
+						id : 'item-lifeStyle',
+						contentId: 'lifeStyle',
+						title: "Life Style Seciton",
+						isClose: false,
+						isDraggable: true
+					},
+						{
+							id : 'item-calendar', // 변경가능
+							contentId: 'calendar',
+							title: "Calendar Seciton",
+							isClose: false,
+							isDraggable: true
+						},
+						{
+							id : 'item-todoList', // 변경가능
+							contentId: 'todoList',
+							title: "TodoList Seciton",
+							isClose: false,
+							isDraggable: true
+						}]
+				},
+				{
+					id: 'g2',
+					ratio: '50',
+					items: [{
+						id : 'item-weather', // 변경가능
+						contentId: 'weather',
+						title: "Weather Seciton",
+						isClose: false,
+						isDraggable: true
+					},
+						{
+							id : 'item-news', // 변경가능
+							contentId: 'news',
+							title: "News Seciton",
+							isClose: true,
+							isDraggable: true
+						}]
+				}
+			]}, $('#layout'));
+	});
+</script>
+</body>
+</html>
