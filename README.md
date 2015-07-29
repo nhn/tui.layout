@@ -9,7 +9,7 @@ Layout
 * html 을 사용자 옵션으로 제어 가능
 
 ## Documentation
-* **API** : https://nhnent.github.io/fe.component-layout/1.0.0
+* **API** : https://nhnent.github.io/fe.component-layout/lastest
 * **Tutorial** : https://github.com/nhnent/fe.component-layout/wiki/레이아웃-컴포넌트-적용방법
 * **Sample** - https://nhnent.github.io/fe.component-layout/1.0.0/tutorial-three.html
 
