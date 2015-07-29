@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: group.js</title>
+    <link type="text/css" rel="stylesheet" href="styles/prettify-jsdoc.css">
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/bootstrap.min.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-fe2.css">
+</head>
+<body>
+
+<div id="wrap">
+
+    <div class="header">
+
+        <div class="container-fluid">
+            <h3><a href="index.html">API Documentation</a> <small>FE개발팀</small></h3>
+        </div>
+
+    </div>
+
+    <div class="body">
+        <div id="navigation" class="navigation"><h3>Samples</h3><ul class="list samples"><li class="item"><a href="tutorial-auto.html">기본 예제</a></li><li class="item"><a href="tutorial-three.html">3단 예제</a></li></ul><h3>Classes</h3><ul class="list classes"><li class="item" id="ne.component.Layout"><span class="title"><span class="p-item">ne.component.</span><a href="ne.component.Layout.html">Layout</a></span><span class="icon blue static">static</span><ul class="sublist methods ne.component.Layout"><span class="subtitle">Methods</span><li><a href="ne.component.Layout.html#height">height</a></li><li><a href="ne.component.Layout.html#init">init</a></li></ul></li><li class="item" id="ne.component.Layout.Group"><span class="title"><span class="p-item">ne.component.Layout.</span><a href="ne.component.Layout.Group.html">Group</a></span><span class="icon blue static">static</span><ul class="sublist members ne.component.Layout.Group"><span class="subtitle">Members</span><li><a href="ne.component.Layout.Group.html#$pool">$pool</a></li></ul><ul class="sublist division ne.component.Layout.Group"><li></li></ul><ul class="sublist methods ne.component.Layout.Group"><span class="subtitle">Methods</span><li><a href="ne.component.Layout.Group.html#add">add</a></li><li><a href="ne.component.Layout.Group.html#init">init</a></li><li><a href="ne.component.Layout.Group.html#remove">remove</a></li><li><a href="ne.component.Layout.Group.html#render">render</a></li><li><a href="ne.component.Layout.Group.html#storePool">storePool</a></li></ul></li><li class="item" id="ne.component.Layout.Guide"><span class="title"><span class="p-item">ne.component.Layout.</span><a href="ne.component.Layout.Guide.html">Guide</a></span><span class="icon blue static">static</span><ul class="sublist methods ne.component.Layout.Guide"><span class="subtitle">Methods</span><li><a href="ne.component.Layout.Guide.html#disable">disable</a></li><li><a href="ne.component.Layout.Guide.html#enable">enable</a></li><li><a href="ne.component.Layout.Guide.html#finish">finish</a></li><li><a href="ne.component.Layout.Guide.html#getScrollLeft">getScrollLeft</a></li><li><a href="ne.component.Layout.Guide.html#getScrollTop">getScrollTop</a></li><li><a href="ne.component.Layout.Guide.html#hide">hide</a></li><li><a href="ne.component.Layout.Guide.html#init">init</a></li><li><a href="ne.component.Layout.Guide.html#moveTo">moveTo</a></li><li><a href="ne.component.Layout.Guide.html#ready">ready</a></li><li><a href="ne.component.Layout.Guide.html#setContent">setContent</a></li><li><a href="ne.component.Layout.Guide.html#setMoveElement">setMoveElement</a></li><li><a href="ne.component.Layout.Guide.html#setPos">setPos</a></li><li><a href="ne.component.Layout.Guide.html#show">show</a></li></ul></li><li class="item" id="ne.component.Layout.Item"><span class="title"><span class="p-item">ne.component.Layout.</span><a href="ne.component.Layout.Item.html">Item</a></span><span class="icon blue static">static</span><ul class="sublist methods ne.component.Layout.Item"><span class="subtitle">Methods</span><li><a href="ne.component.Layout.Item.html#close">close</a></li><li><a href="ne.component.Layout.Item.html#fixTitle">fixTitle</a></li><li><a href="ne.component.Layout.Item.html#getIndex">getIndex</a></li><li><a href="ne.component.Layout.Item.html#hideTitle">hideTitle</a></li><li><a href="ne.component.Layout.Item.html#init">init</a></li><li><a href="ne.component.Layout.Item.html#open">open</a></li><li><a href="ne.component.Layout.Item.html#showTitle">showTitle</a></li><li><a href="ne.component.Layout.Item.html#toggle">toggle</a></li></ul></li></ul></div>
+        <div id="main" class="main">
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * @fileoverview layout group. group include item.
+ * @dependency code-snippet, jquery1.8.3, layout.js
+ * @author NHN entertainment FE dev team Jein Yi(jein.yi@nhnent.com)
+ */
+ne.util.defineNamespace('ne.component.Layout');
+
+/**
+ * The group(ne.component.Layout.Group) class make list of item and group element(jQueryObject).
+ * @constructor
+ */
+ne.component.Layout.Group = ne.util.defineClass(/**@lends ne.component.Layout.Group.prototype */{
+	/**
+	 * Element pool
+	 */
+	$pool: $('&lt;div class="pool" style="display:none">&lt;/div>'),
+	/**
+	 * Initailize default member field
+	 * @param {object} options
+	 * 	@param {string} options.id
+	 *	@param {array} options.items array of items
+	 * 	@param {string} [options.html] html of group element
+	 * 	@param {(number|string)} [options.ratio] ratio
+	 */
+	init: function(options) {
+		if (!options) {
+			throw new Error(ERROR.OPTIONS_NOT_DEFINED);
+		}
+
+		this.size = options.ratio + '%';
+		this.id = options.id;
+
+		this._makeElement(options.html || HTML.GROUP);
+		this._makeItems(options.items);
+		this._appendDimmed();
+
+		this.render();
+	},
+
+	/**
+	 * Make group element(JqueryObject)
+	 * @param {string} html The html string to create the html element
+	 * @private
+	 */
+	_makeElement: function(html) {
+		html = this._getHtml(html, {
+			'group-id': this.id
+		});
+
+		this.$element = $(html);
+		this.$element.css({
+			'position': 'relative',
+			'width': this.size
+		});
+	},
+
+	/**
+	 * Make markup with template
+	 * @param {string} html A item element html
+	 * @param {object} map The map to change html string
+	 * @returns {string}
+	 * @private
+	 */
+	_getHtml: function(html, map) {
+		html = html.replace(/\{\{([^\}]+)\}\}/g, function(mstr, name) {
+			return map[name];
+		});
+		return html;
+	},
+
+	/**
+	 * Make list of item by items
+	 * @param {array} list The list of item's IDs
+	 * @private
+	 */
+	_makeItems: function(list) {
+		var options = {
+			groupInfo: this.id
+		};
+		this.list = ne.util.map(list, function(item) {
+			ne.util.extend(item, options);
+			return new ne.component.Layout.Item(item);
+		}, this);
+	},
+
+	/**
+	 * Make dimmed element
+	 * @private
+	 */
+	_makeDimmed: function() {
+		this.$dimmed = $('&lt;div class="' + DIMMED_LAYER_CLASS + '">&lt;/div>');
+		this.$dimmed.css({
+			position: 'absolute',
+			left: 0,
+			top: 0, 
+			bottom: 0,
+			right: 0,
+			display: 'none'
+		});
+	},
+
+	/**
+	 * Append dimmed element
+	 * @private
+	 */
+	_appendDimmed: function() {
+		if (!this.$dimmed) {
+			this._makeDimmed();
+		}
+		this.$element.append(this.$dimmed);
+	},
+
+	/**
+	 * Remove item by index
+	 * @param {number} index The index of the item to remove
+	 **/
+	remove: function(index) {
+		this.storePool(this.list[index]);
+		this.list.splice(index, 1);
+	},
+
+	/**
+	 * Add item to item list
+	 * @param {object} item item object
+	 * @param {number} [index] add The index of the item to add
+	 */
+	add: function(item, index) {
+		if (arguments.length > 1) {
+			this.list.splice(index, 0, item);
+		} else {
+			this.list.push(item);
+		}
+		item.groupInfo = this.id;
+	},
+
+	/**
+	 * Rearrange group items
+	 */
+	render: function() {
+		ne.util.forEach(this.list, function(item, index) {
+			this.$dimmed.before(item.$element);
+			item.index = index;
+			item.$element.attr({
+				'data-index' : index,
+				'data-groupInfo': this.id
+			});
+		}, this);
+		this.$dimmed.hide();
+	},
+
+	/**
+	 * Store items to pool
+	 * @param {object} $element A JQuery element to store in the pool
+	 */
+	storePool: function($element) {
+		if ($element) {
+			this.$pool.append($element);
+		} else {
+			ne.util.forEach(this.list, function(item) {
+				this.$pool.append(item.$element);
+			}, this);
+		}
+	}
+});
+
+</code></pre>
+        </article>
+    </section>
+
+
+
+</div>
+        <div class="clearfix"></div>
+    </div>
+
+</div>
+<script>
+(function() {
+// 영역 height 설정
+var height = (window.innerHeight || document.documentElement.clientHeight || document.getElementByTagName('body')[0].clientHeight) - 50;
+var navigation = document.getElementById('navigation');
+var main = document.getElementById('main');
+navigation.style.height = height + 'px';
+main.style.height = height + 'px';
+
+// IE 7,8을 위한 getElementsByClassName 구현
+var getElementsByClassName = function(className, parentElement) {
+	if(document.getElementsByClassName) {
+		return (parentElement || document).getElementsByClassName(className);
+	}
+
+    var regEx = new RegExp('(^| )'+className+'( |$)');
+	var nodes = new Array();
+    var elements = (parentElement || document.body).getElementsByTagName("*");
+    for(var i = 0, len = elements.length; i < len ; i++) {
+        if(regEx.test(elements[i].className)) {
+			nodes.push(elements[i]);
+		}
+	}
+	elements = null;
+    return nodes;
+}
+
+// url 파싱후 해당 카테고리만 display:block 처리
+var url = location.href;
+var path = url.lastIndexOf('/');
+var fileName = url.substring(path+1);
+var fullName = fileName.split('.');
+fullName.length -= 1;
+fullName = fullName.join('.');
+fullName = fullName.split('-');
+fullName = fullName[fullName.length - 1];
+var lnbList = getElementsByClassName(fullName);
+if(lnbList.length && lnbList.length > 0) {
+    for(var i = 0, len = lnbList.length; i < len; i++) {
+        lnbList[i].className += ' selected';
+    }
+}
+
+var title = document.getElementById(fullName);
+if(title) {
+    title.className += ' selected';
+    title.innerHTML = '<span class="arrow">▶</span>' + title.innerHTML;
+
+    var static = getElementsByClassName('static', title);
+    if(static) {
+        static[0].className += ' selected';
+    }
+}
+})();
+</script>
+<script type="text/javascript" src="scripts/prettify/prettify.js"></script>
+<script type="text/javascript" src="scripts/prettify/lang-css.js"></script>
+<script type="text/javascript">prettyPrint();</script>
+<script type="text/javascript" src="scripts/linenumber.js"></script>
+</body>
+</html>
