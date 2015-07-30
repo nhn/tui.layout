@@ -9,9 +9,9 @@ Layout
 * html 을 사용자 옵션으로 제어 가능
 
 ## Documentation
-* **API** : https://nhnent.github.io/fe.component-layout/lastest
+* **API** : https://nhnent.github.io/fe.component-layout/latest
 * **Tutorial** : https://github.com/nhnent/fe.component-layout/wiki/레이아웃-컴포넌트-적용방법
-* **Sample** - https://nhnent.github.io/fe.component-layout/1.0.0/tutorial-three.html
+* **Sample** - https://nhnent.github.io/fe.component-layout/latest/tutorial-three.html
 
 ## Dependency
 * jquery: ~1.8.3
