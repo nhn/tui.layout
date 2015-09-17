@@ -1,15 +1,18 @@
 /**
 * @fileoverview Layout component
 * @dependency code-snippet.js jquery.1.8.3
-* @author NHN entertainment FE dev team Jein Yi(jein.yi@nhnent.com)
+* @author NHN entertainment FE dev team.<dl_javascript@nhnent.com>
 */
-ne.util.defineNamespace('ne.component');
+
+var statics = require('./statics');
+var Group = require('./group');
+var Guide = require('./guide');
 
 /**
- * Layout class(ne.component.Layout) make layout element(JQueryObject) and include groups, control item move and set events.
+ * Layout class make layout element(JQueryObject) and include groups, control item move and set events.
  * @constructor
  */
-ne.component.Layout = ne.util.defineClass(/**@lends ne.component.Layout.prototype */{
+var Layout = ne.util.defineClass(/**@lends Layout.prototype */{
 	/**
 	 * Initialize layout
 	 * @param {object} opitons
@@ -33,7 +36,7 @@ ne.component.Layout = ne.util.defineClass(/**@lends ne.component.Layout.prototyp
 		this.groups = {};
 
 		ne.util.forEach(grouplist, function(item) {
-			group = this.groups[item.id] = new ne.component.Layout.Group(item);
+			group = this.groups[item.id] = new Group(item);
 			this.$element.append(group.$element);
 		}, this);
 	},
@@ -61,7 +64,7 @@ ne.component.Layout = ne.util.defineClass(/**@lends ne.component.Layout.prototyp
 	 * @private
 	 */
 	_makeGuide: function(guideHTML) {
-		this._guide = new ne.component.Layout.Guide({
+		this._guide = new Guide({
 			guideHTML: guideHTML
 		});
 	},
@@ -300,7 +303,7 @@ ne.component.Layout = ne.util.defineClass(/**@lends ne.component.Layout.prototyp
 			$doc = $(document),
 			gbound = group.$element.offset(),
 			limit = $doc.scrollTop() + gbound.top + group.$element.height();
-		if ($next.hasClass(DIMMED_LAYER_CLASS)) {
+		if ($next.hasClass(statics.DIMMED_LAYER_CLASS)) {
 			bottom = limit;
 		} else {
 			bottom = $doc.scrollTop() + $next.offset().top;
@@ -366,3 +369,5 @@ ne.component.Layout = ne.util.defineClass(/**@lends ne.component.Layout.prototyp
 		}
 	}
 });
+
+module.exports = Layout;

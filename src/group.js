@@ -3,13 +3,15 @@
  * @dependency code-snippet, jquery1.8.3, layout.js
  * @author NHN entertainment FE dev team Jein Yi(jein.yi@nhnent.com)
  */
-ne.util.defineNamespace('ne.component.Layout');
+
+var statics = require('./statics');
+var Item = require('./item');
 
 /**
- * The group(ne.component.Layout.Group) class make list of item and group element(jQueryObject).
+ * The group class make list of item and group element(jQueryObject).
  * @constructor
  */
-ne.component.Layout.Group = ne.util.defineClass(/**@lends ne.component.Layout.Group.prototype */{
+var Group = ne.util.defineClass(/**@lends Group.prototype */{
 	/**
 	 * Element pool
 	 */
@@ -24,13 +26,13 @@ ne.component.Layout.Group = ne.util.defineClass(/**@lends ne.component.Layout.Gr
 	 */
 	init: function(options) {
 		if (!options) {
-			throw new Error(ERROR.OPTIONS_NOT_DEFINED);
+			throw new Error(statics.ERROR.OPTIONS_NOT_DEFINED);
 		}
 
 		this.size = options.ratio + '%';
 		this.id = options.id;
 
-		this._makeElement(options.html || HTML.GROUP);
+		this._makeElement(options.html || statics.HTML.GROUP);
 		this._makeItems(options.items);
 		this._appendDimmed();
 
@@ -79,7 +81,7 @@ ne.component.Layout.Group = ne.util.defineClass(/**@lends ne.component.Layout.Gr
 		};
 		this.list = ne.util.map(list, function(item) {
 			ne.util.extend(item, options);
-			return new ne.component.Layout.Item(item);
+			return new Item(item);
 		}, this);
 	},
 
@@ -88,7 +90,7 @@ ne.component.Layout.Group = ne.util.defineClass(/**@lends ne.component.Layout.Gr
 	 * @private
 	 */
 	_makeDimmed: function() {
-		this.$dimmed = $('<div class="' + DIMMED_LAYER_CLASS + '"></div>');
+		this.$dimmed = $('<div class="' + statics.DIMMED_LAYER_CLASS + '"></div>');
 		this.$dimmed.css({
 			position: 'absolute',
 			left: 0,
@@ -163,3 +165,4 @@ ne.component.Layout.Group = ne.util.defineClass(/**@lends ne.component.Layout.Gr
 	}
 });
 
+module.exports = Group;

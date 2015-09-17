@@ -1,15 +1,16 @@
 /**
  * @fileoverview layout item. contain original items.
  * @dependency code-snippet, jquery1.8.3, layout.js
- * @author NHN entertainment FE dev team Jein Yi(jein.yi@nhnent.com)
+ * @author NHN entertainment FE dev team<dl_javascript@nhnent.com>
  */
-ne.util.defineNamespace('ne.component.Layout');
+
+var statics = require('./statics');
 
 /**
- * Item class(ne.component.Layout.Item) is manage item state and title.
+ * Item class is manage item state and title.
  * @constructor
  */
-ne.component.Layout.Item = ne.util.defineClass(/** @lends ne.component.Layout.Item.prototype */{
+var Item = ne.util.defineClass(/** @lends Item.prototype */{
 	/**
 	 * Initialize meember filed and state
 	 * @param {object} options
@@ -25,16 +26,16 @@ ne.component.Layout.Item = ne.util.defineClass(/** @lends ne.component.Layout.It
 	init : function(options) {
 
 		if (!options) {
-			throw new Error(ERROR.OPTIONS_NOT_DEFINED);
+			throw new Error(statics.ERROR.OPTIONS_NOT_DEFINED);
 		}
 
 		// html set
 		ne.util.extend(options, {
-			elementHTML: options.elementHTML || HTML.ELEMENT,
-			moveButtonHTML: options.moveButtonHTML || HTML.MOVEBUTTON,
-			titleHTML: options.titleHTML || HTML.TITLE,
-			toggleButtonHTML: options.toggleButtonHTML || HTML.TOGGLEBUTTON,
-			title: options.title || TEXT.DEFAULT_TITLE
+			elementHTML: options.elementHTML || statics.HTML.ELEMENT,
+			moveButtonHTML: options.moveButtonHTML || statics.HTML.MOVEBUTTON,
+			titleHTML: options.titleHTML || statics.HTML.TITLE,
+			toggleButtonHTML: options.toggleButtonHTML || statics.HTML.TOGGLEBUTTON,
+			title: options.title || statics.TEXT.DEFAULT_TITLE
 		});
 		ne.util.extend(this, options);
 
@@ -69,7 +70,7 @@ ne.component.Layout.Item = ne.util.defineClass(/** @lends ne.component.Layout.It
 	 * @private
 	 */
 	_makeElement: function() {
-		var wrapperClass = this.wrapperClass || DEFAULT_WRPPER_CLASS,
+		var wrapperClass = this.wrapperClass || statics.DEFAULT_WRPPER_CLASS,
 			elementHTML = this._getHtml(this.elementHTML, {
 				number : this.index,
 				wrapper: wrapperClass
@@ -195,3 +196,5 @@ ne.component.Layout.Item = ne.util.defineClass(/** @lends ne.component.Layout.It
 		this.$toggleButton.on('click', $.proxy(this.toggle, this));
 	}
 });
+
+module.exports = Item;

@@ -1,15 +1,14 @@
 /**
  * @fileoverview Layout helper object. Guide mouse move-statement to know what is dragged well.
  * @dependency code-snippet, jquery1.8.3, layout.js
- * @author NHN entertainment FE dev team Jein Yi(jein.yi@nhnent.com)
+ * @author NHN entertainment FE dev team <dl_javascript@nhnent.com>
  */
-ne.util.defineNamespace('ne.component.Layout');
 
 /**
- * Guide class(ne.component.Layout.Guide) make helper element and move helper element by position.
+ * Guide class make helper element and move helper element by position.
  * @constructor
  */
-ne.component.Layout.Guide = ne.util.defineClass(/**@lends ne.component.Layout.Guide.prototype */{
+var Guide = ne.util.defineClass(/**@lends Guide.prototype */{
 	/**
 	 * Initialize guide object with options
 	 * @param {object} [options]
@@ -134,3 +133,5 @@ ne.component.Layout.Guide = ne.util.defineClass(/**@lends ne.component.Layout.Gu
 		return (window.scrollY || $(window).scrollTop());
 	}
 });
+
+module.exports = Guide;

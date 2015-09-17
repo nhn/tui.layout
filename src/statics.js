@@ -1,5 +1,9 @@
-
-var HTML = {
+/**
+ * @fileoverview The static values
+ * @author NHN Ent. FE dev team.<dl_javascript@nhnent.com>
+ */
+exports.module = {
+    HTML : {
 		MOVEBUTTON: '<button class="move-button drag-item-move" data-item="{{item-id}}">move</button>',
 		ELEMENT: '<div class="item" data-index="{{number}}"><div class="{{wrapper}}"></div></div>',
 		TITLE: '<div class="title"></div>',
@@ -7,11 +11,12 @@ var HTML = {
 		GROUP : '<div class="group gp_{{group-id}}" data-group="{{group-id}}"></div>',
 		GUIDE: '<div class="item-guide"></div>'
 	},
-	TEXT = {
+	TEXT : {
 		DEFAULT_TITLE: 'no title'
 	},
-	ERROR = {
+	ERROR : {
 		OPTIONS_NOT_DEFINED : 'options are not defined'
 	},
-	DEFAULT_WRPPER_CLASS = 'item-body',
-	DIMMED_LAYER_CLASS = 'dimmed-layer';
+	DEFAULT_WRPPER_CLASS : 'item-body',
+	DIMMED_LAYER_CLASS : 'dimmed-layer'
+};
