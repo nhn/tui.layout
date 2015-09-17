@@ -1,28 +1,13 @@
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-    <meta charset="utf-8">
-    <title>JSDoc: Tutorial: 3단 예제</title>
-    <link type="text/css" rel="stylesheet" href="styles/prettify-jsdoc.css">
-    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
-    <link type="text/css" rel="stylesheet" href="styles/bootstrap.min.css">
-    <link type="text/css" rel="stylesheet" href="styles/jsdoc-fe2.css">
-</head>
-<body>
-
-<div id="wrap">
-
-    <div class="header">
-
-        <div class="container-fluid">
-            <h3><a href="index.html">API Documentation</a> <small>FE개발팀</small></h3>
-        </div>
-
-    </div>
-
-    <div class="body">
-        <div id="navigation" class="navigation"><h3>Samples</h3><ul class="list samples"><li class="item"><a href="tutorial-auto.html">기본 예제</a></li><li class="item"><a href="tutorial-three.html">3단 예제</a></li></ul><h3>Classes</h3><ul class="list classes"><li class="item" id="ne.component.Layout"><span class="title"><span class="p-item">ne.component.</span><a href="ne.component.Layout.html">Layout</a></span><span class="icon blue static">static</span><ul class="sublist methods ne.component.Layout"><span class="subtitle">Methods</span><li><a href="ne.component.Layout.html#height">height</a></li><li><a href="ne.component.Layout.html#init">init</a></li></ul></li><li class="item" id="ne.component.Layout.Group"><span class="title"><span class="p-item">ne.component.Layout.</span><a href="ne.component.Layout.Group.html">Group</a></span><span class="icon blue static">static</span><ul class="sublist members ne.component.Layout.Group"><span class="subtitle">Members</span><li><a href="ne.component.Layout.Group.html#$pool">$pool</a></li></ul><ul class="sublist division ne.component.Layout.Group"><li></li></ul><ul class="sublist methods ne.component.Layout.Group"><span class="subtitle">Methods</span><li><a href="ne.component.Layout.Group.html#add">add</a></li><li><a href="ne.component.Layout.Group.html#init">init</a></li><li><a href="ne.component.Layout.Group.html#remove">remove</a></li><li><a href="ne.component.Layout.Group.html#render">render</a></li><li><a href="ne.component.Layout.Group.html#storePool">storePool</a></li></ul></li><li class="item" id="ne.component.Layout.Guide"><span class="title"><span class="p-item">ne.component.Layout.</span><a href="ne.component.Layout.Guide.html">Guide</a></span><span class="icon blue static">static</span><ul class="sublist methods ne.component.Layout.Guide"><span class="subtitle">Methods</span><li><a href="ne.component.Layout.Guide.html#disable">disable</a></li><li><a href="ne.component.Layout.Guide.html#enable">enable</a></li><li><a href="ne.component.Layout.Guide.html#finish">finish</a></li><li><a href="ne.component.Layout.Guide.html#getScrollLeft">getScrollLeft</a></li><li><a href="ne.component.Layout.Guide.html#getScrollTop">getScrollTop</a></li><li><a href="ne.component.Layout.Guide.html#hide">hide</a></li><li><a href="ne.component.Layout.Guide.html#init">init</a></li><li><a href="ne.component.Layout.Guide.html#moveTo">moveTo</a></li><li><a href="ne.component.Layout.Guide.html#ready">ready</a></li><li><a href="ne.component.Layout.Guide.html#setContent">setContent</a></li><li><a href="ne.component.Layout.Guide.html#setMoveElement">setMoveElement</a></li><li><a href="ne.component.Layout.Guide.html#setPos">setPos</a></li><li><a href="ne.component.Layout.Guide.html#show">show</a></li></ul></li><li class="item" id="ne.component.Layout.Item"><span class="title"><span class="p-item">ne.component.Layout.</span><a href="ne.component.Layout.Item.html">Item</a></span><span class="icon blue static">static</span><ul class="sublist methods ne.component.Layout.Item"><span class="subtitle">Methods</span><li><a href="ne.component.Layout.Item.html#close">close</a></li><li><a href="ne.component.Layout.Item.html#fixTitle">fixTitle</a></li><li><a href="ne.component.Layout.Item.html#getIndex">getIndex</a></li><li><a href="ne.component.Layout.Item.html#hideTitle">hideTitle</a></li><li><a href="ne.component.Layout.Item.html#init">init</a></li><li><a href="ne.component.Layout.Item.html#open">open</a></li><li><a href="ne.component.Layout.Item.html#showTitle">showTitle</a></li><li><a href="ne.component.Layout.Item.html#toggle">toggle</a></li></ul></li></ul></div>
-        <div id="main" class="main"><section>
+<div id="main" class="main"><script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="js/code-snippet.js"></script>
+<script type="text/javascript" src="js/toast-doc.js"></script>
+<script type="text/javascript" src="js/list.js"></script>
+<link type="text/css" rel="stylesheet" href="styles/prettify-jsdoc.css" />
+<link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+<link type="text/css" rel="stylesheet" href="styles/bootstrap.min.css">
+<link type="text/css" rel="stylesheet" href="styles/jsdoc-fe2.css">
+   
+<section>
 <header>
     
 
@@ -31,7 +16,7 @@
 
 <article>
 	
-    <a href="tutorials/three.html" target="_blank">새창으로 열기</a><br/>
+    <a href="tutorials/three.html" target="_blank">Open this sample in New Tab</a><br/>
     <iframe id="exampleFrame" width="500" height="700" frameborder="0" src=tutorials/three.html onload="onIframeLoad()"></iframe>
     <br/>
     <div id='codeArea'></div>
@@ -90,69 +75,5 @@ function encodeHTMLEntity(html) {
 }
 </script>
 
-</section></div>
-        <div class="clearfix"></div>
-    </div>
-
+</section>
 </div>
-<script>
-(function() {
-// 영역 height 설정
-var height = (window.innerHeight || document.documentElement.clientHeight || document.getElementByTagName('body')[0].clientHeight) - 50;
-var navigation = document.getElementById('navigation');
-var main = document.getElementById('main');
-navigation.style.height = height + 'px';
-main.style.height = height + 'px';
-
-// IE 7,8을 위한 getElementsByClassName 구현
-var getElementsByClassName = function(className, parentElement) {
-	if(document.getElementsByClassName) {
-		return (parentElement || document).getElementsByClassName(className);
-	}
-
-    var regEx = new RegExp('(^| )'+className+'( |$)');
-	var nodes = new Array();
-    var elements = (parentElement || document.body).getElementsByTagName("*");
-    for(var i = 0, len = elements.length; i < len ; i++) {
-        if(regEx.test(elements[i].className)) {
-			nodes.push(elements[i]);
-		}
-	}
-	elements = null;
-    return nodes;
-}
-
-// url 파싱후 해당 카테고리만 display:block 처리
-var url = location.href;
-var path = url.lastIndexOf('/');
-var fileName = url.substring(path+1);
-var fullName = fileName.split('.');
-fullName.length -= 1;
-fullName = fullName.join('.');
-fullName = fullName.split('-');
-fullName = fullName[fullName.length - 1];
-var lnbList = getElementsByClassName(fullName);
-if(lnbList.length && lnbList.length > 0) {
-    for(var i = 0, len = lnbList.length; i < len; i++) {
-        lnbList[i].className += ' selected';
-    }
-}
-
-var title = document.getElementById(fullName);
-if(title) {
-    title.className += ' selected';
-    title.innerHTML = '<span class="arrow">▶</span>' + title.innerHTML;
-
-    var static = getElementsByClassName('static', title);
-    if(static) {
-        static[0].className += ' selected';
-    }
-}
-})();
-</script>
-<script type="text/javascript" src="scripts/prettify/prettify.js"></script>
-<script type="text/javascript" src="scripts/prettify/lang-css.js"></script>
-<script type="text/javascript">prettyPrint();</script>
-<script type="text/javascript" src="scripts/linenumber.js"></script>
-</body>
-</html>
