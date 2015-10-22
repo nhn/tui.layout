@@ -1,5 +1,5 @@
 describe('view drag', function() {
-	var drag = new ne.component.Layout.Guide();
+	var drag = new tui.component.Layout.Guide();
 	jasmine.getFixtures().fixturesPath = 'base';
 	beforeEach(function() {
 		loadFixtures('test/html/guide.html');

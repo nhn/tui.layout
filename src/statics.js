@@ -2,7 +2,7 @@
  * @fileoverview The static values
  * @author NHN Ent. FE dev team.<dl_javascript@nhnent.com>
  */
-exports.module = {
+module.exports = {
     HTML : {
 		MOVEBUTTON: '<button class="move-button drag-item-move" data-item="{{item-id}}">move</button>',
 		ELEMENT: '<div class="item" data-index="{{number}}"><div class="{{wrapper}}"></div></div>',

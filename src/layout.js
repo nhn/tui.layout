@@ -12,7 +12,7 @@ var Guide = require('./guide');
  * Layout class make layout element(JQueryObject) and include groups, control item move and set events.
  * @constructor
  */
-var Layout = ne.util.defineClass(/**@lends Layout.prototype */{
+var Layout = tui.util.defineClass(/**@lends Layout.prototype */{
 	/**
 	 * Initialize layout
 	 * @param {object} opitons
@@ -35,7 +35,7 @@ var Layout = ne.util.defineClass(/**@lends Layout.prototype */{
 		var group;
 		this.groups = {};
 
-		ne.util.forEach(grouplist, function(item) {
+		tui.util.forEach(grouplist, function(item) {
 			group = this.groups[item.id] = new Group(item);
 			this.$element.append(group.$element);
 		}, this);
@@ -48,7 +48,7 @@ var Layout = ne.util.defineClass(/**@lends Layout.prototype */{
 	 * @private
 	 */
 	_getGroup: function(group) {
-		if (ne.util.isObject(group)) {
+		if (tui.util.isObject(group)) {
 			if (group.attr('data-group')) {
 				group = group.attr('data-group');
 			} else {
@@ -182,7 +182,7 @@ var Layout = ne.util.defineClass(/**@lends Layout.prototype */{
 	 * @param {number} [height] The height value to save _height feild
 	 */
 	height: function(height) {
-		if (ne.util.isUndefined(height)) {
+		if (tui.util.isUndefined(height)) {
 			return this._height;
 		} else {
 			this._height = height;
@@ -203,7 +203,7 @@ var Layout = ne.util.defineClass(/**@lends Layout.prototype */{
 			top = $doc.scrollTop(),
 			left = $doc.scrollLeft();
 
-		if (ne.util.isEmpty(groupInst.list)) {
+		if (tui.util.isEmpty(groupInst.list)) {
 			item.append(this.$temp);
 			this.height($doc.height());
 			this.$temp.way = 'after';
@@ -246,7 +246,7 @@ var Layout = ne.util.defineClass(/**@lends Layout.prototype */{
 	_detectTargetByPosition: function(pos, group) {
 		var target;
 
-		ne.util.forEach(group.list, function(item) {
+		tui.util.forEach(group.list, function(item) {
 			if (!this._isValidItem(item)) {
 				return;
 			}

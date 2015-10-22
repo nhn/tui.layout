@@ -5,7 +5,7 @@ describe('item set', function() {
 		item4;
 
 	beforeEach(function() {
-		item = new ne.component.Layout.Item({
+		item = new tui.component.Layout.Item({
 			title: 'title1',
 			id: 'id1',
 			contentId: 'lifeStyle',
@@ -14,7 +14,7 @@ describe('item set', function() {
 			isClose: true,
 			index: 0
 		});
-		item2 = new ne.component.Layout.Item({
+		item2 = new tui.component.Layout.Item({
 			id: 'iddddd1',
 			contentId: 'lifeStyle',
 			groupInfo: 'groupA',
@@ -22,14 +22,14 @@ describe('item set', function() {
 			isClose: false,
 			index: 1
 		});
-		item3 = new ne.component.Layout.Item({
+		item3 = new tui.component.Layout.Item({
 			id: 'id2',
 			contentId: 'lifeStyle',
 			groupInfo: 'groupA',
 			isClose: false,
 			index: 2
 		});	
-		item4 = new ne.component.Layout.Item({
+		item4 = new tui.component.Layout.Item({
 			title: 'asdf',
 			id: 'id2',
 			contentId: 'lifeStyle',

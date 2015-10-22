@@ -4,7 +4,7 @@ describe('group', function() {
 		group3;
 
 	beforeEach(function() {
-		group = new ne.component.Layout.Group({
+		group = new tui.component.Layout.Group({
 			ratio: '5',
 			items: [
 				{
@@ -30,11 +30,11 @@ describe('group', function() {
 			],
 			id: 'groupA'
 		});
-		group2 = new ne.component.Layout.Group({
+		group2 = new tui.component.Layout.Group({
 			ratio: '10',
 			id: 'groupB'
 		});
-		group3 = new ne.component.Layout.Group({
+		group3 = new tui.component.Layout.Group({
 			ratio: '5',
 			items: [
 				{

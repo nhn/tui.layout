@@ -10,7 +10,7 @@ var statics = require('./statics');
  * Item class is manage item state and title.
  * @constructor
  */
-var Item = ne.util.defineClass(/** @lends Item.prototype */{
+var Item = tui.util.defineClass(/** @lends Item.prototype */{
 	/**
 	 * Initialize meember filed and state
 	 * @param {object} options
@@ -30,19 +30,19 @@ var Item = ne.util.defineClass(/** @lends Item.prototype */{
 		}
 
 		// html set
-		ne.util.extend(options, {
+		tui.util.extend(options, {
 			elementHTML: options.elementHTML || statics.HTML.ELEMENT,
 			moveButtonHTML: options.moveButtonHTML || statics.HTML.MOVEBUTTON,
 			titleHTML: options.titleHTML || statics.HTML.TITLE,
 			toggleButtonHTML: options.toggleButtonHTML || statics.HTML.TOGGLEBUTTON,
 			title: options.title || statics.TEXT.DEFAULT_TITLE
 		});
-		ne.util.extend(this, options);
+		tui.util.extend(this, options);
 
 		this._makeElement();
 		
 		// title used, and fix title (no hide)
-		if (!ne.util.isBoolean(this.isClose)) {
+		if (!tui.util.isBoolean(this.isClose)) {
 			this.fixTitle();
 		}
 	

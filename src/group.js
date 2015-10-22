@@ -11,7 +11,7 @@ var Item = require('./item');
  * The group class make list of item and group element(jQueryObject).
  * @constructor
  */
-var Group = ne.util.defineClass(/**@lends Group.prototype */{
+var Group = tui.util.defineClass(/**@lends Group.prototype */{
 	/**
 	 * Element pool
 	 */
@@ -79,8 +79,8 @@ var Group = ne.util.defineClass(/**@lends Group.prototype */{
 		var options = {
 			groupInfo: this.id
 		};
-		this.list = ne.util.map(list, function(item) {
-			ne.util.extend(item, options);
+		this.list = tui.util.map(list, function(item) {
+			tui.util.extend(item, options);
 			return new Item(item);
 		}, this);
 	},
@@ -139,7 +139,7 @@ var Group = ne.util.defineClass(/**@lends Group.prototype */{
 	 * Rearrange group items
 	 */
 	render: function() {
-		ne.util.forEach(this.list, function(item, index) {
+		tui.util.forEach(this.list, function(item, index) {
 			this.$dimmed.before(item.$element);
 			item.index = index;
 			item.$element.attr({
@@ -158,7 +158,7 @@ var Group = ne.util.defineClass(/**@lends Group.prototype */{
 		if ($element) {
 			this.$pool.append($element);
 		} else {
-			ne.util.forEach(this.list, function(item) {
+			tui.util.forEach(this.list, function(item) {
 				this.$pool.append(item.$element);
 			}, this);
 		}

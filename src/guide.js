@@ -3,12 +3,12 @@
  * @dependency code-snippet, jquery1.8.3, layout.js
  * @author NHN entertainment FE dev team <dl_javascript@nhnent.com>
  */
-
+var statics = require('./statics');
 /**
  * Guide class make helper element and move helper element by position.
  * @constructor
  */
-var Guide = ne.util.defineClass(/**@lends Guide.prototype */{
+var Guide = tui.util.defineClass(/**@lends Guide.prototype */{
 	/**
 	 * Initialize guide object with options
 	 * @param {object} [options]
@@ -16,10 +16,10 @@ var Guide = ne.util.defineClass(/**@lends Guide.prototype */{
 	 */
 	init: function(options) {
 		options = options || {};
-		this.$element = $(options.guideHTML || HTML.GUIDE);
+		this.$element = $(options.guideHTML || statics.HTML.GUIDE);
 		this.$element.css('position', 'absolute');
 		this.$element.appendTo(document.body);
-		this.$dimElements = $('.' +  DIMMED_LAYER_CLASS);
+		this.$dimElements = $('.' +  statics.DIMMED_LAYER_CLASS);
 		this.hide();
 	},
 	

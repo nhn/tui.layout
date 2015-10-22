@@ -70,7 +70,7 @@ describe('layout', function() {
 	});
 
 	beforeEach(function() {
-		layout1 = new ne.component.Layout({
+		layout1 = new tui.component.Layout({
 		    grouplist: groupList1
 		}, $('#layout1'));
 	});
