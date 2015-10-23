@@ -10,9 +10,9 @@ Arrange elements by group, and move element from some group and the others.
 * Custom html 
 
 ## Documentation
-* **API** : https://nhnent.github.io/fe.component-layout/latest
-* **Tutorial** : https://github.com/nhnent/fe.component-layout/wiki/Layout-Tutorial
-* **Sample** - https://nhnent.github.io/fe.component-layout/latest/tutorial-three.html
+* **API** : https://nhnent.github.io/tui.component.layout/latest
+* **Tutorial** : https://github.com/nhnent/tui.component.layout/wiki/Layout-Tutorial
+* **Sample** - https://nhnent.github.io/tui.component.layout/latest/tutorial-three.html
 
 ## Dependency
 * jquery: ~1.8.3
@@ -28,12 +28,13 @@ Arrange elements by group, and move element from some group and the others.
 * Bower:
    * latest : `bower install "ne-component-layout#master"`
    * each version : `bower install "ne-component-layout[#tag]"`
-* Download: https://github.com/nhnent/fe.component-layout
+* Download: https://github.com/nhnent/tui.component.layout
 
 ## History
 | Version | Description | Date | Developer |
 | ---- | ---- | ---- | ---- |
-| 1.0.0 | Release | 2015.06 | NHN Ent. FE dev team.<dl_javascript@nhnent.com> |
+| 1.0.0 | Namespace changed | 2015.10 | NHN Ent. FE dev team <dl_javascript@nhnent.com> |
+| <a href="https://nhnent.github.io/tui.component.layout/1.0.0/" target="_blank">1.0.0</a> | Release | 2015.06 | NHN Ent. FE dev team <dl_javascript@nhnent.com> |
 
 ## LICENSE
 [MIT LICENSE](LICENSE)
