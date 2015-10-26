@@ -21,7 +21,7 @@
 <div id="calendar" class="layer">
 	<div id="cal"></div>
 	<script type="text/javascript">
-		var cal = new ne.component.Calendar({
+		var cal = new tui.component.Calendar({
 			element: $('#cal'),
 			year: 1983,     // 달력이 보여줄 날짜-년도
 			month: 5,       // 달력이 보여줄 날짜-월
@@ -55,9 +55,9 @@
 <!-- today's news section -->
 <div id="news">
 	<ul>
-		<li><a href="#">메르스 낙타만 주의하면 됩니다.</a></li>
-		<li><a href="#">대통령이 사랑한 낙타</a></li>
-		<li><a href="#">과천태생 낙타, 격리수용에 격분하여 청와대로 돌진</a></li>
+		<li><a href="#">NEW1</a></li>
+        <li><a href="#">NEW2</a></li>
+		<li><a href="#">NEW3</a></li>
 	</ul>
 	<a href="#">더보기</a>
 </div>
@@ -86,7 +86,7 @@
 <script type="text/javascript">
 	$(window).ready(function() {
 
-		var layout = new ne.component.Layout({
+		var layout = new tui.component.Layout({
 			name: 'half',
 			grouplist: [
 				{
