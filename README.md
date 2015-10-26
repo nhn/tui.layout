@@ -26,8 +26,8 @@ Arrange elements by group, and move element from some group and the others.
 
 ## Download/Install
 * Bower:
-   * latest : `bower install "ne-component-layout#master"`
-   * each version : `bower install "ne-component-layout[#tag]"`
+   * latest : `bower install "tui-component-layout#master"`
+   * each version : `bower install "tui-component-layout[#tag]"`
 * Download: https://github.com/nhnent/tui.component.layout
 
 ## History
