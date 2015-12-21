@@ -35,8 +35,8 @@
   },
   "opts": {
     "recurse": true,
-    "private": true,
-    "destination": "api",
-    "tutorials": "samples"
+    "destination": "doc",
+    "tutorials": "samples",
+    "name":"Layout"
   }
 }
