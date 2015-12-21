@@ -1,3 +1,6 @@
+tui.util.defineNamespace('tui.component.Layout');
+tui.component.Layout.Group = require('../src/group');
+
 describe('group', function() {
 	var group,
 		group2,

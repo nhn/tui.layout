@@ -14,7 +14,7 @@ module.exports = function(config) {
 
         // frameworks to use
         // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
-        frameworks: ['jasmine'],
+        frameworks: ['browserify', 'jasmine'],
 
         reporters: [
             'dots',
@@ -36,8 +36,7 @@ module.exports = function(config) {
          ]
          */
         files: [
-            'lib/ne-code-snippet/code-snippet.js',
-            'lib/asdfjs/build/asdf.client-min.js',
+            'lib/tui-code-snippet/code-snippet.js',
             'lib/jquery/jquery.js',
             'node_modules/jasmine-jquery/lib/jasmine-jquery.js',
             'src/**/layout.js',
@@ -68,7 +67,8 @@ module.exports = function(config) {
         // preprocess matching files before serving them to the browser
         // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
         preprocessors: {
-            'src/**/*.js': ['coverage']
+            'src/**/*.js': ['coverage', 'browserify'],
+            'test/**/*.js': ['browserify']
         },
 
         // test results reporter to use
@@ -94,6 +94,7 @@ module.exports = function(config) {
         },
 
         junitReporter: {
+            outputDir: 'report',
             outputFile: 'report/junit-result.xml',
             suite: ''
         },
@@ -128,37 +129,36 @@ module.exports = function(config) {
             'Firefox-WebDriver'
         ],
 
-
-        /*
-         사용가능한 테스트 브라우저 목록
-
-         추가를 원하시면 말씀주세요
-         */
         customLaunchers: {
             'IE7': {
                 base: 'WebDriver',
                 config: webdriverConfig,
-                browserName: 'IE7'
+                browserName: 'internet explorer',
+                version: 7
             },
             'IE8': {
                 base: 'WebDriver',
                 config: webdriverConfig,
-                browserName: 'IE8'
+                browserName: 'internet explorer',
+                version: 8
             },
             'IE9': {
                 base: 'WebDriver',
                 config: webdriverConfig,
-                browserName: 'IE9'
+                browserName: 'internet explorer',
+                version: 9
             },
             'IE10': {
                 base: 'WebDriver',
+                browserName: 'internet explorer',
                 config: webdriverConfig,
-                browserName: 'IE10'
+                version: 10
             },
             'IE11': {
                 base: 'WebDriver',
                 config: webdriverConfig,
-                browserName: 'IE11'
+                browserName: 'internet explorer',
+                version: 11
             },
             'Chrome-WebDriver': {
                 base: 'WebDriver',

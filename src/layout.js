@@ -11,13 +11,14 @@ var Guide = require('./guide');
 /**
  * Layout class make layout element(JQueryObject) and include groups, control item move and set events.
  * @constructor
+ * @api
+ * @param {object} opitons
+ * 	@param {array} options.grouplist The list of group options
+ * @param {jQuery} $element
  */
 var Layout = tui.util.defineClass(/**@lends Layout.prototype */{
 	/**
 	 * Initialize layout
-	 * @param {object} opitons
-	 * 	@param {array} options.grouplist The list of group options
-	 * @param {JQueryObject} $element
 	 */
 	init: function(opitons, $element) {
 		this.$element = $element;
@@ -143,7 +144,6 @@ var Layout = tui.util.defineClass(/**@lends Layout.prototype */{
 	 * @private
 	 */
 	_onMouseMove: function(e) {
-
 		var parent, $doc, pointX, pointY, group;
 
 		parent = $(e.target).parent();
@@ -179,6 +179,7 @@ var Layout = tui.util.defineClass(/**@lends Layout.prototype */{
 
 	/**
 	 * Save document height or return height
+     * @api
 	 * @param {number} [height] The height value to save _height feild
 	 */
 	height: function(height) {

@@ -1,3 +1,6 @@
+tui.util.defineNamespace('tui.component.Layout');
+tui.component.Layout.Item = require('../src/item');
+
 describe('item set', function() {
 	var item,
 		item2,
