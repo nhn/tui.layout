@@ -12,7 +12,7 @@ Arrange elements by group, and move element from some group and the others.
 ## Documentation
 * **API** : https://nhnent.github.io/tui.component.layout/latest
 * **Tutorial** : https://github.com/nhnent/tui.component.layout/wiki/Layout-Tutorial
-* **Sample** - https://nhnent.github.io/tui.component.layout/latest/tutorial-three.html
+* **Sample** - https://nhnent.github.io/tui.component.layout/latest/tutorial.html
 
 ## Dependency
 * jquery: ~1.8.3
