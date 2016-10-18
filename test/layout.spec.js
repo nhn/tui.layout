@@ -147,7 +147,7 @@ describe('layout', function() {
 		expect(top).toBe(60);
 	});
 
-	xit('_detectMove', function(done) {
+	it('_detectMove', function(done) {
 		var group = layout1.groups['g0'],
 			item = layout1.groups['g0'].list[0],
 			pos = {
@@ -160,6 +160,6 @@ describe('layout', function() {
 		//expect($target.way).toBe('before');
 		setTimeout(function() {
 			done();
-		}, 3000)
+		}, 1000)
 	});
 });

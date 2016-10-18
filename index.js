@@ -1,1 +1,5 @@
-tui.util.defineNamespace('tui.component.Layout', require('./src/layout'));
+var Layout = require('./src/layout');
+
+tui.util.defineNamespace('tui.component', {
+  Layout: Layout
+});

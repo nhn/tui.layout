@@ -36,8 +36,8 @@ module.exports = function(config) {
          ]
          */
         files: [
-            'lib/tui-code-snippet/code-snippet.js',
-            'lib/jquery/jquery.js',
+            'bower_components/tui-code-snippet/code-snippet.js',
+            'bower_components/jquery/jquery.js',
             'node_modules/jasmine-jquery/lib/jasmine-jquery.js',
             'src/**/layout.js',
             'src/**/guide.js',
@@ -95,7 +95,6 @@ module.exports = function(config) {
 
         junitReporter: {
             outputDir: 'report',
-            outputFile: 'report/junit-result.xml',
             suite: ''
         },
 
@@ -120,7 +119,6 @@ module.exports = function(config) {
         // start these browsers
         // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
         browsers: [
-            'IE7',
             'IE8',
             'IE9',
             'IE10',
@@ -130,12 +128,6 @@ module.exports = function(config) {
         ],
 
         customLaunchers: {
-            'IE7': {
-                base: 'WebDriver',
-                config: webdriverConfig,
-                browserName: 'internet explorer',
-                version: 7
-            },
             'IE8': {
                 base: 'WebDriver',
                 config: webdriverConfig,
