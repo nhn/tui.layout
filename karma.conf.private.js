@@ -57,21 +57,63 @@ module.exports = function(config) {
             suite: ''
         },
 
-        browserify: {
-            debug: true
-        },
-
         port: 9876,
 
         colors: true,
 
         logLevel: config.LOG_INFO,
 
-        autoWatch: true,
+        autoWatch: false,
+
+        browserify: {
+            debug: true
+        },
 
         browsers: [
-            'PhantomJS'
+            'IE8',
+            'IE9',
+            'IE10',
+            'IE11',
+            'Chrome-WebDriver',
+            'Firefox-WebDriver'
         ],
+
+        customLaunchers: {
+            'IE8': {
+                base: 'WebDriver',
+                config: webdriverConfig,
+                browserName: 'internet explorer',
+                version: 8
+            },
+            'IE9': {
+                base: 'WebDriver',
+                config: webdriverConfig,
+                browserName: 'internet explorer',
+                version: 9
+            },
+            'IE10': {
+                base: 'WebDriver',
+                browserName: 'internet explorer',
+                config: webdriverConfig,
+                version: 10
+            },
+            'IE11': {
+                base: 'WebDriver',
+                config: webdriverConfig,
+                browserName: 'internet explorer',
+                version: 11
+            },
+            'Chrome-WebDriver': {
+                base: 'WebDriver',
+                config: webdriverConfig,
+                browserName: 'chrome'
+            },
+            'Firefox-WebDriver': {
+                base: 'WebDriver',
+                config: webdriverConfig,
+                browserName: 'firefox'
+            }
+        },
 
         singleRun: true
     });

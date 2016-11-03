@@ -1,8 +1,7 @@
-tui.util.defineNamespace('tui.component.Layout');
-tui.component.Layout.Guide = require('../src/guide');
+var Guide = require('../src/guide');
 
 describe('view drag', function() {
-	var drag = new tui.component.Layout.Guide();
+	var drag = new Guide();
 	jasmine.getFixtures().fixturesPath = 'base';
 	beforeEach(function() {
 		loadFixtures('test/html/guide.html');
