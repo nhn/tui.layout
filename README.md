@@ -26,9 +26,13 @@ Arrange elements by group, and move element from some group and the others.
 
 ## Download/Install
 * Bower:
-   * latest : `bower install "tui-component-layout#master"`
+   * latest : `bower install "tui-component-layout"`
    * each version : `bower install "tui-component-layout[#tag]"`
 * Download: https://github.com/nhnent/tui.component.layout
 
 ## LICENSE
 [MIT LICENSE](LICENSE)
+
+## Sponsor
+* <img src="https://cloud.githubusercontent.com/assets/12269563/12287774/8cf4d2c0-ba12-11e5-9fa8-0a9c452cca05.png" height="30"><br>
+ [BrowserStack](https://www.browserstack.com/) is a cloud based cross browser testing tool

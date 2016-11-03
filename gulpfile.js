@@ -21,11 +21,11 @@ var banner = ['/**',
 
 var BUNDLE_PATH = './dist/';
 
-gulp.task('test', function(done) {
+gulp.task('test', function() {
     new Karma({
         configFile: path.join(__dirname, 'karma.conf.js'),
         singleRun: true
-    }, done).start();
+    }).start();
 });
 
 gulp.task('connect', function() {

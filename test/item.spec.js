@@ -1,5 +1,4 @@
-tui.util.defineNamespace('tui.component.Layout');
-tui.component.Layout.Item = require('../src/item');
+var Item = require('../src/item');
 
 describe('item set', function() {
 	var item,
@@ -8,7 +7,7 @@ describe('item set', function() {
 		item4;
 
 	beforeEach(function() {
-		item = new tui.component.Layout.Item({
+		item = new Item({
 			title: 'title1',
 			id: 'id1',
 			contentId: 'lifeStyle',
@@ -17,7 +16,7 @@ describe('item set', function() {
 			isClose: true,
 			index: 0
 		});
-		item2 = new tui.component.Layout.Item({
+		item2 = new Item({
 			id: 'iddddd1',
 			contentId: 'lifeStyle',
 			groupInfo: 'groupA',
@@ -25,14 +24,14 @@ describe('item set', function() {
 			isClose: false,
 			index: 1
 		});
-		item3 = new tui.component.Layout.Item({
+		item3 = new Item({
 			id: 'id2',
 			contentId: 'lifeStyle',
 			groupInfo: 'groupA',
 			isClose: false,
 			index: 2
 		});	
-		item4 = new tui.component.Layout.Item({
+		item4 = new Item({
 			title: 'asdf',
 			id: 'id2',
 			contentId: 'lifeStyle',

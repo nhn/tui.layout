@@ -3,7 +3,7 @@
   "authors": [
     "NHN Ent. FE Dev team.<dl_javascript@nhnent.com>"
   ],
-  "main": "layout.js",
+  "main": "dist/layout.js",
   "license": "MIT",
   "ignore": [
     "**/.*",

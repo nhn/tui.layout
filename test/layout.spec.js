@@ -1,5 +1,4 @@
-tui.util.defineNamespace('tui.component');
-tui.component.Layout = require('../src/layout');
+var Layout = require('../src/layout');
 
 describe('layout', function() {
 	var layout1,
@@ -73,7 +72,7 @@ describe('layout', function() {
 	});
 
 	beforeEach(function() {
-		layout1 = new tui.component.Layout({
+		layout1 = new Layout({
 		    grouplist: groupList1
 		}, $('#layout1'));
 	});
@@ -147,17 +146,17 @@ describe('layout', function() {
 		expect(top).toBe(60);
 	});
 
-	it('_detectMove', function(done) {
+	xit('_detectMove', function(done) { //@todo isValid test?
 		var group = layout1.groups['g0'],
 			item = layout1.groups['g0'].list[0],
 			pos = {
 				x: 100,
-				y: 40
+				y: 250
 			},
 			$target;
 
 		$target = layout1._getTarget(item, pos, group);
-		//expect($target.way).toBe('before');
+		expect($target.way).toBe('before');
 		setTimeout(function() {
 			done();
 		}, 1000)
