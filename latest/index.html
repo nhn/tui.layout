@@ -1,94 +1,122 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Layout API</title>
+    <title>Layout</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/bootstrap.min.css">
     <link type="text/css" rel="stylesheet" href="styles/prettify-jsdoc.css">
     <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
-    <link type="text/css" rel="stylesheet" href="styles/bootstrap.min.css">
-    <link type="text/css" rel="stylesheet" href="styles/layout.css">
-    <script type="text/javascript" src="scripts/prettify/prettify.js"></script>
-    <script type="text/javascript" src="scripts/prettify/lang-css.js"></script>
-    	<script type="text/javascript" src="js/jquery.js"></script>
-	<script type="text/javascript" src="js/code-snippet.js"></script>
-	<script type="text/javascript" src="js/tui.doc.js"></script>
-	<script type="text/javascript" src="js/list.js"></script>
-	<script type="text/javascript" src="group.js.html.js"></script>
-	<script type="text/javascript" src="guide.js.html.js"></script>
-	<script type="text/javascript" src="item.js.html.js"></script>
-	<script type="text/javascript" src="layout.js.html.js"></script>
-	<script type="text/javascript" src="statics.js.html.js"></script>
-	<script type="text/javascript" src="main.html.js"></script>
-	<script type="text/javascript" src="Group.html.js"></script>
-	<script type="text/javascript" src="Guide.html.js"></script>
-	<script type="text/javascript" src="Item.html.js"></script>
-	<script type="text/javascript" src="Layout.html.js"></script>
-
+    <link type="text/css" rel="stylesheet" href="styles/tui-doc.css">
 </head>
 <body>
+<nav id="lnb">
+    <div class="logo" style="">
+        <img src="img/toast-ui.png" width="100%" height="100%">
+    </div>
+    <div class="title">
+        <h1><a href="index.html" class="link">Layout</a></h1>
+    </div>
+    <div id="search-container">
+        <input type="text" placeholder="Search">
+        <ul></ul>
+    </div>
+    <ol id="lnb-tab" class="breadcrumb">
+        <li id="api-tab"><a href="#">API</a></li>
+        <li id="examples-tab"><a href="#">Examples</a></li>
+    </ol>
+    <div class="lnb-examples hidden"><h3>Examples</h3><ul><li><a href="tutorial-auto.html">Default</a><div class="hidden" id="auto_sub"></div></li><li><a href="tutorial-three.html">3Group</a><div class="hidden" id="three_sub"></div></li></ul></div><div class="lnb-api hidden"><h3>Classes</h3><ul><li><a href="Layout.html">Layout</a><div class="hidden" id="Layout_sub"></div></li></ul></div>
+</nav>
+<div id="resizer"></div>
 
-<div id="wrap">
-    <div id="left">
-        <div class="logo">
-            Toast UI Component
-        </div>
-        <div class="home">
-            <a id="mainLink" href="index.html"><h1>Layout</h1></a>
-        </div>
-        <div id="search">
-            <input type="text" placeholder="Search" class="searchbox" />
-            <ul class="searchList">
-            </ul>
-        </div>
-        <div id="menu"></div>
-    </div>
-    <div id="content" class="body">
-        <div id="pagetop"></div>
-        <div id="contentTab">
-            <ul>
-                <li class="tabmenu info on">API</li>
-                <li class="tabmenu code">Code</li>
-                <li class="tabmenu sample">Sample</li>
-            </ul>
-        </div>
-        <div id="contentBody"></div>
-        <div id="contentCode"></div>
-        <div class="clearfix"></div>
-    </div>
+<div class="main" id="main">
+    
+
+
+
+    
+
+
+
+
+
+
+
+
+
+    
+
+
+    <section>
+        <article class="readme"><h1>Layout</h1><p>Layout Component<br>
+Arrange elements by group, and move element from some group and the others.</p>
+<h2>Feature</h2><ul>
+<li>Arrange elements by group</li>
+<li>Chagne item group by drag and drop</li>
+<li>Guide for move element</li>
+<li>Custom html </li>
+</ul>
+<h2>Documentation</h2><ul>
+<li><strong>API</strong> : https://nhnent.github.io/tui.component.layout/latest</li>
+<li><strong>Tutorial</strong> : https://github.com/nhnent/tui.component.layout/wiki/Layout-Tutorial</li>
+<li><strong>Sample</strong> - https://nhnent.github.io/tui.component.layout/latest/tutorial.html</li>
+</ul>
+<h2>Dependency</h2><ul>
+<li>jquery: ~1.8.3</li>
+<li>tui-code-snippet: ~1.1.0</li>
+</ul>
+<h2>Test environment</h2><ul>
+<li>PC<ul>
+<li>IE8~11</li>
+<li>Chrome</li>
+<li>Firefox</li>
+</ul>
+</li>
+</ul>
+<h2>Download/Install</h2><ul>
+<li>Bower:<ul>
+<li>latest : <code>bower install &quot;tui-component-layout#master&quot;</code></li>
+<li>each version : <code>bower install &quot;tui-component-layout[#tag]&quot;</code></li>
+</ul>
+</li>
+<li>Download: https://github.com/nhnent/tui.component.layout</li>
+</ul>
+<h2>LICENSE</h2><p><a href="LICENSE">MIT LICENSE</a></p></article>
+    </section>
+
+
+
+
+
 
 </div>
-<footer class="footer">
-    <div class="f_wrap">
-        <div class="logo">
-            Toast UI Component
-        </div>
-        <copyright class="copyright">
-            NHN Entertainment. Frontend Development Team.
-        </copyright>
-    </div>
+
+<footer>
+    <img class="logo" src="img/toast-ui.png" style="">
+    <div class="copyright">NHN Entertainment. Frontend Development Lab</div>
 </footer>
-<script type="text/javascript">
-    $('#mainLink').attr({
-        href: location.href.replace(location.hash, '')
-    });
+<script>prettyPrint();</script>
+<script src="scripts/jquery.min.js"> </script>
+<script src="scripts/tui-doc.js"> </script>
+<script src="scripts/linenumber.js"> </script>
 
-    var ui = new tui.doc({
-        element: {
-            menu: $('#menu'),
-            content: $('#contentBody'),
-            code: $('#contentCode'),
-            tab: $('#contentTab'),
-            search: $('#search')
-        },
-        data: {
-            content: fedoc.content['main.html'],
-            menu: fedoc.lnb
+    <script>
+        var id = 'package:tui-component-layout_sub';
+        var element;
+
+        id = id.replace(/"/g, '_');
+        element = document.getElementById(id);
+
+        if (element) {
+            element.className = '';
         }
-    });
+        showLnbApi();
+    </script>
 
-    if (tui.util.isEmpty(fedoc.lnb.tutorials)) {
-        $('#content #contentTab .tabmenu.sample').hide();
-    }
-</script>
 </body>
 </html>
