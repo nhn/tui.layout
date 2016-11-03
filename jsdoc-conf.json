@@ -1,0 +1,19 @@
+{
+  "source": {
+    "include": ["src", "README.md"],
+    "exclude": [],
+    "includePattern": ".+\\.js(doc)?$",
+    "excludePattern": "(^|\\/|\\\\)_"
+  },
+  "plugins": ["plugins/markdown"],
+  "template": {
+    "name": "Layout"
+  },
+  "opts": {
+    "recurse": true,
+    "destination": "doc",
+    "tutorials": "samples",
+    "template": "node_modules/tui-doc-template",
+    "package": "package.json"
+  }
+}

@@ -16,11 +16,11 @@ Arrange elements by group, and move element from some group and the others.
 
 ## Dependency
 * jquery: ~1.8.3
-* tui-code-snippet: ~1.0.2
+* tui-code-snippet: ~1.1.0
 
 ## Test environment
 * PC
-	* IE7~11
+	* IE8~11
 	* Chrome
 	* Firefox
 
@@ -29,12 +29,6 @@ Arrange elements by group, and move element from some group and the others.
    * latest : `bower install "tui-component-layout#master"`
    * each version : `bower install "tui-component-layout[#tag]"`
 * Download: https://github.com/nhnent/tui.component.layout
-
-## History
-| Version | Description | Date | Developer |
-| ---- | ---- | ---- | ---- |
-| 1.0.0 | Namespace changed | 2015.10 | NHN Ent. FE dev team <dl_javascript@nhnent.com> |
-| <a href="https://nhnent.github.io/tui.component.layout/1.0.0/" target="_blank">1.0.0</a> | Release | 2015.06 | NHN Ent. FE dev team <dl_javascript@nhnent.com> |
 
 ## LICENSE
 [MIT LICENSE](LICENSE)

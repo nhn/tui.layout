@@ -10,6 +10,7 @@ var Item = require('./item');
 /**
  * The group class make list of item and group element(jQueryObject).
  * @constructor
+ * @ignore
  */
 var Group = tui.util.defineClass(/**@lends Group.prototype */{
 	/**

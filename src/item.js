@@ -9,6 +9,7 @@ var statics = require('./statics');
 /**
  * Item class is manage item state and title.
  * @constructor
+ * @ignore
  */
 var Item = tui.util.defineClass(/** @lends Item.prototype */{
 	/**
