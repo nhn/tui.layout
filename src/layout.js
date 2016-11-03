@@ -11,14 +11,16 @@ var Guide = require('./guide');
 /**
  * Layout class make layout element(JQueryObject) and include groups, control item move and set events.
  * @constructor
- * @api
  * @param {object} opitons
- * 	@param {array} options.grouplist The list of group options
+ * 	@param {Array} options.grouplist The list of group options, See the details in "{@tutorial auto}" example
  * @param {jQuery} $element
+ * @tutorial auto
+ * @tutorial three
  */
 var Layout = tui.util.defineClass(/**@lends Layout.prototype */{
 	/**
 	 * Initialize layout
+	 * @ignore
 	 */
 	init: function(opitons, $element) {
 		this.$element = $element;
@@ -29,7 +31,7 @@ var Layout = tui.util.defineClass(/**@lends Layout.prototype */{
 
 	/**
 	 * Make group
-	 * @param {array} grouplist The list of group options
+	 * @param {Array} grouplist The list of group options
 	 * @private
 	 */
 	_makeGroup: function(grouplist) {
@@ -179,8 +181,8 @@ var Layout = tui.util.defineClass(/**@lends Layout.prototype */{
 
 	/**
 	 * Save document height or return height
-     * @api
 	 * @param {number} [height] The height value to save _height feild
+	 * @ignore
 	 */
 	height: function(height) {
 		if (tui.util.isUndefined(height)) {

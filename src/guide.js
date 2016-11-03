@@ -7,6 +7,7 @@ var statics = require('./statics');
 /**
  * Guide class make helper element and move helper element by position.
  * @constructor
+ * @ignore
  */
 var Guide = tui.util.defineClass(/**@lends Guide.prototype */{
 	/**

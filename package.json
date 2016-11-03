@@ -1,5 +1,5 @@
 {
-  "name": "component-layout",
+  "name": "tui-component-layout",
   "version": "1.0.0",
   "description": "",
   "license": "MIT",
@@ -30,7 +30,7 @@
     "watchify": "^3.7.0"
   },
   "scripts": {
-    "doc": "./node_modules/.bin/jsdoc -c jsdoc-conf.json -t node_modules/fedoc-template"
+    "doc": "./node_modules/.bin/jsdoc -c jsdoc-conf.json && mkdir -p doc/dist && cp -f dist/layout.min.js doc/dist"
   },
   "author": "NHNEnt FE Development Team <dl_javascript@nhnent.com>"
 }

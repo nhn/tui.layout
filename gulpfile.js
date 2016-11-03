@@ -20,7 +20,6 @@ var banner = ['/**',
     ''].join('\n');
 
 var BUNDLE_PATH = './dist/';
-var SAMPLES_PATH = './samples/js/';
 
 gulp.task('test', function(done) {
     new Karma({
@@ -62,10 +61,4 @@ gulp.task('compress', ['bundle'], function() {
 
 });
 
-gulp.task('concat', ['compress'], function() {
-    gulp.src(BUNDLE_PATH + filename + '.js')
-      .pipe(concat(filename + '.js'))
-      .pipe(gulp.dest(SAMPLES_PATH));
-});
-
-gulp.task('default', ['bundle', 'compress', 'concat']);
+gulp.task('default', ['bundle', 'compress']);
