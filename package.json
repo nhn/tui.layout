@@ -1,5 +1,6 @@
 {
   "name": "tui-component-layout",
+  "author": "NHNEnt FE Development Team <dl_javascript@nhnent.com>",
   "version": "1.0.0",
   "description": "",
   "license": "MIT",
@@ -7,7 +8,6 @@
   "devDependencies": {
     "browserify": "latest",
     "browserify-istanbul": "latest",
-    "fedoc-template": "git+https://14bfd38a036366f7ca90355d202038126127bd01:x-oauth-basic@github.nhnent.com/fe/share-fedoc-template.git#develop",
     "gulp": "latest",
     "gulp-concat": "latest",
     "gulp-connect": "latest",
@@ -15,6 +15,7 @@
     "gulp-uglify": "latest",
     "jasmine-core": "latest",
     "jasmine-jquery": "^2.1.0",
+    "jsdoc": "latest",
     "karma": "^1.2.0",
     "karma-browserify": "latest",
     "karma-browserstack-launcher": "^1.1.1",
@@ -26,12 +27,13 @@
     "karma-phantomjs-launcher": "latest",
     "karma-webdriver-launcher": "git+https://github.com/everedifice/karma-webdriver-launcher.git",
     "phantomjs": "^1.9.18",
+    "tui-jsdoc-template": "^1.0.4",
     "vinyl-buffer": "latest",
     "vinyl-source-stream": "latest",
     "watchify": "^3.7.0"
   },
   "scripts": {
-    "doc": "./node_modules/.bin/jsdoc -c jsdoc-conf.json && mkdir -p doc/dist && cp -f dist/layout.min.js doc/dist"
-  },
-  "author": "NHNEnt FE Development Team <dl_javascript@nhnent.com>"
+    "cpy-dist2doc": "mkdir -p doc/dist && cp -f dist/tui-component-layout.js doc/dist",
+    "doc": "./node_modules/.bin/jsdoc -c jsdoc-conf.json && npm run cpy-dist2doc"
+  }
 }
