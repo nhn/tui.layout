@@ -33,6 +33,8 @@
     "watchify": "^3.7.0"
   },
   "scripts": {
+    "test": "karma start --no-single-run",
+    "test:ne": "karma start karma.conf.private.js",
     "cpy-dist2doc": "mkdir -p doc/dist && cp -f dist/tui-component-layout.js doc/dist",
     "doc": "./node_modules/.bin/jsdoc -c jsdoc-conf.json && npm run cpy-dist2doc"
   }
