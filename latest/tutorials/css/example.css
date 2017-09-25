@@ -1,0 +1,76 @@
+ul, ol {
+    text-align: left;
+}
+
+a {
+    color: #000;
+}
+
+button {
+    outline: 0;
+    border: 0;
+    cursor: pointer;
+}
+
+#layout {
+    width: 800px;
+}
+
+.group {
+    float: left;
+    margin: 10px;
+    min-height: 20px;
+    padding: 10px;
+    outline: 2px dashed #eee;
+}
+
+.item {
+    width: auto;
+    margin-top: 10px;
+    border: 1px solid #4b96e6;
+}
+
+.item:first-child {
+    margin-top: 0;
+}
+
+.item .title {
+    text-align: center;
+    background-color: #eee;
+    padding: 12px 10px 10px 10px;
+}
+
+.item .item-body {
+    padding: 10px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.move-button {
+    position: absolute;
+    top: 8px;
+    right: 10px;
+    padding: 5px;
+    background-color: #eee;
+    border: 1px dashed #ccc;
+}
+
+.toggle-button {
+    width: 20px;
+    height: 15px;
+    text-indent: -9999px;
+    margin-left: 10px;
+    background: url('https://user-images.githubusercontent.com/18183560/30795553-0cb8117c-a209-11e7-826d-40ff6a908edc.png') no-repeat 0px -5px;
+}
+
+.toggle-button.open {
+    background-position: -19px -5px;
+}
+
+.item-guide {
+    padding: 0;
+    margin: 0;
+    border: 2px dashed #eee;
+    background-color: #fff;
+    opacity: 1;
+}
