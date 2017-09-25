@@ -1,21 +1,26 @@
 {
-  "name": "tui-component-layout",
-  "authors": [
-    "NHN Ent. FE Dev team.<dl_javascript@nhnent.com>"
-  ],
-  "main": "dist/layout.js",
-  "license": "MIT",
-  "ignore": [
-    "**/.*",
-    "node_modules",
-    "bower_components",
-    "test",
-    "tests",
-    "*.json",
-    ".*"
-  ],
-  "dependencies": {
-    "jquery": "~1.8.3",
-    "tui-code-snippet": "~1.1.0"
-  }
+    "name": "tui-layout",
+    "authors": [
+        "NHNent. FE Development Lab <dl_javascript@nhnent.com>"
+    ],
+    "main": [
+        "dist/tui-layout.js"
+    ],
+    "license": "MIT",
+    "ignore": [
+        "**/.*",
+        "node_modules",
+        "bower_components",
+        "examples",
+        "src",
+        "test",
+        "jsdoc.conf.json",
+        "karma.conf.js",
+        "webpack.config.js",
+        "package.json"
+    ],
+    "dependencies": {
+        "jquery": "^1.11.0",
+        "tui-code-snippet": "^1.2.5"
+    }
 }

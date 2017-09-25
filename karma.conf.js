@@ -1,40 +1,83 @@
-module.exports = function(config) {
-    var webdriverConfig = {
-        hostname: 'fe.nhnent.com',
-        port: 4444,
-        remoteHost: true
-    };
+/**
+ * Config file for testing
+ * @author NHN Ent. FE Development Lab <dl_javascript@nhnent.com>
+ */
 
-    config.set({
-        basePath: './',
+'use strict';
 
-        frameworks: ['browserify', 'jasmine'],
+var webdriverConfig = {
+    hostname: 'fe.nhnent.com',
+    port: 4444,
+    remoteHost: true
+};
 
-        reporters: [
-            'dots',
-            'coverage',
-            'junit'
-        ],
-
-        files: [
-            'bower_components/tui-code-snippet/code-snippet.js',
-            'bower_components/jquery/jquery.js',
-            'node_modules/jasmine-jquery/lib/jasmine-jquery.js',
-            'src/**/*.js',
-            'test/**/*.js',
-            { pattern: 'test/**/*.html', included: true },
-            { pattern: 'test/**/*.css', included: true }
-        ],
-
-        exclude: [],
-
-        preprocessors: {
-            'src/**/*.js': ['coverage', 'browserify'],
-            'test/**/*.js': ['browserify']
-        },
-
-        coverageReporter: {
-            dir : 'report/coverage/',
+/**
+ * Set config by environment
+ * @param {object} defaultConfig - default config
+ * @param {string} server - server type ('ne' or local)
+ */
+function setConfig(defaultConfig, server) {
+    if (server === 'ne') {
+        defaultConfig.customLaunchers = {
+            'IE8': {
+                base: 'WebDriver',
+                config: webdriverConfig,
+                browserName: 'internet explorer',
+                version: '8'
+            },
+            'IE9': {
+                base: 'WebDriver',
+                config: webdriverConfig,
+                browserName: 'internet explorer',
+                version: '9'
+            },
+            'IE10': {
+                base: 'WebDriver',
+                config: webdriverConfig,
+                browserName: 'internet explorer',
+                version: '10'
+            },
+            'IE11': {
+                base: 'WebDriver',
+                config: webdriverConfig,
+                browserName: 'internet explorer',
+                version: '11'
+            },
+            'Edge': {
+                base: 'WebDriver',
+                config: webdriverConfig,
+                browserName: 'MicrosoftEdge'
+            },
+            'Chrome-WebDriver': {
+                base: 'WebDriver',
+                config: webdriverConfig,
+                browserName: 'chrome'
+            },
+            'Firefox-WebDriver': {
+                base: 'WebDriver',
+                config: webdriverConfig,
+                browserName: 'firefox'
+            },
+            'Safari-WebDriver': {
+                base: 'WebDriver',
+                config: webdriverConfig,
+                browserName: 'safari'
+            }
+        };
+        defaultConfig.browsers = [
+            'IE8',
+            'IE9',
+            'IE10',
+            'IE11',
+            'Edge',
+            'Chrome-WebDriver',
+            'Firefox-WebDriver'
+            // 'Safari-WebDriver' // active only when safari test is needed
+        ];
+        defaultConfig.reporters.push('coverage');
+        defaultConfig.reporters.push('junit');
+        defaultConfig.coverageReporter = {
+            dir: 'report/coverage/',
             reporters: [
                 {
                     type: 'html',
@@ -50,29 +93,73 @@ module.exports = function(config) {
                     file: 'cobertura.txt'
                 }
             ]
-        },
-
-        junitReporter: {
+        };
+        defaultConfig.junitReporter = {
             outputDir: 'report',
             suite: ''
-        },
+        };
+    } else {
+        defaultConfig.browsers = [
+            'ChromeHeadless'
+        ];
+    }
+}
 
-        browserify: {
-            debug: true
-        },
-
-        port: 9876,
-
-        colors: true,
-
-        logLevel: config.LOG_INFO,
-
-        autoWatch: true,
-
-        browsers: [
-            'PhantomJS'
+module.exports = function(config) {
+    var defaultConfig = {
+        basePath: './',
+        frameworks: [
+            'jquery-1.11.0',
+            'jasmine',
+            'es5-shim'
         ],
+        files: [
+            // reason for not using karma-jasmine-jquery framework is that including older jasmine-karma file
+            // included jasmine-karma version is 2.0.5 and this version don't support ie8
+            {
+                pattern: 'node_modules/jasmine-jquery/lib/jasmine-jquery.js',
+                watched: false
+            },
+            {
+                pattern: 'test/fixtures/*.html',
+                included: false
+            },
+            {
+                pattern: 'test/fixtures/*.css',
+                included: false
+            },
 
+            'test/index.js'
+        ],
+        preprocessors: {
+            'test/index.js': ['webpack', 'sourcemap']
+        },
+        reporters: ['dots'],
+        webpack: {
+            devtool: 'inline-source-map',
+            module: {
+                preLoaders: [
+                    {
+                        test: /\.js$/,
+                        exclude: /(test|bower_components|node_modules)/,
+                        loader: 'istanbul-instrumenter'
+                    },
+                    {
+                        test: /\.js$/,
+                        exclude: /(bower_components|node_modules)/,
+                        loader: 'eslint-loader'
+                    }
+                ]
+            }
+        },
+        port: 9876,
+        colors: true,
+        logLevel: config.LOG_INFO,
+        autoWatch: true,
         singleRun: true
-    });
+    };
+
+    /* eslint-disable */
+    setConfig(defaultConfig, process.env.KARMA_SERVER);
+    config.set(defaultConfig);
 };
