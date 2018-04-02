@@ -74,6 +74,27 @@ $ bower install tui-layout#<tag> # Specific version
 * [Download all sources for each version](https://github.com/nhnent/tui.layout/releases)
 
 
+### Via Contents Delivery Network (CDN)
+TOAST UI Component: Layout is available over a CDN.
+
+- You can use cdn as below.
+
+```html
+<script src="https://uicdn.toast.com/tui.layout/latest/tui-layout.min.js"></script>
+```
+
+
+- Within the download you'll find the following directories
+
+```
+tui.layout/
+├─ latest
+│  ├─ tui-layout.js
+│  ├─ tui-layout.min.js
+```
+
+
+
 ## 🔨 Usage
 
 ### HTML
