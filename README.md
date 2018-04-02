@@ -75,7 +75,7 @@ $ bower install tui-layout#<tag> # Specific version
 
 
 ### Via Contents Delivery Network (CDN)
-TOAST UI Component: Layout is available over a CDN.
+The TOAST UI Component: Layout is available over a CDN.
 
 - You can use cdn as below.
 
