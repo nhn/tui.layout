@@ -7,6 +7,7 @@
 
 var $ = require('jquery');
 var snippet = require('tui-code-snippet');
+var util = require('./util');
 
 var statics = require('./statics');
 var Group = require('./group');
@@ -26,6 +27,7 @@ var Guide = require('./guide');
  *             @param {string} options.grouplist.items.title - The item's title
  *             @param {string} [options.grouplist.items.isClose] - Whether the item is closed or not
  *             @param {string} [options.grouplist.items.isDraggable] - Whether the item is draggable or not
+ *     @param {Boolean} [options.usageStatistics=true|false] send hostname to google analytics [default value is true]
  * @example
  * var container = document.getElementById('layout');
  * var Layout = tui.Layout; // or require('tui-layout');
@@ -73,6 +75,10 @@ var Guide = require('./guide');
  */
 var Layout = snippet.defineClass(/** @lends Layout.prototype */ {
     init: function(container, options) {
+        options = snippet.extend({
+            usageStatistics: true
+        }, options);
+
         /**
          * Container element
          * @type {jQuery}
@@ -84,6 +90,10 @@ var Layout = snippet.defineClass(/** @lends Layout.prototype */ {
         this._makeGroup(options.grouplist);
         this._makeGuide(options.guideHTML);
         this._setEvents();
+
+        if (options.usageStatistics) {
+            util.sendHostName();
+        }
     },
 
     /**

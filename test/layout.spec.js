@@ -1,6 +1,7 @@
 'use strict';
 
 var $ = require('jquery');
+var snippet = require('tui-code-snippet');
 
 var Layout = require('../src/js/layout');
 
@@ -163,5 +164,32 @@ describe('layout', function() {
         setTimeout(function() {
             done();
         }, 1000);
+    });
+    describe('usageStatistics', function() {
+        beforeEach(function() {
+            this.layout = null;
+        });
+
+        it('should send hostname by default', function() {
+            spyOn(snippet, 'imagePing');
+            this.layout = new Layout($('#layout1'), {
+                grouplist: groupList1
+            });
+
+            expect(snippet.imagePing).toHaveBeenCalled();
+        });
+        it('should not send hostname on usageStatistics option false', function() {
+            spyOn(snippet, 'imagePing');
+            this.layout = new Layout($('#layout1'), {
+                grouplist: groupList1,
+                usageStatistics: false
+            });
+
+            expect(snippet.imagePing).not.toHaveBeenCalled();
+        });
+
+        afterEach(function() {
+            delete this.layout;
+        });
     });
 });
