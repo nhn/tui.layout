@@ -73,19 +73,23 @@ $ bower install tui-layout#<tag> # Specific version
 ### Via Contents Delivery Network (CDN)
 TOAST UI products are available over a CDN powered by [TOAST Cloud](https://www.toast.com).
 
-- You can use cdn as below.
+You can use CDN as below.
 
 ```html
 <script src="https://uicdn.toast.com/tui.layout/latest/tui-layout.js"></script>
 ```
 
-- Within the download you'll find the following directories
+If you want to use a specific version, use the tag name instead of `latest` in the url's path.
+
+The CDN directory has the following structure.
 
 ```
 tui.layout/
 ├─ latest
 │  ├─ tui-layout.js
 │  ├─ tui-layout.min.js
+├─ v2.0.0/
+│  ├─ ...
 ```
 
 
