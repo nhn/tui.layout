@@ -167,11 +167,11 @@ describe('layout', function() {
     });
     describe('usageStatistics', function() {
         beforeEach(function() {
+            spyOn(snippet, 'imagePing');
             this.layout = null;
         });
 
         it('should send hostname by default', function() {
-            spyOn(snippet, 'imagePing');
             this.layout = new Layout($('#layout1'), {
                 grouplist: groupList1
             });
@@ -179,17 +179,12 @@ describe('layout', function() {
             expect(snippet.imagePing).toHaveBeenCalled();
         });
         it('should not send hostname on usageStatistics option false', function() {
-            spyOn(snippet, 'imagePing');
             this.layout = new Layout($('#layout1'), {
                 grouplist: groupList1,
                 usageStatistics: false
             });
 
             expect(snippet.imagePing).not.toHaveBeenCalled();
-        });
-
-        afterEach(function() {
-            delete this.layout;
         });
     });
 });

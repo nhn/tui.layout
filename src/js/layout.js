@@ -7,11 +7,21 @@
 
 var $ = require('jquery');
 var snippet = require('tui-code-snippet');
-var util = require('./util');
 
 var statics = require('./statics');
 var Group = require('./group');
 var Guide = require('./guide');
+var sendHostName = function() {
+    var hostname = location.hostname;
+    snippet.imagePing('https://www.google-analytics.com/collect', {
+        v: 1,
+        t: 'event',
+        tid: 'UA-115377265-9',
+        cid: hostname,
+        dp: hostname,
+        dh: 'layout'
+    });
+};
 
 /**
  * Layout class make layout element and include groups, control item move and set events.
@@ -92,7 +102,7 @@ var Layout = snippet.defineClass(/** @lends Layout.prototype */ {
         this._setEvents();
 
         if (options.usageStatistics) {
-            util.sendHostName();
+            sendHostName();
         }
     },
 
