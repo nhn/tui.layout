@@ -1,6 +1,6 @@
 /*!
  * tui-layout.js
- * @version 2.0.0
+ * @version 2.1.0
  * @author NHNEnt FE Development Lab <dl_javascript@nhnent.com>
  * @license MIT
  */
@@ -73,6 +73,17 @@ return /******/ (function(modules) { // webpackBootstrap
 	var statics = __webpack_require__(3);
 	var Group = __webpack_require__(4);
 	var Guide = __webpack_require__(6);
+	var sendHostName = function() {
+	    var hostname = location.hostname;
+	    snippet.imagePing('https://www.google-analytics.com/collect', {
+	        v: 1,
+	        t: 'event',
+	        tid: 'UA-115377265-9',
+	        cid: hostname,
+	        dp: hostname,
+	        dh: 'layout'
+	    });
+	};
 
 	/**
 	 * Layout class make layout element and include groups, control item move and set events.
@@ -88,6 +99,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 *             @param {string} options.grouplist.items.title - The item's title
 	 *             @param {string} [options.grouplist.items.isClose] - Whether the item is closed or not
 	 *             @param {string} [options.grouplist.items.isDraggable] - Whether the item is draggable or not
+	 *     @param {Boolean} [options.usageStatistics=true|false] send hostname to google analytics [default value is true]
 	 * @example
 	 * var container = document.getElementById('layout');
 	 * var Layout = tui.Layout; // or require('tui-layout');
@@ -135,6 +147,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	 */
 	var Layout = snippet.defineClass(/** @lends Layout.prototype */ {
 	    init: function(container, options) {
+	        options = snippet.extend({
+	            usageStatistics: true
+	        }, options);
+
 	        /**
 	         * Container element
 	         * @type {jQuery}
@@ -146,6 +162,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	        this._makeGroup(options.grouplist);
 	        this._makeGuide(options.guideHTML);
 	        this._setEvents();
+
+	        if (options.usageStatistics) {
+	            sendHostName();
+	        }
 	    },
 
 	    /**
@@ -499,7 +519,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	     */
 	    _update: function() {
 	        var temp = this.$temp,
-	            oldGroup = this._getGroup(temp.attr('data-groupInfo')),
+	            oldGroup = this._getGroup(temp.attr('data-groupinfo')),
 	            targetGroup = this._getGroup(temp.parent()),
 	            removeIndex = parseInt(temp.attr('data-index'), 10),
 	            addIndex = this._getAddIndex(),
@@ -719,7 +739,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	            item.index = index;
 	            item.$element.attr({
 	                'data-index': index,
-	                'data-groupInfo': this.id
+	                'data-groupinfo': this.id
 	            });
 	        }, this);
 	        this.$dimmed.hide();
