@@ -151,7 +151,7 @@ var Group = snippet.defineClass(/** @lends Group.prototype */ {
             item.index = index;
             item.$element.attr({
                 'data-index': index,
-                'data-groupInfo': this.id
+                'data-groupinfo': this.id
             });
         }, this);
         this.$dimmed.hide();

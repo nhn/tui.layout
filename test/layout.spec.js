@@ -11,8 +11,8 @@ describe('layout', function() {
         id: 'g0',
         ratio: '10',
         items: [{
-            id: 'item-lifeStyle',
-            contentId: 'lifeStyle',
+            id: 'item-lifestyle',
+            contentId: 'lifestyle',
             title: 'Sports',
             isDraggable: true
         },
@@ -40,8 +40,8 @@ describe('layout', function() {
             isDraggable: true
         },
         {
-            id: 'item-todoList', // 변경가능
-            contentId: 'todoList',
+            id: 'item-todolist', // 변경가능
+            contentId: 'todolist',
             title: 'TodoList Seciton',
             isClose: false,
             isDraggable: true

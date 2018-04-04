@@ -457,7 +457,7 @@ var Layout = snippet.defineClass(/** @lends Layout.prototype */ {
      */
     _update: function() {
         var temp = this.$temp,
-            oldGroup = this._getGroup(temp.attr('data-groupInfo')),
+            oldGroup = this._getGroup(temp.attr('data-groupinfo')),
             targetGroup = this._getGroup(temp.parent()),
             removeIndex = parseInt(temp.attr('data-index'), 10),
             addIndex = this._getAddIndex(),
