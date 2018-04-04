@@ -9,7 +9,7 @@ describe('item set', function() {
         item = new Item({
             title: 'title1',
             id: 'id1',
-            contentId: 'lifeStyle',
+            contentId: 'lifestyle',
             groupInfo: 'groupA',
             isDraggable: true,
             isClose: true,
@@ -17,7 +17,7 @@ describe('item set', function() {
         });
         item2 = new Item({
             id: 'iddddd1',
-            contentId: 'lifeStyle',
+            contentId: 'lifestyle',
             groupInfo: 'groupA',
             isDraggable: true,
             isClose: false,
@@ -26,7 +26,7 @@ describe('item set', function() {
         item3 = new Item({
             title: 'asdf',
             id: 'id2',
-            contentId: 'lifeStyle',
+            contentId: 'lifestyle',
             groupInfo: 'groupA',
             index: 3
         });
