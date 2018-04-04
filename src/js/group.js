@@ -107,7 +107,6 @@ var Group = snippet.defineClass(/** @lends Group.prototype */ {
             display: 'none'
         });
     },
-
     /**
      * Append dimmed element
      * @private
