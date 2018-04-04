@@ -1,6 +1,7 @@
 'use strict';
 
 var $ = require('jquery');
+var snippet = require('tui-code-snippet');
 
 var Layout = require('../src/js/layout');
 
@@ -10,8 +11,8 @@ describe('layout', function() {
         id: 'g0',
         ratio: '10',
         items: [{
-            id: 'item-lifeStyle',
-            contentId: 'lifeStyle',
+            id: 'item-lifestyle',
+            contentId: 'lifestyle',
             title: 'Sports',
             isDraggable: true
         },
@@ -39,8 +40,8 @@ describe('layout', function() {
             isDraggable: true
         },
         {
-            id: 'item-todoList', // 변경가능
-            contentId: 'todoList',
+            id: 'item-todolist', // 변경가능
+            contentId: 'todolist',
             title: 'TodoList Seciton',
             isClose: false,
             isDraggable: true
@@ -163,5 +164,27 @@ describe('layout', function() {
         setTimeout(function() {
             done();
         }, 1000);
+    });
+    describe('usageStatistics', function() {
+        beforeEach(function() {
+            spyOn(snippet, 'imagePing');
+            this.layout = null;
+        });
+
+        it('should send hostname by default', function() {
+            this.layout = new Layout($('#layout1'), {
+                grouplist: groupList1
+            });
+
+            expect(snippet.imagePing).toHaveBeenCalled();
+        });
+        it('should not send hostname on usageStatistics option false', function() {
+            this.layout = new Layout($('#layout1'), {
+                grouplist: groupList1,
+                usageStatistics: false
+            });
+
+            expect(snippet.imagePing).not.toHaveBeenCalled();
+        });
     });
 });

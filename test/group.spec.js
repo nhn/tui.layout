@@ -14,19 +14,19 @@ describe('group', function() {
             ratio: '5',
             items: [{
                 id: 'item1',
-                contentId: 'viewItem1',
+                contentId: 'viewitem1',
                 title: 'title1'
             }, {
                 id: 'item2',
-                contentId: 'viewItem2',
+                contentId: 'viewitem2',
                 title: 'title2'
             }, {
                 id: 'item3',
-                contentId: 'viewItem3',
+                contentId: 'viewitem3',
                 title: 'title3'
             }, {
                 id: 'item4',
-                contentId: 'viewItem3',
+                contentId: 'viewitem3',
                 title: 'title4'
             }],
             id: 'groupA'
@@ -39,11 +39,11 @@ describe('group', function() {
             ratio: '5',
             items: [{
                 id: 'item5',
-                contentId: 'viewItem5',
+                contentId: 'viewitem5',
                 title: 'title5'
             }, {
                 id: 'item6',
-                contentId: 'viewItem6',
+                contentId: 'viewitem6',
                 title: 'title6'
             }],
             id: 'groupA'

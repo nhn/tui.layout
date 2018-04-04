@@ -11,6 +11,17 @@ var snippet = require('tui-code-snippet');
 var statics = require('./statics');
 var Group = require('./group');
 var Guide = require('./guide');
+var sendHostName = function() {
+    var hostname = location.hostname;
+    snippet.imagePing('https://www.google-analytics.com/collect', {
+        v: 1,
+        t: 'event',
+        tid: 'UA-115377265-9',
+        cid: hostname,
+        dp: hostname,
+        dh: 'layout'
+    });
+};
 
 /**
  * Layout class make layout element and include groups, control item move and set events.
@@ -26,6 +37,7 @@ var Guide = require('./guide');
  *             @param {string} options.grouplist.items.title - The item's title
  *             @param {string} [options.grouplist.items.isClose] - Whether the item is closed or not
  *             @param {string} [options.grouplist.items.isDraggable] - Whether the item is draggable or not
+ *     @param {Boolean} [options.usageStatistics=true|false] send hostname to google analytics [default value is true]
  * @example
  * var container = document.getElementById('layout');
  * var Layout = tui.Layout; // or require('tui-layout');
@@ -73,6 +85,10 @@ var Guide = require('./guide');
  */
 var Layout = snippet.defineClass(/** @lends Layout.prototype */ {
     init: function(container, options) {
+        options = snippet.extend({
+            usageStatistics: true
+        }, options);
+
         /**
          * Container element
          * @type {jQuery}
@@ -84,6 +100,10 @@ var Layout = snippet.defineClass(/** @lends Layout.prototype */ {
         this._makeGroup(options.grouplist);
         this._makeGuide(options.guideHTML);
         this._setEvents();
+
+        if (options.usageStatistics) {
+            sendHostName();
+        }
     },
 
     /**
@@ -437,7 +457,7 @@ var Layout = snippet.defineClass(/** @lends Layout.prototype */ {
      */
     _update: function() {
         var temp = this.$temp,
-            oldGroup = this._getGroup(temp.attr('data-groupInfo')),
+            oldGroup = this._getGroup(temp.attr('data-groupinfo')),
             targetGroup = this._getGroup(temp.parent()),
             removeIndex = parseInt(temp.attr('data-index'), 10),
             addIndex = this._getAddIndex(),
