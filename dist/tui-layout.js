@@ -1,6 +1,6 @@
 /*!
  * tui-layout.js
- * @version 2.1.0
+ * @version 2.1.1
  * @author NHNEnt FE Development Lab <dl_javascript@nhnent.com>
  * @license MIT
  */
@@ -73,17 +73,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	var statics = __webpack_require__(3);
 	var Group = __webpack_require__(4);
 	var Guide = __webpack_require__(6);
-	var sendHostName = function() {
-	    var hostname = location.hostname;
-	    snippet.imagePing('https://www.google-analytics.com/collect', {
-	        v: 1,
-	        t: 'event',
-	        tid: 'UA-115377265-9',
-	        cid: hostname,
-	        dp: hostname,
-	        dh: 'layout'
-	    });
-	};
 
 	/**
 	 * Layout class make layout element and include groups, control item move and set events.
@@ -164,7 +153,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        this._setEvents();
 
 	        if (options.usageStatistics) {
-	            sendHostName();
+	            snippet.sendHostname('layout', 'UA-129987462-1');
 	        }
 	    },
 
