@@ -167,7 +167,7 @@ describe('layout', function() {
     });
     describe('usageStatistics', function() {
         beforeEach(function() {
-            spyOn(snippet, 'imagePing');
+            spyOn(snippet, 'sendHostname');
             this.layout = null;
         });
 
@@ -176,7 +176,7 @@ describe('layout', function() {
                 grouplist: groupList1
             });
 
-            expect(snippet.imagePing).toHaveBeenCalled();
+            expect(snippet.sendHostname).toHaveBeenCalled();
         });
         it('should not send hostname on usageStatistics option false', function() {
             this.layout = new Layout($('#layout1'), {
@@ -184,7 +184,7 @@ describe('layout', function() {
                 usageStatistics: false
             });
 
-            expect(snippet.imagePing).not.toHaveBeenCalled();
+            expect(snippet.sendHostname).not.toHaveBeenCalled();
         });
     });
 });
