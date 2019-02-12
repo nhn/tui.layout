@@ -268,7 +268,6 @@ var Layout = snippet.defineClass(/** @lends Layout.prototype */ {
      * Save document height or return height
      * @param {number} [height] The height value to save _height feild
      * @returns {number} Current height
-     * @ignore
      */
     height: function(height) {
         var result = false;
