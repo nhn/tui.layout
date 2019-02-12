@@ -58,7 +58,7 @@ var instance = new Layout(container, options);
 
 
 ## 🐾 Examples
-* [Basic](https://nhnent.github.io/tui.layout/latest/tutorial-example01-basic.html) : Example of using default options.
+* [Basic](https://nhnent.github.io/tui.layout/latest/tutorial-example01-basic) : Example of using default options.
 
 
 ## 💾 Install
@@ -121,7 +121,7 @@ tui.layout/
 ### HTML
 
 Add the container element with target elements to create the component.
-See [here](https://nhnent.github.io/tui.layout/latest/tutorial-example01-basic.html#) for information about the added element.
+See [here](https://nhnent.github.io/tui.layout/latest/tutorial-example01-basic) for information about the added element.
 
 ### JavaScript
 
@@ -139,10 +139,10 @@ var Layout = require('tui-layout'); /* CommonJS */
 ```
 
 ``` javascript
-import {Layout} from 'tui-layout'; /* ES6 */
+import Layout from 'tui-layout'; /* ES6 */
 ```
 
-You can create an instance with [options](https://nhnent.github.io/tui.layout/latest/Layout.html).
+You can create an instance with [options](https://nhnent.github.io/tui.layout/latest/Layout).
 
 ``` javascript
 var container = document.getElementById('layout');
