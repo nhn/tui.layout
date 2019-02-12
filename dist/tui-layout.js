@@ -1,6 +1,6 @@
 /*!
  * tui-layout.js
- * @version 2.1.1
+ * @version 2.1.2
  * @author NHNEnt FE Development Lab <dl_javascript@nhnent.com>
  * @license MIT
  */
@@ -330,7 +330,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	     * Save document height or return height
 	     * @param {number} [height] The height value to save _height feild
 	     * @returns {number} Current height
-	     * @ignore
 	     */
 	    height: function(height) {
 	        var result = false;
