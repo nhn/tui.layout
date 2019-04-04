@@ -1,7 +1,7 @@
 /*!
  * tui-layout.js
- * @version 2.1.2
- * @author NHNEnt FE Development Lab <dl_javascript@nhnent.com>
+ * @version 2.1.3
+ * @author NHN FE Development Lab <dl_javascript@nhn.com>
  * @license MIT
  */
 (function webpackUniversalModuleDefinition(root, factory) {
@@ -62,7 +62,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	/**
 	 * @fileoverview Layout component
-	 * @author NHN Ent. FE dev Lab <dl_javascript@nhnent.com>
+	 * @author NHN. FE dev Lab <dl_javascript@nhn.com>
 	 */
 
 	'use strict';
@@ -545,7 +545,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	/**
 	 * @fileoverview The static values
-	 * @author NHN Ent. FE dev team.<dl_javascript@nhnent.com>
+	 * @author NHN. FE dev team.<dl_javascript@nhn.com>
 	 */
 
 	'use strict';
@@ -576,7 +576,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	/**
 	 * @fileoverview layout group. group include item.
-	 * @author NHN Ent. FE dev Lab <dl_javascript@nhnent.com>
+	 * @author NHN. FE dev Lab <dl_javascript@nhn.com>
 	 */
 
 	'use strict';
@@ -757,7 +757,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	/**
 	 * @fileoverview layout item. contain original items.
-	 * @author NHN Ent. FE dev Lab <dl_javascript@nhnent.com>
+	 * @author NHN. FE dev Lab <dl_javascript@nhn.com>
 	 */
 
 	'use strict';
@@ -969,7 +969,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	/**
 	 * @fileoverview Layout helper object. Guide mouse move-statement to know what is dragged well.
-	 * @author NHN Ent. FE dev Lab <dl_javascript@nhnent.com>
+	 * @author NHN. FE dev Lab <dl_javascript@nhn.com>
 	 */
 
 	'use strict';
