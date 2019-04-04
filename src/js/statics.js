@@ -1,6 +1,6 @@
 /**
  * @fileoverview The static values
- * @author NHN Ent. FE dev team.<dl_javascript@nhnent.com>
+ * @author NHN. FE dev team.<dl_javascript@nhn.com>
  */
 
 'use strict';
