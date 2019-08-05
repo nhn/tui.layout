@@ -1,11 +1,11 @@
 # TOAST UI Component : Layout
 > Component that arranges and moves elements by group.
 
-[![GitHub release](https://img.shields.io/github/release/nhnent/tui.layout.svg)](https://github.com/nhnent/tui.layout/releases/latest)
+[![GitHub release](https://img.shields.io/github/release/nhn/tui.layout.svg)](https://github.com/nhn/tui.layout/releases/latest)
 [![npm](https://img.shields.io/npm/v/tui-layout.svg)](https://www.npmjs.com/package/tui-layout)
-[![GitHub license](https://img.shields.io/github/license/nhnent/tui.layout.svg)](https://github.com/nhnent/tui.layout/blob/production/LICENSE)
-[![PRs welcome](https://img.shields.io/badge/PRs-welcome-ff69b4.svg)](https://github.com/nhnent/tui.project-name/labels/help%20wanted)
-[![code with hearth by NHN](https://img.shields.io/badge/%3C%2F%3E%20with%20%E2%99%A5%20by-NHN-ff1414.svg)](https://github.com/nhnent)
+[![GitHub license](https://img.shields.io/github/license/nhn/tui.layout.svg)](https://github.com/nhn/tui.layout/blob/production/LICENSE)
+[![PRs welcome](https://img.shields.io/badge/PRs-welcome-ff69b4.svg)](https://github.com/nhn/tui.project-name/labels/help%20wanted)
+[![code with hearth by NHN](https://img.shields.io/badge/%3C%2F%3E%20with%20%E2%99%A5%20by-NHN-ff1414.svg)](https://github.com/nhn)
 
 
 ## 🚩 Table of Contents
@@ -58,7 +58,7 @@ var instance = new Layout(container, options);
 
 
 ## 🐾 Examples
-* [Basic](https://nhnent.github.io/tui.layout/latest/tutorial-example01-basic) : Example of using default options.
+* [Basic](https://nhn.github.io/tui.layout/latest/tutorial-example01-basic) : Example of using default options.
 
 
 ## 💾 Install
@@ -110,8 +110,8 @@ tui.layout/
 
 
 ### Download Source Files
-* [Download bundle files](https://github.com/nhnent/tui.layout/tree/production/dist)
-* [Download all sources for each version](https://github.com/nhnent/tui.layout/releases)
+* [Download bundle files](https://github.com/nhn/tui.layout/tree/production/dist)
+* [Download all sources for each version](https://github.com/nhn/tui.layout/releases)
 
 
 
@@ -121,7 +121,7 @@ tui.layout/
 ### HTML
 
 Add the container element with target elements to create the component.
-See [here](https://nhnent.github.io/tui.layout/latest/tutorial-example01-basic) for information about the added element.
+See [here](https://nhn.github.io/tui.layout/latest/tutorial-example01-basic) for information about the added element.
 
 ### JavaScript
 
@@ -142,7 +142,7 @@ var Layout = require('tui-layout'); /* CommonJS */
 import Layout from 'tui-layout'; /* ES6 */
 ```
 
-You can create an instance with [options](https://nhnent.github.io/tui.layout/latest/Layout).
+You can create an instance with [options](https://nhn.github.io/tui.layout/latest/Layout).
 
 ``` javascript
 var container = document.getElementById('layout');
@@ -196,25 +196,25 @@ For more information on PR's step, please see links of Contributing section.
 
 
 ## 📙 Documents
-* [Getting Started](https://github.com/nhnent/tui.layout/blob/production/docs/getting-started.md)
-* [Tutorials](https://github.com/nhnent/tui.layout/tree/production/docs)
-* [APIs](https://nhnent.github.io/tui.layout/latest)
+* [Getting Started](https://github.com/nhn/tui.layout/blob/production/docs/getting-started.md)
+* [Tutorials](https://github.com/nhn/tui.layout/tree/production/docs)
+* [APIs](https://nhn.github.io/tui.layout/latest)
 
-You can also see the older versions of API page on the [releases page](https://github.com/nhnent/tui.layout/releases).
+You can also see the older versions of API page on the [releases page](https://github.com/nhn/tui.layout/releases).
 
 
 ## 💬 Contributing
-* [Code of Conduct](https://github.com/nhnent/tui.layout/blob/production/CODE_OF_CONDUCT.md)
-* [Contributing guideline](https://github.com/nhnent/tui.layout/blob/production/CONTRIBUTING.md)
-* [Issue guideline](https://github.com/nhnent/tui.layout/blob/production/docs/ISSUE_TEMPLATE.md)
-* [Commit convention](https://github.com/nhnent/tui.layout/blob/production/docs/COMMIT_MESSAGE_CONVENTION.md)
+* [Code of Conduct](https://github.com/nhn/tui.layout/blob/production/CODE_OF_CONDUCT.md)
+* [Contributing guideline](https://github.com/nhn/tui.layout/blob/production/CONTRIBUTING.md)
+* [Issue guideline](https://github.com/nhn/tui.layout/blob/production/docs/ISSUE_TEMPLATE.md)
+* [Commit convention](https://github.com/nhn/tui.layout/blob/production/docs/COMMIT_MESSAGE_CONVENTION.md)
 
 
 ## 🔩 Dependency
-* [tui-code-snippet](https://github.com/nhnent/tui.code-snippet) >=1.5.0
+* [tui-code-snippet](https://github.com/nhn/tui.code-snippet) >=1.5.0
 * [jquery](https://jquery.com/) >= 1.11.0
 
 
 ## 📜 License
 
-This software is licensed under the [MIT](https://github.com/nhnent/tui.layout/blob/production/LICENSE) © [NHN](https://github.com/nhnent).
+This software is licensed under the [MIT](https://github.com/nhn/tui.layout/blob/production/LICENSE) © [NHN](https://github.com/nhn).
