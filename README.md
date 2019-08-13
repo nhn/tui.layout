@@ -46,7 +46,7 @@ var options = {
 var instance = new Layout(container, options);
 ```
 
- Or, include [`tui-code-snippet`](https://github.com/nhn/tui.code-snippet)(**v1.5.0** or **later**) and then immediately write the options as follows:
+Or, include [`tui-code-snippet`](https://github.com/nhn/tui.code-snippet)(**v1.5.0** or **later**) and then immediately write the options as follows:
 
 ```js
 tui.usageStatistics = false;
