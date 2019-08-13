@@ -1,6 +1,6 @@
 'use strict';
 
-var $ = require('jquery');
+var domUtil = require('tui-dom');
 
 var Guide = require('../src/js/guide');
 
@@ -19,14 +19,15 @@ describe('view drag', function() {
             y: 200
         });
 
-        expect(drag.$element.css('left')).toBe('100px');
-        expect(drag.$element.css('top')).toBe('200px');
+        expect(drag.element.style.left).toBe('100px');
+        expect(drag.element.style.top).toBe('200px');
     });
 
     it('set Content', function() {
-        var $content = $('<div class="content"></div>');
-        drag.setContent($content);
-        expect(drag.$element.children().first().hasClass('content')).toBe(true);
+        var content = document.createElement('div');
+        domUtil.addClass(content, 'content');
+        drag.setContent(content);
+        expect(domUtil.hasClass(drag.element.firstChild, 'content')).toBe(true);
     });
 
     it('show with isDisable', function() {
@@ -34,10 +35,10 @@ describe('view drag', function() {
         drag.hide();
         drag.disable();
         drag.show();
-        status1 = drag.$element[0].style.display;
+        status1 = drag.element.style.display;
         drag.enable();
         drag.show();
-        status2 = drag.$element[0].style.display;
+        status2 = drag.element.style.display;
         expect(status1).toBe('none');
         expect(status2).not.toBe('none');
     });
@@ -48,7 +49,7 @@ describe('view drag', function() {
             y: 200
         });
 
-        expect(drag.$element.css('left')).toBe('100px');
-        expect(drag.$element.css('top')).toBe('200px');
+        expect(drag.element.style.left).toBe('100px');
+        expect(drag.element.style.top).toBe('200px');
     });
 });

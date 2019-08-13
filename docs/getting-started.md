@@ -1,10 +1,12 @@
-### Load all required files
-All of the required files should be loaded first.
+### Load dependency files
+* Script - [tui-code-snippet](https://github.com/nhn/tui.code-snippet) 1.5.0 or later
+* Script - [tui-dom](https://github.com/nhn/tui.dom) 3.0.0 or later
+    > If your project should support IE8, please use `tui-dom.js`, not `tui-dom.min.js`.
 
 ```html
 ...
-<script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="tui-code-snippet.js"></script>
+<script type="text/javascript" src="tui-dom.js"></script>
 <script type="text/javascript" src="tui-layout.js"></script>
 ...
 ```

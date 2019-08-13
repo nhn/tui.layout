@@ -5,7 +5,11 @@ var Item = require('../src/js/item');
 describe('item set', function() {
     var item, item2, item3;
 
+    jasmine.getFixtures().fixturesPath = 'base';
+
     beforeEach(function() {
+        loadFixtures('test/fixtures/item.html');
+
         item = new Item({
             title: 'title1',
             id: 'id1',
@@ -34,32 +38,32 @@ describe('item set', function() {
 
     it('item defined', function() {
         expect(item).toBeDefined();
-        expect(item.$element).toBeDefined();
+        expect(item.element).toBeDefined();
     });
 
     it('item make title, if options include title and useDrag', function() {
-        expect(item.$titleElement).toBeDefined();
-        expect(item.$toggleButton).toBeDefined();
+        expect(item.titleElement).toBeDefined();
+        expect(item.toggleButton).toBeDefined();
     });
 
     it('make option isOpen item, item display block', function() {
-        expect(item.$content.css('display')).toBe('none');
-        expect(item2.$content.css('display')).not.toBe('none');
+        expect(item.content.style.display).toBe('none');
+        expect(item2.content.style.display).not.toBe('none');
     });
 
     it('toggle is working none -> block', function() {
         item.toggle();
-        expect(item.$content.css('display')).not.toBe('none');
+        expect(item.content.style.display).not.toBe('none');
     });
 
     it('toggle is working(2) block -> none', function() {
         item2.toggle();
-        expect(item2.$content.css('display')).toBe('none');
+        expect(item2.content.style.display).toBe('none');
     });
 
     it('item3 title is fixed', function() {
         item3.hideTitle();
         // event run title Off still title is on
-        expect(item3.$titleElement.css('display')).toBe('block');
+        expect(item3.titleElement.style.display).toBe('block');
     });
 });

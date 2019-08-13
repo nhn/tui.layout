@@ -1,6 +1,5 @@
 'use strict';
 
-var $ = require('jquery');
 var snippet = require('tui-code-snippet');
 
 var Layout = require('../src/js/layout');
@@ -12,7 +11,7 @@ describe('layout', function() {
         ratio: '10',
         items: [{
             id: 'item-lifestyle',
-            contentId: 'lifestyle',
+            contentId: 'lifeStyle',
             title: 'Sports',
             isDraggable: true
         },
@@ -41,7 +40,7 @@ describe('layout', function() {
         },
         {
             id: 'item-todolist', // 변경가능
-            contentId: 'todolist',
+            contentId: 'todoList',
             title: 'TodoList Seciton',
             isClose: false,
             isDraggable: true
@@ -71,10 +70,7 @@ describe('layout', function() {
     beforeEach(function() {
         loadFixtures('test/fixtures/layout.html');
         loadStyleFixtures('test/fixtures/layout.css');
-    });
-
-    beforeEach(function() {
-        layout1 = new Layout($('#layout1'), {
+        layout1 = new Layout('layout1', {
             grouplist: groupList1
         });
     });
@@ -99,41 +95,41 @@ describe('layout', function() {
     it('getGroup with element', function() {
         var origin = layout1.groups.g1;
         var group = layout1._getGroup('g1');
-        var $groupEl = group.$element;
-        var $itemEl = group.list[0].$element;
+        var groupEl = group.element;
+        var itemEl = group.list[0].element;
         expect(group).toBe(origin);
-        expect(layout1._getGroup($groupEl)).toBe(origin);
-        expect(layout1._getGroup($itemEl)).toBe(origin);
+        expect(layout1._getGroup(groupEl)).toBe(origin);
+        expect(layout1._getGroup(itemEl)).toBe(origin);
     });
 
     it('setGuide', function() {
         var group = layout1.groups.g1;
-        var target = group.list[0].$element.find('.move-button')[0];
+        var target = group.list[0].element.querySelector('.move-button');
         var left, top;
 
         layout1._setGuide(target, 300, 100);
-        left = parseInt(layout1._guide.$element.css('left'), 10);
-        top = parseInt(layout1._guide.$element.css('top'), 10);
+        left = parseInt(layout1._guide.element.style.left, 10);
+        top = parseInt(layout1._guide.element.style.top, 10);
         expect(left).toBe(310);
         expect(top).toBe(110);
     });
 
     it('unlockTemp', function() {
-        var $item = layout1.groups.g1.list[0].$element;
+        var item = layout1.groups.g1.list[0].element;
         var opacity;
 
-        layout1.$temp = $item;
+        layout1.temp = item;
         layout1._lockTemp();
-        opacity = parseFloat($item.css('opacity')).toFixed(1);
+        opacity = parseFloat(item.style.opacity).toFixed(1);
         expect(opacity).toBe('0.2');
         layout1._unlockTemp();
-        opacity = parseFloat($item.css('opacity')).toFixed(1);
+        opacity = parseFloat(item.style.opacity).toFixed(1);
         expect(opacity).toBe('1.0');
     });
 
-    it('_onMouseMove', function() {
-        var $item = layout1.groups.g1.list[0].$element;
-        var target = $item[0];
+    it('_onMousemove', function() {
+        var item = layout1.groups.g1.list[0].element;
+        var target = item;
         var e = {
             target: target,
             clientX: 100,
@@ -141,30 +137,31 @@ describe('layout', function() {
         };
         var left, top;
 
-        layout1.$temp = $item;
+        layout1.temp = item;
 
-        layout1._onMouseMove(e);
-        left = parseInt(layout1._guide.$element.css('left'), 10);
-        top = parseInt(layout1._guide.$element.css('top'), 10);
+        layout1._onMousemove(e);
+        left = parseInt(layout1._guide.element.style.left, 10);
+        top = parseInt(layout1._guide.element.style.top, 10);
         expect(left).toBe(110);
         expect(top).toBe(60);
     });
 
-    xit('_detectMove', function(done) { // @todo isValid test?
+    it('_detectMove', function(done) {
         var group = layout1.groups.g0;
         var item = layout1.groups.g0.list[0];
         var pos = {
             x: 100,
             y: 250
         };
-        var $target;
+        var target;
 
-        $target = layout1._getTarget(item, pos, group);
-        expect($target.way).toBe('before');
+        target = layout1._getTarget(item, pos, group);
+        expect(target.way).toBe('before');
         setTimeout(function() {
             done();
         }, 1000);
     });
+
     describe('usageStatistics', function() {
         beforeEach(function() {
             spyOn(snippet, 'sendHostname');
@@ -172,14 +169,14 @@ describe('layout', function() {
         });
 
         it('should send hostname by default', function() {
-            this.layout = new Layout($('#layout1'), {
+            this.layout = new Layout('layout1', {
                 grouplist: groupList1
             });
 
             expect(snippet.sendHostname).toHaveBeenCalled();
         });
         it('should not send hostname on usageStatistics option false', function() {
-            this.layout = new Layout($('#layout1'), {
+            this.layout = new Layout('layout1', {
                 grouplist: groupList1,
                 usageStatistics: false
             });

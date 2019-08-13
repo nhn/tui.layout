@@ -5,8 +5,8 @@
 
 'use strict';
 
-var $ = require('jquery');
 var snippet = require('tui-code-snippet');
+var domUtil = require('tui-dom');
 
 var statics = require('./statics');
 var Group = require('./group');
@@ -15,7 +15,7 @@ var Guide = require('./guide');
 /**
  * Layout class make layout element and include groups, control item move and set events.
  * @class Layout
- * @param {jQuery|HTMLElement|string} container - Wrapper element or id selector
+ * @param {HTMLElement|string} container - Wrapper element or id selector
  * @param {object} options
  *     @param {array} options.grouplist - The list of group options.
  *         @param {string} options.grouplist.id - The group id
@@ -80,12 +80,11 @@ var Layout = snippet.defineClass(/** @lends Layout.prototype */ {
 
         /**
          * Container element
-         * @type {jQuery}
+         * @type {HTMLElement}
          * @private
          */
-        this.$element = null;
+        this.element = snippet.isHTMLNode(container) ? container : document.querySelector('#' + container);
 
-        this._initContainer(container);
         this._makeGroup(options.grouplist);
         this._makeGuide(options.guideHTML);
         this._setEvents();
@@ -96,47 +95,27 @@ var Layout = snippet.defineClass(/** @lends Layout.prototype */ {
     },
 
     /**
-     * Initialize container
-     * @param {jQuery|Element|string} container - Wrapper element or id selector
-     * @private
-     */
-    _initContainer: function(container) {
-        if (snippet.isString(container)) {
-            this.$element = $('#' + container);
-        } else {
-            this.$element = $(container);
-        }
-    },
-
-    /**
      * Make group
      * @param {Array} grouplist The list of group options
      * @private
      */
     _makeGroup: function(grouplist) {
-        var group;
-
         this.groups = {};
 
         snippet.forEach(grouplist, function(item) {
-            group = this.groups[item.id] = new Group(item);
-            this.$element.append(group.$element);
+            this.groups[item.id] = new Group(this.element, item);
         }, this);
     },
 
     /**
      * Get group item
-     * @param {(string|object)} group The item ID or information to find group
+     * @param {string|object} group The item ID or information to find group
      * @returns {*}
      * @private
      */
     _getGroup: function(group) {
         if (snippet.isObject(group)) {
-            if (group.attr('data-group')) {
-                group = group.attr('data-group');
-            } else {
-                group = group.parent().attr('data-group');
-            }
+            group = group.getAttribute('data-group') || group.parentElement.getAttribute('data-group');
         }
 
         return this.groups[group];
@@ -158,10 +137,7 @@ var Layout = snippet.defineClass(/** @lends Layout.prototype */ {
      * @private
      */
     _setEvents: function() {
-        this.onMouseDown = $.proxy(this._onMouseDown, this);
-        this.onMouseMove = $.proxy(this._onMouseMove, this);
-        this.onMouseUp = $.proxy(this._onMouseUp, this);
-        $('.drag-item-move').on('mousedown', this.onMouseDown);
+        domUtil.on(this.element, 'mousedown', this._onMousedown, this);
     },
 
     /**
@@ -169,33 +145,36 @@ var Layout = snippet.defineClass(/** @lends Layout.prototype */ {
      * @param {MouseEvent} e - Event object
      * @private
      */
-    _onMouseDown: function(e) {
-        var $doc = $(document);
-        this.height($doc.height());
-        this._setGuide(e.target, e.clientX, e.clientY);
-        $doc.on('mousemove', this.onMouseMove);
-        $doc.on('mouseup', this.onMouseUp);
+    _onMousedown: function(e) {
+        this.target = e.target || e.srcElement;
+
+        if (domUtil.hasClass(this.target, 'drag-item-move')) {
+            this.height(document.documentElement.scrollHeight);
+            this._setGuide(this.target, e.clientX, e.clientY);
+
+            domUtil.on(document, 'mousemove', this._onMousemove, this);
+            domUtil.on(document, 'mouseup', this._onMouseup, this);
+        }
     },
 
     /**
      * Set guide
-     * @param {object} target The target to set guide's move-statement element
+     * @param {HTMLElement} target The target to set guide's move-statement element
      * @param {number} pointX The position x to set guide element left.
      * @param {number} pointY The position y to set guide element top.
      * @private
      */
     _setGuide: function(target, pointX, pointY) {
-        var $doc = $(document);
         var initPos = {
-            x: pointX + $doc.scrollLeft() + 10,
-            y: pointY + $doc.scrollTop() + 10
+            x: pointX + document.documentElement.scrollLeft + 10,
+            y: pointY + document.documentElement.scrollTop + 10
         };
-        var itemId = $(target).attr('data-item');
-        var $moveEl = $('#' + itemId);
+        var itemId = target.getAttribute('data-item');
+        var moveEl = document.querySelector('#' + itemId);
 
-        this._guide.ready(initPos, $moveEl);
-        this._guide.setMoveElement($moveEl);
-        this.$temp = $moveEl;
+        this._guide.ready(initPos, moveEl);
+        this._guide.setMoveElement(moveEl);
+        this.temp = moveEl;
         this._lockTemp();
     },
 
@@ -204,11 +183,11 @@ var Layout = snippet.defineClass(/** @lends Layout.prototype */ {
      * @private
      */
     _lockTemp: function() {
-        var group = this._getGroup(this.$temp);
-        var item = group.list[this.$temp.attr('data-index')];
+        var group = this._getGroup(this.temp);
+        var item = group.list[this.temp.getAttribute('data-index')];
 
-        this.$temp.css('opacity', '0.2');
-        this.$temp.find('#' + item.contentId).css('visibility', 'hidden');
+        domUtil.css(this.temp, 'opacity', '0.2');
+        domUtil.css(this.temp.querySelector('#' + item.contentId), 'visibility', 'hidden');
     },
 
     /**
@@ -216,26 +195,29 @@ var Layout = snippet.defineClass(/** @lends Layout.prototype */ {
      * @private
      */
     _unlockTemp: function() {
-        var group = this._getGroup(this.$temp);
-        var item = group.list[this.$temp.attr('data-index')];
+        var group = this._getGroup(this.temp);
+        var item = group.list[this.temp.getAttribute('data-index')];
 
-        this.$temp.css('opacity', '1');
-        this.$temp.find('#' + item.contentId).css('visibility', 'visible');
+        domUtil.css(this.temp, 'opacity', '1');
+        domUtil.css(this.temp.querySelector('#' + item.contentId), 'visibility', 'visible');
     },
 
     /**
      * Mouse move handler
-     * @param {JqueryEvent} e JqueryEvent object
+     * @param {MouseEvent} e Event object
      * @private
      */
-    _onMouseMove: function(e) {
-        var parent, $doc, pointX, pointY, group;
+    _onMousemove: function(e) {
+        var target = e.target || e.srcElement;
+        var parent, pointX, pointY, group;
 
-        parent = $(e.target).parent();
-        $doc = $(document);
-        pointX = e.clientX + $doc.scrollLeft();
-        pointY = e.clientY + $doc.scrollTop();
-        group = parent.attr('data-group');
+        parent = target.parentElement || document;
+        pointX = e.clientX + document.documentElement.scrollLeft;
+        pointY = e.clientY + document.documentElement.scrollTop;
+
+        if (parent !== document) {
+            group = parent.getAttribute('data-group');
+        }
 
         this._setScrollState(pointX, pointY);
         this._moveGuide(pointX, pointY);
@@ -252,15 +234,13 @@ var Layout = snippet.defineClass(/** @lends Layout.prototype */ {
      * @private
      */
     _setScrollState: function(x, y) {
-        var $doc = $(document);
-        var $win = $(window);
         var docHeight = this.height();
-        var height = $win.height();
-        var top = $doc.scrollTop();
+        var height = document.body.offsetHeight;
+        var top = document.documentElement.scrollTop;
         var limit = docHeight - height;
 
         if (height + top < y) {
-            $doc.scrollTop(Math.min(top + (y - height + top), limit));
+            document.documentElement.scrollTop = Math.min(top + (y - height + top), limit);
         }
     },
 
@@ -289,28 +269,27 @@ var Layout = snippet.defineClass(/** @lends Layout.prototype */ {
      * @private
      */
     _detectMove: function(item, pointX, pointY) {
-        var $doc = $(document);
         var groupInst = this._getGroup(item);
-        var top = $doc.scrollTop();
-        var left = $doc.scrollLeft();
-        var $before;
+        var top = document.documentElement.scrollTop;
+        var left = document.documentElement.scrollLeft;
+        var before;
 
         if (snippet.isEmpty(groupInst.list)) {
-            item.append(this.$temp);
-            this.height($doc.height());
-            this.$temp.way = 'after';
-            this.$temp.index = 0;
+            item.append(this.temp);
+            this.height(document.documentElement.scrollHeight);
+            this.temp.way = 'after';
+            this.temp.index = 0;
         } else {
-            $before = this._detectTargetByPosition({
+            before = this._detectTargetByPosition({
                 x: pointX + left,
                 y: pointY + top
             }, groupInst);
 
-            if ($before && $before.way) {
-                $before[$before.way](this.$temp);
-                this.height($doc.height());
-                this.$temp.way = $before.way;
-                this.$temp.index = $before.attr('data-index');
+            if (before && before.way) {
+                before[before.way](this.temp);
+                this.height(document.documentElement.scrollHeight);
+                this.temp.way = before.way;
+                this.temp.index = before.getAttribute('data-index');
             }
         }
     },
@@ -323,8 +302,8 @@ var Layout = snippet.defineClass(/** @lends Layout.prototype */ {
      */
     _moveGuide: function(x, y) {
         this._guide.moveTo({
-            x: x + 10 + 'px',
-            y: y + 10 + 'px'
+            x: x + 10,
+            y: y + 10
         });
     },
 
@@ -353,25 +332,24 @@ var Layout = snippet.defineClass(/** @lends Layout.prototype */ {
      * @param {object} item The item to compare with pos
      * @param {object} pos The pos to figure whether target or not
      * @param {object} group The group has item
-     * @returns {jQuery} Target element
+     * @returns {HTMLElement} Target element
      * @private
      */
     _getTarget: function(item, pos, group) {
-        var bound = item.$element.offset();
+        var bound = domUtil.getRect(item.element);
         var bottom = this._getBottom(item, group);
-        var height = item.$element.height();
-        var top = $(document).scrollTop() + bound.top;
-        var $target;
+        var top = document.documentElement.scrollTop + bound.top;
+        var target;
 
-        if (pos.y > top && pos.y <= top + (height / 2)) {
-            $target = item.$element;
-            $target.way = 'before';
-        } else if (pos.y > top + (height / 2) && pos.y < bottom) {
-            $target = item.$element;
-            $target.way = 'after';
+        if (pos.y > top && pos.y <= top + (bound.height / 2)) {
+            target = item.element;
+            target.way = 'before';
+        } else if (pos.y > top + (bound.height / 2) && pos.y < bottom) {
+            target = item.element;
+            target.way = 'after';
         }
 
-        return $target;
+        return target;
     },
 
     /**
@@ -381,7 +359,7 @@ var Layout = snippet.defineClass(/** @lends Layout.prototype */ {
      * @private
      */
     _isValidItem: function(item) {
-        return (item.$element[0] !== this.$temp[0]);
+        return (item.element !== this.temp);
     },
 
     /**
@@ -393,29 +371,29 @@ var Layout = snippet.defineClass(/** @lends Layout.prototype */ {
      * @private
      */
     _getBottom: function(item, group) {
-        var $next = item.$element.next();
-        var $doc = $(document);
-        var gbound = group.$element.offset();
-        var limit = $doc.scrollTop() + gbound.top + group.$element.height();
+        var next = item.element.nextSibling;
+        var gbound = domUtil.getRect(group.element);
+        var scrollTop = document.documentElement.scrollTop;
+        var limit = scrollTop + gbound.top + gbound.height;
         var bottom;
 
-        if ($next.hasClass(statics.DIMMED_LAYER_CLASS)) {
+        if (domUtil.hasClass(next, statics.DIMMED_LAYER_CLASS)) {
             bottom = limit;
         } else {
-            bottom = $doc.scrollTop() + $next.offset().top;
+            bottom = scrollTop + next.offsetTop;
         }
 
         return bottom;
     },
 
     /**
-     * Get add index by $temp, $temp.way
+     * Get add index by temp, temp.way
      * @returns {Number}
      * @private
      */
     _getAddIndex: function() {
-        var temp = this.$temp,
-            index = parseInt(temp.index, 10);
+        var temp = this.temp,
+            index = Number(temp.index);
         if (temp.way === 'after') {
             index += 1;
         }
@@ -427,16 +405,15 @@ var Layout = snippet.defineClass(/** @lends Layout.prototype */ {
      * Mouse up handler
      * @private
      */
-    _onMouseUp: function() {
+    _onMouseup: function() {
         var drag = this._guide;
-        var $doc = $(document);
 
         this._update();
         this._unlockTemp();
         drag.finish();
 
-        $doc.off('mousemove', this.onMouseMove);
-        $doc.off('mouseup', this.onMouseUp);
+        domUtil.off(document, 'mousemove', this._onMousemove);
+        domUtil.off(document, 'mouseup', this._onMouseup);
     },
 
     /**
@@ -444,16 +421,14 @@ var Layout = snippet.defineClass(/** @lends Layout.prototype */ {
      * @private
      */
     _update: function() {
-        var temp = this.$temp,
-            oldGroup = this._getGroup(temp.attr('data-groupinfo')),
-            targetGroup = this._getGroup(temp.parent()),
-            removeIndex = parseInt(temp.attr('data-index'), 10),
+        var temp = this.temp,
+            oldGroup = this._getGroup(temp.getAttribute('data-groupinfo')),
+            targetGroup = this._getGroup(temp.parentElement),
+            removeIndex = Number(temp.getAttribute('data-index')),
             addIndex = this._getAddIndex(),
             item = oldGroup.list[removeIndex];
 
         if (!isNaN(addIndex)) {
-            oldGroup.storePool();
-            targetGroup.storePool();
             oldGroup.remove(removeIndex);
             targetGroup.add(item, addIndex);
             targetGroup.render();
