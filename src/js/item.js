@@ -5,10 +5,13 @@
 
 'use strict';
 
-var $ = require('jquery');
 var snippet = require('tui-code-snippet');
+var domUtil = require('tui-dom');
+var util = require('./util');
 
 var statics = require('./statics');
+
+var SELECTOR_GROUP = '.gp_';
 
 /**
  * Item class is manage item state and title.
@@ -55,8 +58,8 @@ var Item = snippet.defineClass(/** @lends Item.prototype */ {
             this.open();
         }
 
-        this.$content.append($('#' + this.contentId));
-        this.$element.attr('id', 'item_id_' + this.contentId);
+        this.content.appendChild(document.getElementById(this.contentId));
+        this.element.setAttribute('id', 'item_id_' + this.contentId);
         this._setEvents();
     },
     /* eslint-enable complexity */
@@ -80,9 +83,11 @@ var Item = snippet.defineClass(/** @lends Item.prototype */ {
                 wrapper: wrapperClass
             });
 
-        this.$element = $(elementHTML);
-        this.$element.css('position', 'relative');
-        this.$content = this.$element.find('.' + wrapperClass);
+        var group = document.querySelector(SELECTOR_GROUP + this.groupInfo);
+        group.insertAdjacentHTML('beforeend', elementHTML);
+        this.element = group.lastChild;
+        domUtil.css(this.element, 'position', 'relative');
+        this.content = this.element.querySelector('.' + wrapperClass);
 
         this.isDraggable = !!this.isDraggable;
         this._makeTitle();
@@ -93,14 +98,14 @@ var Item = snippet.defineClass(/** @lends Item.prototype */ {
      * @private
      */
     _makeTitle: function() {
-        this.$titleElement = $(this.titleHTML);
-        this.$titleElement.html(this.title);
+        this.element.insertAdjacentHTML('afterbegin', this.titleHTML);
+        this.titleElement = this.element.firstChild;
+        this.titleElement.innerHTML = this.title;
 
         if (this.isDraggable) {
             this._makeDragButton(this.moveButtonHTML);
         }
 
-        this.$content.before(this.$titleElement);
         this._makeToggleButton(this.toggleButtonHTML);
     },
 
@@ -119,7 +124,6 @@ var Item = snippet.defineClass(/** @lends Item.prototype */ {
 
         return html;
     },
-    /* eslint-enable no-useless-escape */
 
     /**
      * Make drag button in title
@@ -130,7 +134,7 @@ var Item = snippet.defineClass(/** @lends Item.prototype */ {
         html = this._getHtml(html, {
             'item-id': 'item_id_' + this.contentId
         });
-        this.$titleElement.append($(html));
+        this.titleElement.insertAdjacentHTML('beforeend', html);
     },
 
     /**
@@ -139,24 +143,24 @@ var Item = snippet.defineClass(/** @lends Item.prototype */ {
      * @private
      */
     _makeToggleButton: function(toggleHTML) {
-        this.$toggleButton = $(toggleHTML);
-        this.$titleElement.append(this.$toggleButton);
+        this.titleElement.insertAdjacentHTML('beforeend', toggleHTML);
+        this.toggleButton = this.titleElement.lastChild;
     },
 
     /**
      * Close item element
      */
     close: function() {
-        this.$toggleButton.addClass('open');
-        this.$content.hide();
+        domUtil.addClass(this.toggleButton, 'open');
+        util.hide(this.content);
     },
 
     /**
      * Open item element
      */
     open: function() {
-        this.$toggleButton.removeClass('open');
-        this.$content.show();
+        domUtil.removeClass(this.toggleButton, 'open');
+        util.show(this.content);
     },
 
     /**
@@ -171,7 +175,7 @@ var Item = snippet.defineClass(/** @lends Item.prototype */ {
      * Show title
      */
     showTitle: function() {
-        this.$titleElement.show();
+        util.show(this.titleElement);
     },
 
     /**
@@ -179,7 +183,7 @@ var Item = snippet.defineClass(/** @lends Item.prototype */ {
      */
     hideTitle: function() {
         if (!this.isTitleFix) {
-            this.$titleElement.hide();
+            util.hide(this.titleElement);
         }
     },
 
@@ -187,7 +191,7 @@ var Item = snippet.defineClass(/** @lends Item.prototype */ {
      * Toggle open/close
      */
     toggle: function() {
-        if (this.$toggleButton.hasClass('open')) {
+        if (domUtil.hasClass(this.toggleButton, 'open')) {
             this.open();
         } else {
             this.close();
@@ -195,11 +199,11 @@ var Item = snippet.defineClass(/** @lends Item.prototype */ {
     },
 
     /**
-     * Set all event about item
+     * Set all events about item
      * @private
      */
     _setEvents: function() {
-        this.$toggleButton.on('click', $.proxy(this.toggle, this));
+        domUtil.on(this.toggleButton, 'click', this.toggle, this);
     }
 });
 

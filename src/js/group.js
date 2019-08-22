@@ -5,29 +5,26 @@
 
 'use strict';
 
-var $ = require('jquery');
 var snippet = require('tui-code-snippet');
+var domUtil = require('tui-dom');
+var util = require('./util');
 
 var statics = require('./statics');
 var Item = require('./item');
 
 /**
- * The group class make list of item and group element(jQueryObject).
+ * The group class make list of item and group element.
  * @class Group
+ * @param {HTMLElement} container container
  * @param {object} options - option
  *     @param {string} options.id
+ *     @param {number|string} [options.ratio] ratio
  *     @param {array} options.items array of items
  *     @param {string} [options.html] html of group element
- *     @param {(number|string)} [options.ratio] ratio
  * @ignore
  */
 var Group = snippet.defineClass(/** @lends Group.prototype */ {
-    /**
-     * Element pool
-     */
-    $pool: $('<div class="pool" style="display:none"></div>'),
-
-    init: function(options) {
+    init: function(container, options) {
         if (!options) {
             throw new Error(statics.ERROR.OPTIONS_NOT_DEFINED);
         }
@@ -35,25 +32,27 @@ var Group = snippet.defineClass(/** @lends Group.prototype */ {
         this.size = options.ratio + '%';
         this.id = options.id;
 
-        this._makeElement(options.html || statics.HTML.GROUP);
+        this._makeElement(container, options.html || statics.HTML.GROUP);
         this._makeItems(options.items);
-        this._appendDimmed();
+        this._makeDimmed();
 
         this.render();
     },
 
     /**
-     * Make group element(JqueryObject)
+     * Make group element
+     * @param {HTMLElement} container container
      * @param {string} html The html string to create the html element
      * @private
      */
-    _makeElement: function(html) {
+    _makeElement: function(container, html) {
         html = this._getHtml(html, {
             'group-id': this.id
         });
 
-        this.$element = $(html);
-        this.$element.css({
+        container.insertAdjacentHTML('beforeend', html);
+        this.element = container.lastChild;
+        domUtil.css(this.element, {
             'position': 'relative',
             'width': this.size
         });
@@ -97,8 +96,9 @@ var Group = snippet.defineClass(/** @lends Group.prototype */ {
      * @private
      */
     _makeDimmed: function() {
-        this.$dimmed = $('<div class="' + statics.DIMMED_LAYER_CLASS + '"></div>');
-        this.$dimmed.css({
+        this.element.insertAdjacentHTML('beforeend', '<div class="' + statics.DIMMED_LAYER_CLASS + '"></div>');
+        this.dimmed = this.element.lastChild;
+        domUtil.css(this.dimmed, {
             position: 'absolute',
             left: 0,
             top: 0,
@@ -109,22 +109,10 @@ var Group = snippet.defineClass(/** @lends Group.prototype */ {
     },
 
     /**
-     * Append dimmed element
-     * @private
-     */
-    _appendDimmed: function() {
-        if (!this.$dimmed) {
-            this._makeDimmed();
-        }
-        this.$element.append(this.$dimmed);
-    },
-
-    /**
      * Remove item by index
      * @param {number} index The index of the item to remove
      **/
     remove: function(index) {
-        this.storePool(this.list[index]);
         this.list.splice(index, 1);
     },
 
@@ -147,28 +135,12 @@ var Group = snippet.defineClass(/** @lends Group.prototype */ {
      */
     render: function() {
         snippet.forEach(this.list, function(item, index) {
-            this.$dimmed.before(item.$element);
+            this.element.insertBefore(item.element, this.dimmed);
             item.index = index;
-            item.$element.attr({
-                'data-index': index,
-                'data-groupinfo': this.id
-            });
+            item.element.setAttribute('data-index', index);
+            item.element.setAttribute('data-groupinfo', this.id);
         }, this);
-        this.$dimmed.hide();
-    },
-
-    /**
-     * Store items to pool
-     * @param {object} $element A JQuery element to store in the pool
-     */
-    storePool: function($element) {
-        if ($element) {
-            this.$pool.append($element);
-        } else {
-            snippet.forEach(this.list, function(item) {
-                this.$pool.append(item.$element);
-            }, this);
-        }
+        util.hide(this.dimmed);
     }
 });
 

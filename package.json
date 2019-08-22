@@ -11,8 +11,7 @@
     "bundle": "webpack && webpack -p",
     "serve": "webpack-dev-server --inline --hot -d",
     "serve:ie8": "webpack-dev-server -d",
-    "doc:dev": "tuidoc --dev",
-    "doc": "tuidoc"
+    "doc": "tuidoc && tuidoc --serv"
   },
   "description": "TOAST UI Component: Layout",
   "repository": {
@@ -40,7 +39,6 @@
     "karma-coverage": "^1.1.1",
     "karma-es5-shim": "^0.0.4",
     "karma-jasmine": "^1.0.2",
-    "karma-jasmine-jquery": "^0.1.1",
     "karma-jquery": "^0.2.2",
     "karma-junit-reporter": "^1.2.0",
     "karma-sourcemap-loader": "^0.3.7",
@@ -51,7 +49,7 @@
     "webpack-dev-server": "^1.11.0"
   },
   "dependencies": {
-    "jquery": "^1.11.0",
-    "tui-code-snippet": "^1.5.0"
+    "tui-code-snippet": "^1.5.0",
+    "tui-dom": "^3.0.0"
   }
 }

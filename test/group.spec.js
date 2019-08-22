@@ -1,52 +1,70 @@
 'use strict';
 
-var $ = require('jquery');
-
 var Group = require('../src/js/group');
+var testutil = require('./testutil');
 
 describe('group', function() {
     var group,
         group2,
         group3;
 
+    jasmine.getFixtures().fixturesPath = 'base';
+    jasmine.getStyleFixtures().fixturesPath = 'base';
+
     beforeEach(function() {
-        group = new Group({
-            ratio: '5',
+        var layout;
+
+        loadFixtures('test/fixtures/layout.html');
+        layout = document.getElementById('layout1');
+
+        group = new Group(layout, {
+            id: 'g0',
+            ratio: '4',
             items: [{
-                id: 'item1',
-                contentId: 'viewitem1',
-                title: 'title1'
-            }, {
-                id: 'item2',
-                contentId: 'viewitem2',
-                title: 'title2'
-            }, {
-                id: 'item3',
-                contentId: 'viewitem3',
-                title: 'title3'
-            }, {
-                id: 'item4',
-                contentId: 'viewitem3',
-                title: 'title4'
-            }],
-            id: 'groupA'
+                id: 'item-sports',
+                contentId: 'sports',
+                title: 'Life Style Seciton',
+                isClose: false,
+                isDraggable: true
+            },
+            {
+                id: 'item-calendar',
+                contentId: 'calendar',
+                title: 'Calendar Seciton',
+                isClose: false,
+                isDraggable: true
+            },
+            {
+                id: 'item-todolist',
+                contentId: 'todoList',
+                title: 'TodoList Seciton',
+                isClose: false,
+                isDraggable: true
+            }]
         });
-        group2 = new Group({
-            ratio: '10',
-            id: 'groupB'
+
+        group2 = new Group(layout, {
+            id: 'g1',
+            ratio: '10'
         });
-        group3 = new Group({
-            ratio: '5',
+
+        group3 = new Group(layout, {
+            id: 'g2',
+            ratio: '6',
             items: [{
-                id: 'item5',
-                contentId: 'viewitem5',
-                title: 'title5'
-            }, {
-                id: 'item6',
-                contentId: 'viewitem6',
-                title: 'title6'
-            }],
-            id: 'groupA'
+                id: 'item-weather',
+                contentId: 'weather',
+                title: 'Weather Seciton',
+                isClose: false,
+                isDraggable: true
+            },
+            {
+                id: 'item-news',
+                contentId: 'news',
+                title: 'News Seciton',
+                isClose: true,
+                isDraggable: true
+            }]
         });
     });
 
@@ -57,7 +75,7 @@ describe('group', function() {
     });
 
     it('group has list', function() {
-        expect(group.list.length).toBe(4);
+        expect(group.list.length).toBe(3);
         expect(group2.list.length).toBe(0);
         expect(group3.list.length).toBe(2);
     });
@@ -74,35 +92,28 @@ describe('group', function() {
         expect(group.list[0]).not.toBe(item1);
     });
 
-    it('storePool can store all element of group', function() {
-        var item1 = group.list[0];
-        expect($.contains(group.$element[0], item1.$element[0])).toBe(true);
-        group.storePool();
-        expect($.contains(group.$element[0], item1.$element[0])).toBe(false);
-    });
-
     it('after move render group', function() {
         var item1 = group.list[0];
         group.remove(0);
         group2.add(item1);
         group.render();
         group2.render();
-        expect($.contains(group2.$element[0], item1.$element[0])).toBe(true);
-        expect($.contains(group.$element[0], item1.$element[0])).toBe(false);
+        expect(testutil.contains(group2.element, item1.element)).toBe(true);
+        expect(testutil.contains(group.element, item1.element)).toBe(false);
     });
 
     it('group move to by index', function() {
         var item1 = group.list[2];
         group.remove(2);
         group3.add(item1, 1);
-        expect(group.list.length).toBe(3);
+        expect(group.list.length).toBe(2);
         expect(group3.list.length).toBe(3);
         expect(group3.list[1]).toBe(item1);
         group.render();
         group3.render();
-        expect($.contains(group3.$element[0], item1.$element[0])).toBe(true);
-        expect($.contains(group.$element[0], item1.$element[0])).toBe(false);
-        expect(item1.$element.attr('data-index')).toBe('1');
+        expect(testutil.contains(group3.element, item1.element)).toBe(true);
+        expect(testutil.contains(group.element, item1.element)).toBe(false);
+        expect(item1.element.getAttribute('data-index')).toBe('1');
     });
 
     it('if item move to other group, item groupInfo changed', function() {

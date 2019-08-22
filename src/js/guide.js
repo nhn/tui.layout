@@ -5,8 +5,9 @@
 
 'use strict';
 
-var $ = require('jquery');
 var snippet = require('tui-code-snippet');
+var domUtil = require('tui-dom');
+var util = require('./util');
 
 var statics = require('./statics');
 /**
@@ -19,35 +20,43 @@ var statics = require('./statics');
 var Guide = snippet.defineClass(/** @lends Guide.prototype */ {
     init: function(options) {
         options = options || {};
-        this.$element = $(options.guideHTML || statics.HTML.GUIDE);
-        this.$element.css('position', 'absolute');
-        this.$element.appendTo(document.body);
-        this.$dimElements = $('.' + statics.DIMMED_LAYER_CLASS);
+
+        document.body.insertAdjacentHTML('beforeend', options.guideHTML || statics.HTML.GUIDE);
+        this.element = document.body.lastChild;
+        domUtil.css(this.element, 'position', 'absolute');
+
+        this.dimElements = document.querySelectorAll('.' + statics.DIMMED_LAYER_CLASS);
+
         this.hide();
     },
 
     /**
      * Show each dimmed layer
      * @param {object} pos The position to initialize guide element
-     * @param {jQuerObject} $element The helper element
+     * @param {HTMLElement} element The helper element
      **/
-    ready: function(pos, $element) {
+    ready: function(pos, element) {
         this.setPos(pos);
-        this.$dimElements.show();
 
-        if ($element) {
-            this.setContent($element);
+        snippet.forEachArray(this.dimElements, function(dimElement) {
+            util.show(dimElement);
+        });
+
+        if (element) {
+            this.setContent(element);
         }
 
-        this.$element.show();
+        this.show();
     },
 
     /**
      * Hide each dimmed layer
      **/
     finish: function() {
-        this.$dimElements.hide();
-        this.$element.hide();
+        snippet.forEachArray(this.dimElements, function(dimElement) {
+            util.hide(dimElement);
+        });
+        this.hide();
     },
 
     /**
@@ -63,22 +72,24 @@ var Guide = snippet.defineClass(/** @lends Guide.prototype */ {
      * @param {object} pos  The position to move
      */
     setPos: function(pos) {
-        this.$element.css({
-            left: pos.x,
-            top: pos.y
+        domUtil.css(this.element, {
+            left: pos.x + 'px',
+            top: pos.y + 'px'
         });
     },
 
     /**
      * Set guide content
-     * @param {string} $content The content object to copy and append to guide element.
+     * @param {string} content The content object to copy and append to guide element.
      */
-    setContent: function($content) {
-        this.$element.empty();
-        this.$element.append($content.clone());
-        this.$element.css({
-            width: $content.width() + 'px',
-            height: $content.height() + 'px'
+    setContent: function(content) {
+        snippet.forEachArray(this.element.children, function(child) {
+            domUtil.removeElement(child);
+        });
+        this.element.appendChild(content.cloneNode(true));
+        domUtil.css(this.element, {
+            width: content.offsetWidth + 'px',
+            height: content.offsetHeight + 'px'
         });
     },
 
@@ -87,7 +98,7 @@ var Guide = snippet.defineClass(/** @lends Guide.prototype */ {
      */
     show: function() {
         if (!this.isDisable) {
-            this.$element.show();
+            util.show(this.element);
         }
     },
 
@@ -95,7 +106,7 @@ var Guide = snippet.defineClass(/** @lends Guide.prototype */ {
      * Hide element
      */
     hide: function() {
-        this.$element.hide();
+        util.hide(this.element);
     },
 
     /**
@@ -114,26 +125,10 @@ var Guide = snippet.defineClass(/** @lends Guide.prototype */ {
 
     /**
      * Set move target
-     * @param {object} $el The element is moving in layout.
+     * @param {object} el The element is moving in layout.
      */
-    setMoveElement: function($el) {
-        this.$moveElement = $el;
-    },
-
-    /**
-     * Get scoll left
-     * @returns {Number}
-     */
-    getScrollLeft: function() {
-        return (window.scrollX || $(window).scrollLeft());
-    },
-
-    /**
-     * Get scroll top
-     * @returns {Number}
-     */
-    getScrollTop: function() {
-        return (window.scrollY || $(window).scrollTop());
+    setMoveElement: function(el) {
+        this.moveElement = el;
     }
 });
 
