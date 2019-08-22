@@ -7,6 +7,7 @@
 
 var snippet = require('tui-code-snippet');
 var domUtil = require('tui-dom');
+var util = require('./util');
 
 var statics = require('./statics');
 /**
@@ -38,7 +39,7 @@ var Guide = snippet.defineClass(/** @lends Guide.prototype */ {
         this.setPos(pos);
 
         snippet.forEachArray(this.dimElements, function(dimElement) {
-            domUtil.css(dimElement, 'display', 'block');
+            util.show(dimElement);
         });
 
         if (element) {
@@ -53,7 +54,7 @@ var Guide = snippet.defineClass(/** @lends Guide.prototype */ {
      **/
     finish: function() {
         snippet.forEachArray(this.dimElements, function(dimElement) {
-            domUtil.css(dimElement, 'display', 'none');
+            util.hide(dimElement);
         });
         this.hide();
     },
@@ -97,7 +98,7 @@ var Guide = snippet.defineClass(/** @lends Guide.prototype */ {
      */
     show: function() {
         if (!this.isDisable) {
-            domUtil.css(this.element, 'display', 'block');
+            util.show(this.element);
         }
     },
 
@@ -105,7 +106,7 @@ var Guide = snippet.defineClass(/** @lends Guide.prototype */ {
      * Hide element
      */
     hide: function() {
-        domUtil.css(this.element, 'display', 'none');
+        util.hide(this.element);
     },
 
     /**

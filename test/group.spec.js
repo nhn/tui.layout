@@ -1,26 +1,12 @@
 'use strict';
 
 var Group = require('../src/js/group');
+var testutil = require('./testutil');
 
 describe('group', function() {
     var group,
         group2,
         group3;
-
-    var contains = function(container, contained) {
-        var result = false;
-        var parent = contained.parentElement;
-
-        while (parent) {
-            if (parent === container) {
-                result = true;
-                break;
-            }
-            parent = parent.parentElement;
-        }
-
-        return result;
-    };
 
     jasmine.getFixtures().fixturesPath = 'base';
     jasmine.getStyleFixtures().fixturesPath = 'base';
@@ -29,7 +15,7 @@ describe('group', function() {
         var layout;
 
         loadFixtures('test/fixtures/layout.html');
-        layout = document.querySelector('#layout1');
+        layout = document.getElementById('layout1');
 
         group = new Group(layout, {
             id: 'g0',
@@ -112,8 +98,8 @@ describe('group', function() {
         group2.add(item1);
         group.render();
         group2.render();
-        expect(contains(group2.element, item1.element)).toBe(true);
-        expect(contains(group.element, item1.element)).toBe(false);
+        expect(testutil.contains(group2.element, item1.element)).toBe(true);
+        expect(testutil.contains(group.element, item1.element)).toBe(false);
     });
 
     it('group move to by index', function() {
@@ -125,8 +111,8 @@ describe('group', function() {
         expect(group3.list[1]).toBe(item1);
         group.render();
         group3.render();
-        expect(contains(group3.element, item1.element)).toBe(true);
-        expect(contains(group.element, item1.element)).toBe(false);
+        expect(testutil.contains(group3.element, item1.element)).toBe(true);
+        expect(testutil.contains(group.element, item1.element)).toBe(false);
         expect(item1.element.getAttribute('data-index')).toBe('1');
     });
 

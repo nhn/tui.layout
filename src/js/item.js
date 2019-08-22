@@ -7,6 +7,7 @@
 
 var snippet = require('tui-code-snippet');
 var domUtil = require('tui-dom');
+var util = require('./util');
 
 var statics = require('./statics');
 
@@ -57,7 +58,7 @@ var Item = snippet.defineClass(/** @lends Item.prototype */ {
             this.open();
         }
 
-        this.content.appendChild(document.querySelector('#' + this.contentId));
+        this.content.appendChild(document.getElementById(this.contentId));
         this.element.setAttribute('id', 'item_id_' + this.contentId);
         this._setEvents();
     },
@@ -151,7 +152,7 @@ var Item = snippet.defineClass(/** @lends Item.prototype */ {
      */
     close: function() {
         domUtil.addClass(this.toggleButton, 'open');
-        domUtil.css(this.content, 'display', 'none');
+        util.hide(this.content);
     },
 
     /**
@@ -159,7 +160,7 @@ var Item = snippet.defineClass(/** @lends Item.prototype */ {
      */
     open: function() {
         domUtil.removeClass(this.toggleButton, 'open');
-        domUtil.css(this.content, 'display', 'block');
+        util.show(this.content);
     },
 
     /**
@@ -174,7 +175,7 @@ var Item = snippet.defineClass(/** @lends Item.prototype */ {
      * Show title
      */
     showTitle: function() {
-        domUtil.css(this.titleElement, 'display', 'block');
+        util.show(this.titleElement);
     },
 
     /**
@@ -182,7 +183,7 @@ var Item = snippet.defineClass(/** @lends Item.prototype */ {
      */
     hideTitle: function() {
         if (!this.isTitleFix) {
-            domUtil.css(this.titleElement, 'display', 'none');
+            util.hide(this.titleElement);
         }
     },
 

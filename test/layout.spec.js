@@ -70,7 +70,7 @@ describe('layout', function() {
     beforeEach(function() {
         loadFixtures('test/fixtures/layout.html');
         loadStyleFixtures('test/fixtures/layout.css');
-        layout1 = new Layout('layout1', {
+        layout1 = new Layout('#layout1', {
             grouplist: groupList1
         });
     });
@@ -129,9 +129,8 @@ describe('layout', function() {
 
     it('_onMousemove', function() {
         var item = layout1.groups.g1.list[0].element;
-        var target = item;
         var e = {
-            target: target,
+            target: item,
             clientX: 100,
             clientY: 50
         };
@@ -153,9 +152,7 @@ describe('layout', function() {
             x: 100,
             y: 250
         };
-        var target;
-
-        target = layout1._getTarget(item, pos, group);
+        var target = layout1._getTarget(item, pos, group);
         expect(target.way).toBe('before');
         setTimeout(function() {
             done();
@@ -169,14 +166,14 @@ describe('layout', function() {
         });
 
         it('should send hostname by default', function() {
-            this.layout = new Layout('layout1', {
+            this.layout = new Layout('#layout1', {
                 grouplist: groupList1
             });
 
             expect(snippet.sendHostname).toHaveBeenCalled();
         });
         it('should not send hostname on usageStatistics option false', function() {
-            this.layout = new Layout('layout1', {
+            this.layout = new Layout('#layout1', {
                 grouplist: groupList1,
                 usageStatistics: false
             });

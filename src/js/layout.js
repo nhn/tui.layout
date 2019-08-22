@@ -12,10 +12,12 @@ var statics = require('./statics');
 var Group = require('./group');
 var Guide = require('./guide');
 
+var docElement = document.documentElement;
+
 /**
  * Layout class make layout element and include groups, control item move and set events.
  * @class Layout
- * @param {HTMLElement|string} container - Wrapper element or id selector
+ * @param {HTMLElement|string} container - Wrapper element or selector
  * @param {object} options
  *     @param {array} options.grouplist - The list of group options.
  *         @param {string} options.grouplist.id - The group id
@@ -83,7 +85,7 @@ var Layout = snippet.defineClass(/** @lends Layout.prototype */ {
          * @type {HTMLElement}
          * @private
          */
-        this.element = snippet.isHTMLNode(container) ? container : document.querySelector('#' + container);
+        this.element = snippet.isHTMLNode(container) ? container : document.querySelector(container);
 
         this._makeGroup(options.grouplist);
         this._makeGuide(options.guideHTML);
@@ -149,7 +151,7 @@ var Layout = snippet.defineClass(/** @lends Layout.prototype */ {
         this.target = e.target || e.srcElement;
 
         if (domUtil.hasClass(this.target, 'drag-item-move')) {
-            this.height(document.documentElement.scrollHeight);
+            this.height(docElement.scrollHeight);
             this._setGuide(this.target, e.clientX, e.clientY);
 
             domUtil.on(document, 'mousemove', this._onMousemove, this);
@@ -166,11 +168,11 @@ var Layout = snippet.defineClass(/** @lends Layout.prototype */ {
      */
     _setGuide: function(target, pointX, pointY) {
         var initPos = {
-            x: pointX + document.documentElement.scrollLeft + 10,
-            y: pointY + document.documentElement.scrollTop + 10
+            x: pointX + docElement.scrollLeft + 10,
+            y: pointY + docElement.scrollTop + 10
         };
         var itemId = target.getAttribute('data-item');
-        var moveEl = document.querySelector('#' + itemId);
+        var moveEl = document.getElementById(itemId);
 
         this._guide.ready(initPos, moveEl);
         this._guide.setMoveElement(moveEl);
@@ -212,8 +214,8 @@ var Layout = snippet.defineClass(/** @lends Layout.prototype */ {
         var parent, pointX, pointY, group;
 
         parent = target.parentElement || document;
-        pointX = e.clientX + document.documentElement.scrollLeft;
-        pointY = e.clientY + document.documentElement.scrollTop;
+        pointX = e.clientX + docElement.scrollLeft;
+        pointY = e.clientY + docElement.scrollTop;
 
         if (parent !== document) {
             group = parent.getAttribute('data-group');
@@ -236,11 +238,11 @@ var Layout = snippet.defineClass(/** @lends Layout.prototype */ {
     _setScrollState: function(x, y) {
         var docHeight = this.height();
         var height = document.body.offsetHeight;
-        var top = document.documentElement.scrollTop;
+        var top = docElement.scrollTop;
         var limit = docHeight - height;
 
         if (height + top < y) {
-            document.documentElement.scrollTop = Math.min(top + (y - height + top), limit);
+            docElement.scrollTop = Math.min(top + (y - height + top), limit);
         }
     },
 
@@ -270,24 +272,22 @@ var Layout = snippet.defineClass(/** @lends Layout.prototype */ {
      */
     _detectMove: function(item, pointX, pointY) {
         var groupInst = this._getGroup(item);
-        var top = document.documentElement.scrollTop;
-        var left = document.documentElement.scrollLeft;
         var before;
 
         if (snippet.isEmpty(groupInst.list)) {
             item.append(this.temp);
-            this.height(document.documentElement.scrollHeight);
+            this.height(docElement.scrollHeight);
             this.temp.way = 'after';
             this.temp.index = 0;
         } else {
             before = this._detectTargetByPosition({
-                x: pointX + left,
-                y: pointY + top
+                x: pointX + docElement.scrollLeft,
+                y: pointY + docElement.scrollTop
             }, groupInst);
 
             if (before && before.way) {
                 before[before.way](this.temp);
-                this.height(document.documentElement.scrollHeight);
+                this.height(docElement.scrollHeight);
                 this.temp.way = before.way;
                 this.temp.index = before.getAttribute('data-index');
             }
@@ -338,7 +338,7 @@ var Layout = snippet.defineClass(/** @lends Layout.prototype */ {
     _getTarget: function(item, pos, group) {
         var bound = domUtil.getRect(item.element);
         var bottom = this._getBottom(item, group);
-        var top = document.documentElement.scrollTop + bound.top;
+        var top = docElement.scrollTop + bound.top;
         var target;
 
         if (pos.y > top && pos.y <= top + (bound.height / 2)) {
@@ -373,7 +373,7 @@ var Layout = snippet.defineClass(/** @lends Layout.prototype */ {
     _getBottom: function(item, group) {
         var next = item.element.nextSibling;
         var gbound = domUtil.getRect(group.element);
-        var scrollTop = document.documentElement.scrollTop;
+        var scrollTop = docElement.scrollTop;
         var limit = scrollTop + gbound.top + gbound.height;
         var bottom;
 

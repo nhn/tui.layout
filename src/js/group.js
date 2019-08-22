@@ -7,6 +7,7 @@
 
 var snippet = require('tui-code-snippet');
 var domUtil = require('tui-dom');
+var util = require('./util');
 
 var statics = require('./statics');
 var Item = require('./item');
@@ -139,7 +140,7 @@ var Group = snippet.defineClass(/** @lends Group.prototype */ {
             item.element.setAttribute('data-index', index);
             item.element.setAttribute('data-groupinfo', this.id);
         }, this);
-        domUtil.css(this.dimmed, 'display', 'none');
+        util.hide(this.dimmed);
     }
 });
 
