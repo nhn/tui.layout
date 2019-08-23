@@ -1,1 +1,1 @@
-{"data":{"allNavigationJson":{"edges":[{"node":{"pid":"Layout","parentPid":"class","name":"Layout","opened":false,"childNodes":[{"pid":"Layout#height","name":"height","kind":"instance-function"}]}}]}}}
+{"data":{"allNavigationJson":{"edges":[{"node":{"pid":"Layout","parentPid":"class","name":"Layout","opened":false,"childNodes":[{"pid":"Layout#height","name":"height","kind":"instance-method"}]}}]}}}
