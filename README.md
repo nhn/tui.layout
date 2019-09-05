@@ -1,3 +1,5 @@
+#### ‼️ There are no major updates planned for `tui.layout` in the future. It will only get bug fixes.
+
 # TOAST UI Component : Layout
 > Component that arranges and moves elements by group.
 
